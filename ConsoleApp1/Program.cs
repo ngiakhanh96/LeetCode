@@ -1,4 +1,4 @@
-﻿using ConsoleApp1.BitManipulation;
+﻿using ConsoleApp1.Array;
 using System;
 
 namespace ConsoleApp1
@@ -7,7 +7,8 @@ namespace ConsoleApp1
     {
         static void Main(string[] args)
         {
-            var node = new _78().Subsets(new[] { 1, 2, 3 });
+            var arr = new[] { 2, 0, 2, 1, 1, 0 };
+            new _75().SortColors2(arr);
             Console.ReadKey();
         }
     }
