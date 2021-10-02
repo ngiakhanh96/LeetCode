@@ -1,10 +1,10 @@
-﻿namespace ConsoleApp1
+﻿namespace ConsoleApp1.Array
 {
     public class _303
     {
         public class NumArray
         {
-            private int[] _nums;
+            private readonly int[] _nums;
 
             public NumArray(int[] nums)
             {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace ConsoleApp1
+namespace ConsoleApp1.BitManipulation
 {
     public class _78
     {

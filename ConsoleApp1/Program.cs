@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ConsoleApp1.BitManipulation;
+using System;
 
 namespace ConsoleApp1
 {

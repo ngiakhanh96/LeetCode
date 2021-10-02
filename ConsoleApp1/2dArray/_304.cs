@@ -1,10 +1,10 @@
-﻿namespace ConsoleApp1
+﻿namespace ConsoleApp1._2dArray
 {
     public class _304
     {
         public class NumMatrix
         {
-            private int[][] _matrix;
+            private readonly int[][] _matrix;
             public NumMatrix(int[][] matrix)
             {
                 for (int i = 0; i < matrix.Length; i++)
