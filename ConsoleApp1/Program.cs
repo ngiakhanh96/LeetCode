@@ -8,7 +8,7 @@ namespace ConsoleApp1
         static void Main(string[] args)
         {
             var arr = "iuonzyzlclfudgrr";
-            var res = new _3().LengthOfLongestSubstring(arr);
+            var res = new _904().TotalFruit(new[] { 0, 0, 0, 0, 0 });
 
             Console.ReadKey();
         }
