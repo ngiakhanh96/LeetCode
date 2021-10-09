@@ -7,8 +7,8 @@ namespace ConsoleApp1
     {
         static void Main(string[] args)
         {
-            var t = new[] { -2, 1, -3, 4, -1, 2, 1, -5, 4 };
-            var t2 = new _53().MaxSubArray2(t);
+            var t = new[] { 3, 3, 3, 3, 4, 3, 3, 3, 3 };
+            var t2 = new _215().FindKthLargest2(t, 1);
             Console.ReadKey();
         }
     }
