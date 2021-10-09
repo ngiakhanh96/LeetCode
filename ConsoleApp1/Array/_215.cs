@@ -57,11 +57,11 @@
 
             if (boundary < kSmallestIndex)
             {
-                return FindKthLargest(nums, k, boundary + 1, end);
+                return FindKthLargest2(nums, k, boundary + 1, end);
             }
             if (boundary > kSmallestIndex)
             {
-                return FindKthLargest(nums, k - (end - boundary), start, boundary);
+                return FindKthLargest2(nums, k - (end - boundary), start, boundary);
             }
             return nums[boundary];
         }

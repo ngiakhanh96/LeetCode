@@ -4,15 +4,16 @@
     {
         public void SortColors(int[] nums)
         {
+            var pivot = 1;
             var from = 0;
             var to = nums.Length - 1;
             while (from < to)
             {
-                if (nums[from] < 1)
+                if (nums[from] < pivot)
                 {
                     from++;
                 }
-                else if (nums[to] >= 1)
+                else if (nums[to] >= pivot)
                 {
                     to--;
                 }
@@ -30,11 +31,11 @@
             to = 0;
             while (from > to)
             {
-                if (nums[from] > 1)
+                if (nums[from] > pivot)
                 {
                     from--;
                 }
-                else if (nums[to] <= 1)
+                else if (nums[to] <= pivot)
                 {
                     to++;
                 }
