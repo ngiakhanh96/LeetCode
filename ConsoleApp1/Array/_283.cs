@@ -9,21 +9,12 @@
             {
                 if (nums[i] != 0)
                 {
-                    Swap(nums, i, boundary);
+                    var temp = nums[i];
+                    nums[i] = nums[boundary];
+                    nums[boundary] = temp;
                     boundary++;
                 }
             }
-        }
-
-        private void Swap(int[] nums, int left, int right)
-        {
-            if (right == left)
-            {
-                return;
-            }
-            nums[right] += nums[left];
-            nums[left] = nums[right] - nums[left];
-            nums[right] -= nums[left];
         }
     }
 }

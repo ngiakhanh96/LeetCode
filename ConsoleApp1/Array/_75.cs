@@ -4,16 +4,47 @@
     {
         public void SortColors(int[] nums)
         {
-            for (int i = 0; i < nums.Length; i++)
+            var from = 0;
+            var to = nums.Length - 1;
+            while (from < to)
             {
-                for (int j = 0; j < nums.Length - 1; j++)
+                if (nums[from] < 1)
                 {
-                    if (nums[j] > nums[j + 1])
-                    {
-                        var temp = nums[j + 1];
-                        nums[j + 1] = nums[j];
-                        nums[j] = temp;
-                    }
+                    from++;
+                }
+                else if (nums[to] >= 1)
+                {
+                    to--;
+                }
+                else
+                {
+                    var temp = nums[from];
+                    nums[from] = nums[to];
+                    nums[to] = temp;
+                    from++;
+                    to--;
+                }
+            }
+
+            from = nums.Length - 1;
+            to = 0;
+            while (from > to)
+            {
+                if (nums[from] > 1)
+                {
+                    from--;
+                }
+                else if (nums[to] <= 1)
+                {
+                    to++;
+                }
+                else
+                {
+                    var temp = nums[from];
+                    nums[from] = nums[to];
+                    nums[to] = temp;
+                    from--;
+                    to++;
                 }
             }
         }

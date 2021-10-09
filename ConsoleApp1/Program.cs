@@ -7,9 +7,8 @@ namespace ConsoleApp1
     {
         static void Main(string[] args)
         {
-            var arr = "iuonzyzlclfudgrr";
-            var res = new _904().TotalFruit(new[] { 0, 0, 0, 0, 0 });
-
+            var t = new[] { -2, 1, -3, 4, -1, 2, 1, -5, 4 };
+            var t2 = new _53().MaxSubArray2(t);
             Console.ReadKey();
         }
     }

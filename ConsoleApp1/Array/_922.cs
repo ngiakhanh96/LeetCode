@@ -18,7 +18,9 @@
                         if (nums[j] % 2 == 0)
                         {
                             lastPointer = j;
-                            Swap(nums, i, lastPointer);
+                            var temp = nums[i];
+                            nums[i] = nums[lastPointer];
+                            nums[lastPointer] = temp;
                             break;
                         }
                     }
@@ -26,17 +28,6 @@
             }
 
             return nums;
-        }
-
-        private void Swap(int[] nums, int left, int right)
-        {
-            if (right == left)
-            {
-                return;
-            }
-            nums[right] += nums[left];
-            nums[left] = nums[right] - nums[left];
-            nums[right] -= nums[left];
         }
     }
 }
