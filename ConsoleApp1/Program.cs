@@ -1,4 +1,4 @@
-﻿using ConsoleApp1.Array;
+﻿using ConsoleApp1.CircularQueue;
 using System;
 
 namespace ConsoleApp1
@@ -7,8 +7,11 @@ namespace ConsoleApp1
     {
         static void Main(string[] args)
         {
-            var t = new[] { 3, 3, 3, 3, 4, 3, 3, 3, 3 };
-            var t2 = new _215().FindKthLargest2(t, 1);
+            var myCircularQueue = new _622.MyCircularQueue(3);
+            var a = myCircularQueue.EnQueue(1);
+            a = myCircularQueue.DeQueue();  // return True
+            a = myCircularQueue.EnQueue(4); // return True
+            var b = myCircularQueue.Rear();
             Console.ReadKey();
         }
     }
