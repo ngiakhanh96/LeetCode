@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace ConsoleApp1.Array
 {
@@ -14,9 +13,13 @@ namespace ConsoleApp1.Array
                 {
                     hashSet.Add(c);
                 }
+                else
+                {
+                    hashSet.Remove(c);
+                }
             }
 
-            return hashSet.Count <= Math.Ceiling((double)s.Length / 2);
+            return hashSet.Count < 2;
         }
     }
 }
