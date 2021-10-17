@@ -1,31 +1,28 @@
-﻿using System.Collections.Generic;
+﻿namespace ConsoleApp1.Queue;
 
-namespace ConsoleApp1.Queue
+public class _346
 {
-    public class _346
+    public class MovingAverage
     {
-        public class MovingAverage
+        private Queue<int> _queue;
+        private int _size;
+        private int _culmulativeRes;
+        public MovingAverage(int size)
         {
-            private Queue<int> _queue;
-            private int _size;
-            private int _culmulativeRes;
-            public MovingAverage(int size)
-            {
-                _size = size;
-                _queue = new Queue<int>();
-                _culmulativeRes = 0;
-            }
+            _size = size;
+            _queue = new Queue<int>();
+            _culmulativeRes = 0;
+        }
 
-            public double Next(int val)
+        public double Next(int val)
+        {
+            if (_queue.Count == _size)
             {
-                if (_queue.Count == _size)
-                {
-                    _culmulativeRes -= _queue.Dequeue();
-                }
-                _culmulativeRes += val;
-                _queue.Enqueue(val);
-                return (double)_culmulativeRes / _queue.Count;
+                _culmulativeRes -= _queue.Dequeue();
             }
+            _culmulativeRes += val;
+            _queue.Enqueue(val);
+            return (double)_culmulativeRes / _queue.Count;
         }
     }
 }

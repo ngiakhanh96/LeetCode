@@ -1,24 +1,21 @@
-﻿using System.Collections.Generic;
+﻿namespace ConsoleApp1.Array;
 
-namespace ConsoleApp1.Array
+public class _217
 {
-    public class _217
+    public bool ContainsDuplicate(int[] nums)
     {
-        public bool ContainsDuplicate(int[] nums)
+        var hashset = new HashSet<int>();
+        foreach (var i in nums)
         {
-            var hashset = new HashSet<int>();
-            foreach (var i in nums)
+            if (hashset.Contains(i))
             {
-                if (hashset.Contains(i))
-                {
-                    return true;
-                }
-                else
-                {
-                    hashset.Add(i);
-                }
+                return true;
             }
-            return false;
+            else
+            {
+                hashset.Add(i);
+            }
         }
+        return false;
     }
 }

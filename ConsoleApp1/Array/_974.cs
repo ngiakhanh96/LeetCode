@@ -1,37 +1,33 @@
-﻿using System;
-using System.Collections.Generic;
+﻿namespace ConsoleApp1.Array;
 
-namespace ConsoleApp1.Array
+public class _974
 {
-    public class _974
+    public int SubarraysDivByK(int[] nums, int k)
     {
-        public int SubarraysDivByK(int[] nums, int k)
+        var sum = 0;
+        var sumDict = new Dictionary<int, int> { { 0, 1 } };
+        var res = 0;
+        foreach (var num in nums)
         {
-            var sum = 0;
-            var sumDict = new Dictionary<int, int> { { 0, 1 } };
-            var res = 0;
-            foreach (var num in nums)
+            sum += num;
+
+            var remainder = sum % k;
+            if (sumDict.ContainsKey(remainder))
             {
-                sum += num;
-
-                var remainder = sum % k;
-                if (sumDict.ContainsKey(remainder))
-                {
-                    res += sumDict[remainder];
-                }
-
-                var remainder2 = Math.Abs(-k + sum % k) < k ? -k + sum % k : k + sum % k;
-                if (sumDict.ContainsKey(remainder2))
-                {
-                    res += sumDict[remainder2];
-                }
-
-                if (!sumDict.TryAdd(remainder, 1))
-                {
-                    sumDict[remainder]++;
-                }
+                res += sumDict[remainder];
             }
-            return res;
+
+            var remainder2 = Math.Abs(-k + sum % k) < k ? -k + sum % k : k + sum % k;
+            if (sumDict.ContainsKey(remainder2))
+            {
+                res += sumDict[remainder2];
+            }
+
+            if (!sumDict.TryAdd(remainder, 1))
+            {
+                sumDict[remainder]++;
+            }
         }
+        return res;
     }
 }

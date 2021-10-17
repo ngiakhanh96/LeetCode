@@ -24,3 +24,5 @@ Deque: Find max in a sliding window
 Queue: Find sum/product in a sliding window
 
 Stack: Deal with invalid ({) or remove duplicated characters, Evaluate Reverse Polish Notation (2,3,+)
+
+Binary Tree: Using Prefix Sum

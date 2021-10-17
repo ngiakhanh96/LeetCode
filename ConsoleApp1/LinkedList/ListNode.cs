@@ -1,13 +1,12 @@
-﻿namespace ConsoleApp1.LinkedList
+﻿namespace ConsoleApp1.LinkedList;
+
+public class ListNode
 {
-    public class ListNode
+    public int val;
+    public ListNode next;
+    public ListNode(int val = 0, ListNode next = null)
     {
-        public int val;
-        public ListNode next;
-        public ListNode(int val = 0, ListNode next = null)
-        {
-            this.val = val;
-            this.next = next;
-        }
+        this.val = val;
+        this.next = next;
     }
 }

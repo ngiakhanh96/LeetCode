@@ -1,44 +1,43 @@
-﻿namespace ConsoleApp1.LinkedList
+﻿namespace ConsoleApp1.LinkedList;
+
+public class _142
 {
-    public class _142
+    public ListNode DetectCycle(ListNode head)
     {
-        public ListNode DetectCycle(ListNode head)
+        if (head == null)
         {
-            if (head == null)
+            return null;
+        }
+        ListNode slowPointer = head;
+        ListNode fastPointer = head;
+        while (true)
+        {
+            slowPointer = slowPointer.next ?? slowPointer;
+            fastPointer = fastPointer.next?.next;
+
+            if (fastPointer?.next == null)
             {
                 return null;
             }
-            ListNode slowPointer = head;
-            ListNode fastPointer = head;
-            while (true)
+
+            if (slowPointer == fastPointer)
             {
-                slowPointer = slowPointer.next ?? slowPointer;
-                fastPointer = fastPointer.next?.next;
-
-                if (fastPointer?.next == null)
-                {
-                    return null;
-                }
-
+                slowPointer = head;
                 if (slowPointer == fastPointer)
                 {
-                    slowPointer = head;
+                    return slowPointer;
+                }
+                while (true)
+                {
+                    slowPointer = slowPointer.next;
+                    fastPointer = fastPointer.next;
                     if (slowPointer == fastPointer)
                     {
                         return slowPointer;
                     }
-                    while (true)
-                    {
-                        slowPointer = slowPointer.next;
-                        fastPointer = fastPointer.next;
-                        if (slowPointer == fastPointer)
-                        {
-                            return slowPointer;
-                        }
-                    }
                 }
-
             }
+
         }
     }
 }
