@@ -7,7 +7,7 @@ namespace ConsoleApp1
     {
         static void Main(string[] args)
         {
-            new _227().Calculate(" 3 / 2 ");
+            new _772().Calculate("-5*(2)");
             Console.WriteLine('s');
         }
     }
