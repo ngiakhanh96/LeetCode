@@ -8,17 +8,18 @@ public class _215
         {
             end = nums.Length;
         }
+
         var boundary = LomutoPartition(nums, start, end);
 
-        var kSmallestIndex = end - k;
+        var kLargestIndex = k - 1;
 
-        if (boundary < kSmallestIndex)
+        if (boundary < kLargestIndex)
         {
             return FindKthLargest(nums, k, boundary + 1, end);
         }
-        if (boundary > kSmallestIndex)
+        if (boundary > kLargestIndex)
         {
-            return FindKthLargest(nums, k - (end - boundary), start, boundary);
+            return FindKthLargest(nums, k, start, boundary);
         }
         return nums[boundary];
     }
@@ -29,7 +30,7 @@ public class _215
         var boundary = start;
         for (int i = start; i < end - 1; i++)
         {
-            if (nums[i] < pivot)
+            if (nums[i] > pivot)
             {
                 var temp = nums[i];
                 nums[i] = nums[boundary];
@@ -53,15 +54,15 @@ public class _215
 
         var boundary = HoarePartition(nums, start, end);
 
-        var kSmallestIndex = end - k;
+        var kLargestIndex = k - 1;
 
-        if (boundary < kSmallestIndex)
+        if (boundary < kLargestIndex)
         {
-            return FindKthLargest2(nums, k, boundary + 1, end);
+            return FindKthLargest(nums, k, boundary + 1, end);
         }
-        if (boundary > kSmallestIndex)
+        if (boundary > kLargestIndex)
         {
-            return FindKthLargest2(nums, k - (end - boundary), start, boundary);
+            return FindKthLargest(nums, k, start, boundary);
         }
         return nums[boundary];
     }
@@ -74,11 +75,11 @@ public class _215
         var j = end - 1;
         while (boundary < j)
         {
-            if (nums[boundary] < pivot)
+            if (nums[boundary] > pivot)
             {
                 boundary++;
             }
-            else if (nums[j] >= pivot)
+            else if (nums[j] <= pivot)
             {
                 j--;
             }
@@ -101,7 +102,7 @@ public class _215
                 j--;
             }
         }
-        boundary += nums[boundary] >= pivot ? 0 : 1;
+        boundary += nums[boundary] <= pivot ? 0 : 1;
 
         var temp2 = nums[pivotIndex];
         nums[pivotIndex] = nums[boundary];
