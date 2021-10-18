@@ -58,12 +58,12 @@
 
             //Time: O(MNlog(MN))
             //Space: O(MN)
-            System.Array.Sort(temp, (x, y) => y.CompareTo(x));
-            return temp[k - 1];
+            //System.Array.Sort(temp, (x, y) => y.CompareTo(x));
+            //return temp[k - 1];
 
             //Time: O(MN)
             //Space: O(MN)
-            //return FindKthLargest(temp, k);
+            return FindKthLargest(temp, k - 1);
         }
 
         private int FindKthLargest(int[] nums, int k, int start = 0, int end = -1)
@@ -74,15 +74,13 @@
             }
             var boundary = LomutoPartition(nums, start, end);
 
-            var kSmallestIndex = end - k;
-
-            if (boundary < kSmallestIndex)
+            if (boundary < k)
             {
                 return FindKthLargest(nums, k, boundary + 1, end);
             }
-            if (boundary > kSmallestIndex)
+            if (boundary > k)
             {
-                return FindKthLargest(nums, k - (end - boundary), start, boundary);
+                return FindKthLargest(nums, k, start, boundary);
             }
             return nums[boundary];
         }
@@ -93,7 +91,7 @@
             var boundary = start;
             for (int i = start; i < end - 1; i++)
             {
-                if (nums[i] < pivot)
+                if (nums[i] > pivot)
                 {
                     var temp = nums[i];
                     nums[i] = nums[boundary];
