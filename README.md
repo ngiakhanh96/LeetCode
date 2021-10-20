@@ -5,7 +5,11 @@ Techniques:
 Array: Prefix Sum, Range Addition (Prefix Sum with input (0,0,0,0)), Prefix XOR, Boundary Swap (Dutch Flag), Sliding Window/Two Pointers, Partition, Merge 2 sorted arrays, 
 *Use temp for swapping results in significant better performance compared to swap in-place
 *Partition: Lomuto (Boundary Swap) maintains original order, Hoare not maintain original order.
-Use for find Kth or K largest/smallest - can also make use of binary heap ?
+    Use for find Kth or K largest/smallest - can also make use of binary heap(priority queue)
+*Counting sort: Use when valueRange <= n:
+    Sort or find the value with max frequency in array,
+    Find how many Numbers Are Smaller Than the Current Number (Leetcode 1365)
+*Merge sort: Use to find any number a[i], a[r] (i < r) when a[i], a[r] statisfy a condition
 
 Bit Manipulation: n &= (n - 1), Subset a bitmask from 0 to 2^n - 1, Get Bit, Clear Bit, ~ for flip, & for get/clear, | for get/set | ^ for get/set/clear/flip
 *XOR: 

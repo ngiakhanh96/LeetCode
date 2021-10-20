@@ -1,4 +1,4 @@
-﻿using ConsoleApp1._2dArray;
+﻿using ConsoleApp1.Array;
 
 namespace ConsoleApp1;
 
@@ -6,8 +6,7 @@ class Program
 {
     static void Main(string[] args)
     {
-        var t = new _1738().KthLargestValue(new[] { new[] { 5, 2 }, new[] { 1, 6 } }, 1);
+        var t = new _315().CountSmaller(new int[] { 5, 2, 6, 1 });
         Console.WriteLine('s');
-
     }
 }
