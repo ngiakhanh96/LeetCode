@@ -7,7 +7,7 @@ public class _904
         var dict = new Dictionary<int, int>();
         var max = 0;
         var currentJ = 0;
-        var shouldContinue = false;
+        var shouldContinue = true;
         for (int i = 0; i < fruits.Length; i++)
         {
             if (i > 0)
@@ -26,14 +26,12 @@ public class _904
 
             for (int j = currentJ; j < fruits.Length; j++)
             {
-                shouldContinue = false;
                 if (dict.TryAdd(fruits[j], 1))
                 {
                     if (dict.Count > 2)
                     {
                         currentJ = j;
                         dict.Remove(fruits[j]);
-                        shouldContinue = true;
                         break;
                     }
                 }
@@ -42,6 +40,10 @@ public class _904
                     dict[fruits[j]]++;
                 }
                 max = j - i + 1 > max ? j - i + 1 : max;
+                if (j + 1 >= fruits.Length)
+                {
+                    shouldContinue = false;
+                }
             }
 
             if (!shouldContinue)

@@ -7,7 +7,7 @@ public class _1004
         var currentJ = 0;
         var currentNum0S = 0;
         var maxLength = 0;
-        var shouldContinue = false;
+        var shouldContinue = true;
         for (int i = 0; i < nums.Length; i++)
         {
             if (i > 0)
@@ -21,16 +21,18 @@ public class _1004
 
             for (int j = currentJ; j < nums.Length; j++)
             {
-                shouldContinue = false;
                 currentNum0S += nums[j] == 0 ? 1 : 0;
                 if (currentNum0S > k)
                 {
                     currentJ = j;
                     currentNum0S--;
-                    shouldContinue = true;
                     break;
                 }
                 maxLength = j - i + 1 > maxLength ? j - i + 1 : maxLength;
+                if (j + 1 >= nums.Length)
+                {
+                    shouldContinue = false;
+                }
             }
 
             if (!shouldContinue)

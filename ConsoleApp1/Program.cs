@@ -6,7 +6,7 @@ class Program
 {
     static void Main(string[] args)
     {
-        var t = new _315().CountSmaller(new int[] { 5, 2, 6, 1 });
+        var t = new _1838().MaxFrequency(new int[] { 100000, 99999, 99999 }, 2);
         Console.WriteLine('s');
     }
 }

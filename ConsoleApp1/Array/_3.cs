@@ -7,7 +7,7 @@ public class _3
         var hashset = new HashSet<char>();
         var max = 0;
         var currentJ = 0;
-        var shouldContinue = false;
+        var shouldContinue = true;
         for (int i = 0; i < s.Length; i++)
         {
             if (i > 0)
@@ -18,14 +18,16 @@ public class _3
 
             for (int j = currentJ; j < s.Length; j++)
             {
-                shouldContinue = false;
                 if (!hashset.Add(s[j]))
                 {
                     currentJ = j;
-                    shouldContinue = true;
                     break;
                 }
                 max = hashset.Count > max ? hashset.Count : max;
+                if (j + 1 >= s.Length)
+                {
+                    shouldContinue = false;
+                }
             }
 
             if (!shouldContinue)
