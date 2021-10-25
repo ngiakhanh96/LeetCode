@@ -6,7 +6,7 @@ class Program
 {
     static void Main(string[] args)
     {
-        var t = new _1838().MaxFrequency(new int[] { 100000, 99999, 99999 }, 2);
+        //var t = new _81().Search(new int[] {13, 1, 1, 1, 1 }, 13);
         Console.WriteLine('s');
     }
 }
