@@ -29,4 +29,6 @@ Queue: Find sum/product in a sliding window
 
 Stack: Deal with invalid ({) or remove duplicated characters, Evaluate Reverse Polish Notation (2,3,+)
 
-Binary Tree: Using Prefix Sum
+Binary Tree: Using Prefix Sum, DFS (O(V + E)), Dynamic Programming
+*Dynamic Programming: 1. Choose optimal structure, 2. Avoid overlapping Subproblems (using cache/memoization)
+*Fibonacci: O(2^n)
