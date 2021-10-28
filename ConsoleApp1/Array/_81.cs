@@ -2,103 +2,54 @@ namespace ConsoleApp1.Array;
 
 public class _81
 {
-    //public bool Search(int[] nums, int target, int start = 0, int end = int.MaxValue) {
-    //   if (end == int.MaxValue)
-    //        {
-    //            end = nums.Length - 1;
-    //        }
-    //        if (start >= end)
-    //        {
-    //            return nums[start] == target ? true : false;
-    //        }
-            
-    //        var middleEleIndex = (start + end) / 2;
-    //        if (target == nums[middleEleIndex])
-    //        {
-    //            return true;
-    //        }
-    //        if (nums[start] == nums[end]) {
-    //            if (start == target) {
-    //                return true;
-    //            }
-    //            return Search(nums, target, start+1, end-1);
-    //        }
-    //        if (nums[start] < nums[end])
-    //        {
-    //            if (target > nums[middleEleIndex] && target <= nums[end])
-    //            {
-    //                return Search(
-    //                    nums,
-    //                    target,
-    //                    middleEleIndex + 1,
-    //                    end
-    //                );
-    //            }
-    //            if (target < nums[middleEleIndex])
-    //            {
-    //                return Search(
-    //                    nums,
-    //                    target,
-    //                    start,
-    //                    middleEleIndex - 1
-    //                );
-    //            }
-    //        }
-    //        else
-    //        {
-    //            if (nums[end] == nums[middleEleIndex]) 
-    //            {
-    //                return Search(
-    //                    nums,
-    //                    target,
-    //                    start,
-    //                    middleEleIndex - 1
-    //                );
-    //            }
-    //            if (nums[end] > nums[middleEleIndex])
-    //            {
-    //                if (target > nums[middleEleIndex] && target <= nums[end])
-    //                {
-    //                    return Search(
-    //                        nums,
-    //                        target,
-    //                        middleEleIndex + 1,
-    //                        end
-    //                    );
-    //                }
+    public bool Search(int[] nums, int target)
+    {
+        var startIndex = 0;
+        var endIndex = nums.Length - 1;
+        while (startIndex <= endIndex)
+        {
+            var middleIndex = (startIndex + endIndex) / 2;
+            var leftMost = nums[startIndex];
+            var rightMost = nums[endIndex];
+            var middlePivot = nums[middleIndex];
 
-    //                if (target < nums[middleEleIndex] || target >= nums[end])
-    //                {
-    //                    return Search(
-    //                        nums,
-    //                        target,
-    //                        start,
-    //                        middleEleIndex - 1
-    //                    );
-    //                }
-    //            }
-    //            else
-    //            {
-    //                if (target > nums[middleEleIndex] || target <= nums[end])
-    //                {
-    //                    return Search(
-    //                        nums,
-    //                        target,
-    //                        middleEleIndex + 1,
-    //                        end
-    //                    );
-    //                }
-    //                if (target < nums[middleEleIndex] && target >= nums[end])
-    //                {
-    //                    return Search(
-    //                        nums,
-    //                        target,
-    //                        start,
-    //                        middleEleIndex - 1
-    //                    );
-    //                }
-    //            }
-    //        }
-    //        return false; 
-    //}
+            if (leftMost == target || rightMost == target || middlePivot == target)
+            {
+                return true;
+            }
+
+            if (leftMost == rightMost)
+            {
+                startIndex++;
+                endIndex--;
+            }
+            else
+            {
+                if (rightMost >= middlePivot)
+                {
+                    if (target > middlePivot && target < rightMost)
+                    {
+                        startIndex = middleIndex + 1;
+                    }
+                    else
+                    {
+                        endIndex = middleIndex - 1;
+                    }
+                }
+                else
+                {
+                    if (target < middlePivot && target > rightMost)
+                    {
+                        endIndex = middleIndex - 1;
+                    }
+                    else
+                    {
+                        startIndex = middleIndex + 1;
+                    }
+                }
+            }
+        }
+
+        return false;
+    }
 }

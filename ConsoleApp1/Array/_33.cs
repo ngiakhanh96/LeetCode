@@ -2,91 +2,56 @@
 
 public class _33
 {
-    public int Search(int[] nums, int target, int start = 0, int end = int.MaxValue)
+    public int Search(int[] nums, int target)
     {
-        if (end == int.MaxValue)
-        {
-            end = nums.Length - 1;
-        }
-        if (start >= end)
-        {
-            return nums[start] == target ? start : -1;
-        }
+        var leftMostIndex = 0;
+        var rightMostIndex = nums.Length - 1;
 
-        var middleEleIndex = (start + end) / 2;
-        if (target == nums[middleEleIndex])
+        while (leftMostIndex <= rightMostIndex)
         {
-            return middleEleIndex;
-        }
-        if (nums[start] < nums[end])
-        {
+            var middlePivotIndex = (leftMostIndex + rightMostIndex) / 2;
+            var rightMost = nums[rightMostIndex];
+            var leftMost = nums[leftMostIndex];
+            var middlePivot = nums[middlePivotIndex];
+            if (rightMost == target)
+            {
+                return rightMostIndex;
+            }
 
-            if (target > nums[middleEleIndex] && target <= nums[end])
+            if (leftMost == target)
             {
-                return Search(
-                    nums,
-                    target,
-                    middleEleIndex + 1,
-                    end
-                );
+                return leftMostIndex;
             }
-            if (target < nums[middleEleIndex])
+
+            if (middlePivot == target)
             {
-                return Search(
-                    nums,
-                    target,
-                    start,
-                    middleEleIndex - 1
-                );
+                return middlePivotIndex;
             }
-        }
-        else
-        {
-            if (nums[end] > nums[middleEleIndex])
+
+            if (rightMost > middlePivot)
             {
-                if (target > nums[middleEleIndex] && target <= nums[end])
+                if (target > middlePivot && target < rightMost)
                 {
-                    return Search(
-                        nums,
-                        target,
-                        middleEleIndex + 1,
-                        end
-                    );
+                    leftMostIndex = middlePivotIndex + 1;
                 }
-
-                if (target < nums[middleEleIndex] || target >= nums[end])
+                else
                 {
-                    return Search(
-                        nums,
-                        target,
-                        start,
-                        middleEleIndex - 1
-                    );
+                    rightMostIndex = middlePivotIndex - 1;
                 }
             }
-
             else
             {
-                if (target > nums[middleEleIndex] || target <= nums[end])
+                if (target > rightMost && target < middlePivot)
                 {
-                    return Search(
-                        nums,
-                        target,
-                        middleEleIndex + 1,
-                        end
-                    );
+                    rightMostIndex = middlePivotIndex - 1;
                 }
-                if (target < nums[middleEleIndex] && target >= nums[end])
+                else
                 {
-                    return Search(
-                        nums,
-                        target,
-                        start,
-                        middleEleIndex - 1
-                    );
+                    leftMostIndex = middlePivotIndex + 1;
                 }
             }
         }
+
         return -1;
     }
 }
