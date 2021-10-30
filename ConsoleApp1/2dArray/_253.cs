@@ -1,4 +1,4 @@
-﻿namespace ConsoleApp1.Array;
+﻿namespace ConsoleApp1._2dArray;
 
 public class _253
 {

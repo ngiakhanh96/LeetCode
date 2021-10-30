@@ -1,22 +1,22 @@
 ﻿namespace ConsoleApp1.BinaryTree;
 
-public class _429
+public class _107
 {
     public IList<int>[] LevelOrderNodeValues { get; set; } = new IList<int>[1000];
 
-    public Queue<Node> BfsQueue { get; set; } = new Queue<Node>();
+    public Queue<TreeNode> BfsQueue { get; set; } = new Queue<TreeNode>();
 
     public int NumberOfNodeInCurrentLevel { get; set; }
 
     public int CurrentLevel { get; set; }
 
-    public IList<IList<int>> LevelOrder(Node root)
+    public IList<IList<int>> LevelOrderBottom(TreeNode root)
     {
         Dfs(root, 0);
-        return LevelOrderNodeValues.Where(x => x != null).ToList();
+        return LevelOrderNodeValues.Where(x => x != null).Reverse().ToList();
     }
 
-    private void Dfs(Node root, int level)
+    private void Dfs(TreeNode root, int level)
     {
         if (root == null)
         {
@@ -32,19 +32,17 @@ public class _429
             LevelOrderNodeValues[level].Add(root.val);
         }
 
-        foreach (var node in root.children)
-        {
-            Dfs(node, level + 1);
-        }
+        Dfs(root.left, level + 1);
+        Dfs(root.right, level + 1);
     }
 
-    public IList<IList<int>> LevelOrder2(Node root)
+    public IList<IList<int>> LevelOrderBottom2(TreeNode root)
     {
         Bfs(root, 0);
-        return LevelOrderNodeValues.Where(x => x != null).ToList();
+        return LevelOrderNodeValues.Where(x => x != null).Reverse().ToList();
     }
 
-    private void Bfs(Node root, int level)
+    private void Bfs(TreeNode root, int level)
     {
         if (root == null)
         {
@@ -75,12 +73,14 @@ public class _429
             LevelOrderNodeValues[CurrentLevel].Add(node.val);
         }
 
-        foreach (var subNode in node.children)
+        if (node.left != null)
         {
-            if (subNode != null)
-            {
-                BfsQueue.Enqueue(subNode);
-            }
+            BfsQueue.Enqueue(node.left);
+        }
+
+        if (node.right != null)
+        {
+            BfsQueue.Enqueue(node.right);
         }
 
         if (NumberOfNodeInCurrentLevel == 0)

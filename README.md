@@ -29,6 +29,11 @@ Queue: Find sum/product in a sliding window
 
 Stack: Deal with invalid ({) or remove duplicated characters, Evaluate Reverse Polish Notation (2,3,+)
 
-Binary Tree: Using Prefix Sum, DFS (O(V + E)), Dynamic Programming
+Binary Tree: Using Prefix Sum, DFS (O(V + E)), BFS(O(V + E)), Dynamic Programming
+*DFS use to find connected graph, dynamic programming
 *Dynamic Programming: 1. Choose optimal structure, 2. Avoid overlapping Subproblems (using cache/memoization)
 *Fibonacci: O(2^n)
+*BFS use to find the shortest path, deal with level in tree
+*Binary Search: 
+**Can use with sorted list, rotated sorted list
+**Can Use for problems which have the only way to solve is to bruteforce
