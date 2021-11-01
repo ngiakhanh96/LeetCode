@@ -21,12 +21,7 @@ public class _153
                 startIndex = middleIndex + 1;
             }
         }
-
-        if (startIndex == endIndex)
-        {
-            return nums[startIndex];
-        }
-        return -1;
+        return nums[startIndex];
     }
 
     public int FindMin2(int[] nums, int start = 0, int end = -1)

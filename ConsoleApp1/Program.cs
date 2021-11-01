@@ -6,6 +6,6 @@ class Program
 {
     static void Main(string[] args)
     {
-        var t = new _542().UpdateMatrix(new int[][] { new int[] { 0, 0, 0 }, new[] { 0, 1, 0 }, new[] { 0, 0, 0 } });
+        var t = new _1631().MinimumEffortPath(new int[][] { new int[] { 1, 2, 2 }, new int[] { 3, 8, 2 }, new int[] { 5, 3, 5 } });
     }
 }
