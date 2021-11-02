@@ -4,10 +4,6 @@ public class _199
 {
     public Queue<TreeNode> BfsQueue { get; set; } = new Queue<TreeNode>();
 
-    public int CurrentLevel { get; set; }
-
-    public int NumberOfNodesInCurrentLevel { get; set; }
-
     public IList<int> RightSideValues { get; set; } = new List<int>();
 
     public IList<int> RightSideView(TreeNode root)
@@ -23,38 +19,28 @@ public class _199
             return;
         }
         BfsQueue.Enqueue(root);
-        CurrentLevel = 0;
-        NumberOfNodesInCurrentLevel = BfsQueue.Count;
-        Bfs();
-    }
-
-    private void Bfs()
-    {
-        if (BfsQueue.Count == 0)
+        while (BfsQueue.Count > 0)
         {
-            return;
+            var numberOfNodesInCurrentLevel = BfsQueue.Count;
+            for (int i = 0; i < numberOfNodesInCurrentLevel; i++)
+            {
+                var node = BfsQueue.Dequeue();
+
+                if (node.left != null)
+                {
+                    BfsQueue.Enqueue(node.left);
+                }
+
+                if (node.right != null)
+                {
+                    BfsQueue.Enqueue(node.right);
+                }
+
+                if (i == numberOfNodesInCurrentLevel - 1)
+                {
+                    RightSideValues.Add(node.val);
+                }
+            }
         }
-
-        var node = BfsQueue.Dequeue();
-        NumberOfNodesInCurrentLevel--;
-
-        if (node.left != null)
-        {
-            BfsQueue.Enqueue(node.left);
-        }
-
-        if (node.right != null)
-        {
-            BfsQueue.Enqueue(node.right);
-        }
-
-        if (NumberOfNodesInCurrentLevel == 0)
-        {
-            RightSideValues.Add(node.val);
-            NumberOfNodesInCurrentLevel = BfsQueue.Count;
-            CurrentLevel++;
-        }
-
-        Bfs();
     }
 }

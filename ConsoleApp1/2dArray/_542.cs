@@ -8,10 +8,6 @@ public class _542
 
     public bool[][] Visited { get; set; }
 
-    public int CurrentLevel { get; set; }
-
-    public int NumOfCellsInCurrentLevel { get; set; }
-
     public int[][] InputMatrix { get; set; }
 
     public int[][] UpdateMatrix(int[][] mat)
@@ -41,57 +37,43 @@ public class _542
             }
         }
 
-        CurrentLevel = 0;
-        NumOfCellsInCurrentLevel = BfsQueue.Count;
-        Bfs();
-    }
-
-    private void Bfs()
-    {
-        if (BfsQueue.Count == 0)
+        var currentLevel = -1;
+        while (BfsQueue.Count > 0)
         {
-            return;
-        }
+            var numOfCellsInCurrentLevel = BfsQueue.Count;
+            currentLevel++;
+            for (int i = 0; i < numOfCellsInCurrentLevel; i++)
+            {
+                var cell = BfsQueue.Dequeue();
+                var rowIndex = cell[0];
+                var colIndex = cell[1];
 
-        var cell = BfsQueue.Dequeue();
-        NumOfCellsInCurrentLevel--;
-        var rowIndex = cell[0];
-        var colIndex = cell[1];
+                if (InputMatrix[rowIndex][colIndex] == 1)
+                {
+                    DistanceToNearest0s[rowIndex][colIndex] = currentLevel;
+                }
 
-        if (InputMatrix[rowIndex][colIndex] == 1)
-        {
-            DistanceToNearest0s[rowIndex][colIndex] = CurrentLevel;
+                var adjacentCells = new int[][]
+                {
+                    new int[] { rowIndex - 1, colIndex },
+                    new int[] { rowIndex, colIndex - 1 },
+                    new int[] { rowIndex + 1, colIndex },
+                    new int[] { rowIndex, colIndex + 1 }
+                };
+                foreach (var adjacentCell in adjacentCells)
+                {
+                    if (adjacentCell[0] >= 0 &&
+                        adjacentCell[0] <= InputMatrix.Length - 1 &&
+                        adjacentCell[1] >= 0 &&
+                        adjacentCell[1] <= InputMatrix[0].Length - 1 &&
+                        InputMatrix[adjacentCell[0]][adjacentCell[1]] == 1 &&
+                        !Visited[adjacentCell[0]][adjacentCell[1]])
+                    {
+                        BfsQueue.Enqueue(adjacentCell);
+                        Visited[adjacentCell[0]][adjacentCell[1]] = true;
+                    }
+                }
+            }
         }
-
-        if (rowIndex > 0 && InputMatrix[rowIndex - 1][colIndex] == 1 && !Visited[rowIndex - 1][colIndex])
-        {
-            BfsQueue.Enqueue(new int[] { rowIndex - 1, colIndex });
-            Visited[rowIndex - 1][colIndex] = true;
-        }
-
-        if (rowIndex < InputMatrix.Length - 1 && InputMatrix[rowIndex + 1][colIndex] == 1 && !Visited[rowIndex + 1][colIndex])
-        {
-            BfsQueue.Enqueue(new int[] { rowIndex + 1, colIndex });
-            Visited[rowIndex + 1][colIndex] = true;
-        }
-
-        if (colIndex > 0 && InputMatrix[rowIndex][colIndex - 1] == 1 && !Visited[rowIndex][colIndex - 1])
-        {
-            BfsQueue.Enqueue(new int[] { rowIndex, colIndex - 1 });
-            Visited[rowIndex][colIndex - 1] = true;
-        }
-
-        if (colIndex < InputMatrix[rowIndex].Length - 1 && InputMatrix[rowIndex][colIndex + 1] == 1 && !Visited[rowIndex][colIndex + 1])
-        {
-            BfsQueue.Enqueue(new int[] { rowIndex, colIndex + 1 });
-            Visited[rowIndex][colIndex + 1] = true;
-        }
-
-        if (NumOfCellsInCurrentLevel == 0)
-        {
-            NumOfCellsInCurrentLevel = BfsQueue.Count;
-            CurrentLevel++;
-        }
-        Bfs();
     }
 }

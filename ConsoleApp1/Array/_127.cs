@@ -6,10 +6,6 @@ public class _127
 
     public HashSet<string> VisitedHashSet { get; set; } = new HashSet<string>();
 
-    public int CurrentLevel { get; set; }
-
-    public int NumOfWordsInCurrentLevel { get; set; }
-
     public string EndWord { get; set; }
 
     public int NumberOfWordsInShortestTransformationSequence { get; set; }
@@ -61,46 +57,35 @@ public class _127
     private void Bfs(string beginWord)
     {
         BfsQueue.Enqueue(beginWord);
-        CurrentLevel = 1;
-        NumOfWordsInCurrentLevel = BfsQueue.Count;
         VisitedHashSet.Add(beginWord);
-        Bfs();
-    }
-
-    private void Bfs()
-    {
-        if (BfsQueue.Count == 0)
+        var currentLevel = 0;
+        while (BfsQueue.Count > 0)
         {
-            return;
-        }
-
-        var word = BfsQueue.Dequeue();
-        NumOfWordsInCurrentLevel--;
-
-        if (word == EndWord)
-        {
-            NumberOfWordsInShortestTransformationSequence = CurrentLevel;
-            return;
-        }
-
-        var wildCardAdjacentWords = BuildWildCardAdjacentWords(word);
-        foreach (var wildCardAdjacentWord in wildCardAdjacentWords)
-        {
-            foreach (var adjacentWord in AdjacentWordsDict[wildCardAdjacentWord])
+            var numOfWordsInCurrentLevel = BfsQueue.Count;
+            currentLevel++;
+            for (var i = 0; i < numOfWordsInCurrentLevel; i++)
             {
-                if (!VisitedHashSet.Contains(adjacentWord))
+                var word = BfsQueue.Dequeue();
+
+                if (word == EndWord)
                 {
-                    VisitedHashSet.Add(adjacentWord);
-                    BfsQueue.Enqueue(adjacentWord);
+                    NumberOfWordsInShortestTransformationSequence = currentLevel;
+                    return;
+                }
+
+                var wildCardAdjacentWords = BuildWildCardAdjacentWords(word);
+                foreach (var wildCardAdjacentWord in wildCardAdjacentWords)
+                {
+                    foreach (var adjacentWord in AdjacentWordsDict[wildCardAdjacentWord])
+                    {
+                        if (!VisitedHashSet.Contains(adjacentWord))
+                        {
+                            VisitedHashSet.Add(adjacentWord);
+                            BfsQueue.Enqueue(adjacentWord);
+                        }
+                    }
                 }
             }
         }
-
-        if (NumOfWordsInCurrentLevel == 0)
-        {
-            NumOfWordsInCurrentLevel = BfsQueue.Count;
-            CurrentLevel++;
-        }
-        Bfs();
     }
 }

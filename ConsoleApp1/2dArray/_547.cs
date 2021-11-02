@@ -53,29 +53,25 @@ public class _547
         return numOfProvinces;
     }
 
-    private void Bfs(int index)
+    private void Bfs(int startIndex)
     {
-        BfsQueue.Enqueue(index);
-        IsVisited[index] = true;
-        Bfs();
-    }
-
-    private void Bfs()
-    {
-        if (BfsQueue.Count == 0)
+        BfsQueue.Enqueue(startIndex);
+        IsVisited[startIndex] = true;
+        while (BfsQueue.Count > 0)
         {
-            return;
-        }
-        var index = BfsQueue.Dequeue();
-        for (var i = 0; i < IsConnected[index].Length; i++)
-        {
-            if (i != index && IsConnected[index][i] == 1 && !IsVisited[i])
+            var numCellsInCurrentLevel = BfsQueue.Count;
+            for (int i = 0; i < numCellsInCurrentLevel; i++)
             {
-                BfsQueue.Enqueue(i);
-                IsVisited[i] = true;
+                var index = BfsQueue.Dequeue();
+                for (var j = 0; j < IsConnected[index].Length; j++)
+                {
+                    if (j != index && IsConnected[index][j] == 1 && !IsVisited[j])
+                    {
+                        BfsQueue.Enqueue(j);
+                        IsVisited[j] = true;
+                    }
+                }
             }
         }
-
-        Bfs();
     }
 }

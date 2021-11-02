@@ -4,15 +4,7 @@ public class _1161
 {
     public Queue<TreeNode> BfsQueue { get; set; } = new Queue<TreeNode>();
 
-    public int CurrentLevel { get; set; }
-
-    public int NumOfNodesInCurrentLevel { get; set; }
-
     public int SmallestLevelWithMaxSum { get; set; }
-
-    public int CurrentLevelSum { get; set; }
-
-    public int MaxSum { get; set; }
 
     public int MaxLevelSum(TreeNode root)
     {
@@ -23,48 +15,39 @@ public class _1161
     private void Bfs(TreeNode root)
     {
         BfsQueue.Enqueue(root);
-        NumOfNodesInCurrentLevel = BfsQueue.Count;
-        CurrentLevel = 1;
+        var currentLevel = 0;
         SmallestLevelWithMaxSum = 1;
-        CurrentLevelSum = 0;
-        MaxSum = root.val;
-        Bfs();
-    }
 
-    private void Bfs()
-    {
-        if (BfsQueue.Count == 0)
+        var maxSum = root.val;
+        while (BfsQueue.Count > 0)
         {
-            return;
-        }
-
-        var node = BfsQueue.Dequeue();
-        NumOfNodesInCurrentLevel--;
-        CurrentLevelSum += node.val;
-
-        if (node.left != null)
-        {
-            BfsQueue.Enqueue(node.left);
-        }
-
-        if (node.right != null)
-        {
-            BfsQueue.Enqueue(node.right);
-        }
-
-        if (NumOfNodesInCurrentLevel == 0)
-        {
-            if (MaxSum < CurrentLevelSum)
+            var numOfNodesInCurrentLevel = BfsQueue.Count;
+            var currentLevelSum = 0;
+            currentLevel++;
+            for (int i = 0; i < numOfNodesInCurrentLevel; i++)
             {
-                MaxSum = CurrentLevelSum;
-                SmallestLevelWithMaxSum = CurrentLevel;
+                var node = BfsQueue.Dequeue();
+                currentLevelSum += node.val;
+
+                if (node.left != null)
+                {
+                    BfsQueue.Enqueue(node.left);
+                }
+
+                if (node.right != null)
+                {
+                    BfsQueue.Enqueue(node.right);
+                }
+
+                if (i == numOfNodesInCurrentLevel - 1)
+                {
+                    if (maxSum < currentLevelSum)
+                    {
+                        maxSum = currentLevelSum;
+                        SmallestLevelWithMaxSum = currentLevel;
+                    }
+                }
             }
-
-            NumOfNodesInCurrentLevel = BfsQueue.Count;
-            CurrentLevel++;
-            CurrentLevelSum = 0;
         }
-
-        Bfs();
     }
 }

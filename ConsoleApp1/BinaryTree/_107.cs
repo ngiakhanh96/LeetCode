@@ -6,10 +6,6 @@ public class _107
 
     public Queue<TreeNode> BfsQueue { get; set; } = new Queue<TreeNode>();
 
-    public int NumberOfNodeInCurrentLevel { get; set; }
-
-    public int CurrentLevel { get; set; }
-
     public IList<IList<int>> LevelOrderBottom(TreeNode root)
     {
         Dfs(root, 0);
@@ -50,45 +46,34 @@ public class _107
         }
 
         BfsQueue.Enqueue(root);
-        CurrentLevel = 0;
-        NumberOfNodeInCurrentLevel = BfsQueue.Count;
-        Bfs();
-    }
+        var currentLevel = -1;
 
-    private void Bfs()
-    {
-        if (BfsQueue.Count == 0)
+        while (BfsQueue.Count > 0)
         {
-            return;
-        }
+            var numberOfNodeInCurrentLevel = BfsQueue.Count;
+            currentLevel++;
+            for (int i = 0; i < numberOfNodeInCurrentLevel; i++)
+            {
+                var node = BfsQueue.Dequeue();
+                if (LevelOrderNodeValues[currentLevel] == null)
+                {
+                    LevelOrderNodeValues[currentLevel] = new List<int> { node.val };
+                }
+                else
+                {
+                    LevelOrderNodeValues[currentLevel].Add(node.val);
+                }
 
-        var node = BfsQueue.Dequeue();
-        NumberOfNodeInCurrentLevel--;
-        if (LevelOrderNodeValues[CurrentLevel] == null)
-        {
-            LevelOrderNodeValues[CurrentLevel] = new List<int> { node.val };
-        }
-        else
-        {
-            LevelOrderNodeValues[CurrentLevel].Add(node.val);
-        }
+                if (node.left != null)
+                {
+                    BfsQueue.Enqueue(node.left);
+                }
 
-        if (node.left != null)
-        {
-            BfsQueue.Enqueue(node.left);
+                if (node.right != null)
+                {
+                    BfsQueue.Enqueue(node.right);
+                }
+            }
         }
-
-        if (node.right != null)
-        {
-            BfsQueue.Enqueue(node.right);
-        }
-
-        if (NumberOfNodeInCurrentLevel == 0)
-        {
-            CurrentLevel++;
-            NumberOfNodeInCurrentLevel = BfsQueue.Count;
-        }
-
-        Bfs();
     }
 }

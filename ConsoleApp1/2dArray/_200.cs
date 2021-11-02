@@ -32,21 +32,24 @@ public class _200
     private void Dfs(int rowIndex, int colIndex)
     {
         IsVisited[rowIndex, colIndex] = true;
-        if (rowIndex > 0 && Grid[rowIndex - 1][colIndex] == '1' && !IsVisited[rowIndex - 1, colIndex])
+        var adjacentCells = new int[][]
         {
-            Dfs(rowIndex - 1, colIndex);
-        }
-        if (colIndex > 0 && Grid[rowIndex][colIndex - 1] == '1' && !IsVisited[rowIndex, colIndex - 1])
+            new int[] { rowIndex - 1, colIndex },
+            new int[] { rowIndex, colIndex - 1 },
+            new int[] { rowIndex + 1, colIndex },
+            new int[] { rowIndex, colIndex + 1 }
+        };
+        foreach (var adjacentCell in adjacentCells)
         {
-            Dfs(rowIndex, colIndex - 1);
-        }
-        if (rowIndex < Grid.Length - 1 && Grid[rowIndex + 1][colIndex] == '1' && !IsVisited[rowIndex + 1, colIndex])
-        {
-            Dfs(rowIndex + 1, colIndex);
-        }
-        if (colIndex < Grid[0].Length - 1 && Grid[rowIndex][colIndex + 1] == '1' && !IsVisited[rowIndex, colIndex + 1])
-        {
-            Dfs(rowIndex, colIndex + 1);
+            if (adjacentCell[0] >= 0 &&
+                adjacentCell[0] <= Grid.Length - 1 &&
+                adjacentCell[1] >= 0 &&
+                adjacentCell[1] <= Grid[0].Length - 1 &&
+                Grid[adjacentCell[0]][adjacentCell[1]] == '1' &&
+                !IsVisited[adjacentCell[0], adjacentCell[1]])
+            {
+                Dfs(adjacentCell[0], adjacentCell[1]);
+            }
         }
     }
 
@@ -75,40 +78,36 @@ public class _200
     {
         BfsQueue.Enqueue(new int[] { rowIndex, colIndex });
         IsVisited[rowIndex, colIndex] = true;
-        Bfs();
-    }
+        while (BfsQueue.Count > 0)
+        {
+            var numAdjacentCellsInCurrentLevel = BfsQueue.Count;
+            for (int i = 0; i < numAdjacentCellsInCurrentLevel; i++)
+            {
+                var currentPosition = BfsQueue.Dequeue();
+                rowIndex = currentPosition[0];
+                colIndex = currentPosition[1];
 
-    private void Bfs()
-    {
-        if (BfsQueue.Count == 0)
-        {
-            return;
+                var adjacentCells = new int[][]
+                {
+                    new int[] { rowIndex - 1, colIndex },
+                    new int[] { rowIndex, colIndex - 1 },
+                    new int[] { rowIndex + 1, colIndex },
+                    new int[] { rowIndex, colIndex + 1 }
+                };
+                foreach (var adjacentCell in adjacentCells)
+                {
+                    if (adjacentCell[0] >= 0 &&
+                        adjacentCell[0] <= Grid.Length - 1 &&
+                        adjacentCell[1] >= 0 &&
+                        adjacentCell[1] <= Grid[0].Length - 1 &&
+                        Grid[adjacentCell[0]][adjacentCell[1]] == '1' &&
+                        !IsVisited[adjacentCell[0], adjacentCell[1]])
+                    {
+                        BfsQueue.Enqueue(adjacentCell);
+                        IsVisited[adjacentCell[0], adjacentCell[1]] = true;
+                    }
+                }
+            }
         }
-        var currentPosition = BfsQueue.Dequeue();
-        var rowIndex = currentPosition[0];
-        var colIndex = currentPosition[1];
-
-        if (rowIndex > 0 && Grid[rowIndex - 1][colIndex] == '1' && !IsVisited[rowIndex - 1, colIndex])
-        {
-            BfsQueue.Enqueue(new int[] { rowIndex - 1, colIndex });
-            IsVisited[rowIndex - 1, colIndex] = true;
-        }
-        if (colIndex > 0 && Grid[rowIndex][colIndex - 1] == '1' && !IsVisited[rowIndex, colIndex - 1])
-        {
-            BfsQueue.Enqueue(new int[] { rowIndex, colIndex - 1 });
-            IsVisited[rowIndex, colIndex - 1] = true;
-        }
-        if (rowIndex < Grid.Length - 1 && Grid[rowIndex + 1][colIndex] == '1' && !IsVisited[rowIndex + 1, colIndex])
-        {
-            BfsQueue.Enqueue(new int[] { rowIndex + 1, colIndex });
-            IsVisited[rowIndex + 1, colIndex] = true;
-        }
-        if (colIndex < Grid[0].Length - 1 && Grid[rowIndex][colIndex + 1] == '1' && !IsVisited[rowIndex, colIndex + 1])
-        {
-            BfsQueue.Enqueue(new int[] { rowIndex, colIndex + 1 });
-            IsVisited[rowIndex, colIndex + 1] = true;
-        }
-
-        Bfs();
     }
 }

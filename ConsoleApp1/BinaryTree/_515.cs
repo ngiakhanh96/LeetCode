@@ -4,12 +4,6 @@ public class _515
 {
     public Queue<TreeNode> BfsQueue { get; set; } = new Queue<TreeNode>();
 
-    public int CurrentLevel { get; set; }
-
-    public int NumberOfNodesInCurrentLevel { get; set; }
-
-    public int CurrentLargestValueInCurrentLevel { get; set; } = int.MinValue;
-
     public IList<int> LargestValuesInEachLevel { get; set; } = new List<int>();
 
     public IList<int> LargestValues(TreeNode root)
@@ -25,45 +19,36 @@ public class _515
             return;
         }
         BfsQueue.Enqueue(root);
-        CurrentLevel = 0;
-        NumberOfNodesInCurrentLevel = BfsQueue.Count;
-        CurrentLargestValueInCurrentLevel = int.MinValue;
-        Bfs();
-    }
-
-    private void Bfs()
-    {
-        if (BfsQueue.Count == 0)
+        var currentLevel = -1;
+        while (BfsQueue.Count > 0)
         {
-            return;
+            var numberOfNodesInCurrentLevel = BfsQueue.Count;
+            currentLevel++;
+            var currentLargestValueInCurrentLevel = int.MinValue;
+            for (int i = 0; i < numberOfNodesInCurrentLevel; i++)
+            {
+                var node = BfsQueue.Dequeue();
+
+                if (node.val > currentLargestValueInCurrentLevel)
+                {
+                    currentLargestValueInCurrentLevel = node.val;
+                }
+
+                if (node.left != null)
+                {
+                    BfsQueue.Enqueue(node.left);
+                }
+
+                if (node.right != null)
+                {
+                    BfsQueue.Enqueue(node.right);
+                }
+
+                if (i == numberOfNodesInCurrentLevel - 1)
+                {
+                    LargestValuesInEachLevel.Add(currentLargestValueInCurrentLevel);
+                }
+            }
         }
-
-        var node = BfsQueue.Dequeue();
-        NumberOfNodesInCurrentLevel--;
-
-        if (node.val > CurrentLargestValueInCurrentLevel)
-        {
-            CurrentLargestValueInCurrentLevel = node.val;
-        }
-
-        if (node.left != null)
-        {
-            BfsQueue.Enqueue(node.left);
-        }
-
-        if (node.right != null)
-        {
-            BfsQueue.Enqueue(node.right);
-        }
-
-        if (NumberOfNodesInCurrentLevel == 0)
-        {
-            LargestValuesInEachLevel.Add(CurrentLargestValueInCurrentLevel);
-            NumberOfNodesInCurrentLevel = BfsQueue.Count;
-            CurrentLevel++;
-            CurrentLargestValueInCurrentLevel = int.MinValue;
-        }
-
-        Bfs();
     }
 }

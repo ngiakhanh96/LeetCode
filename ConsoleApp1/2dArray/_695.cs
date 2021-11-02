@@ -34,21 +34,25 @@ public class _695
     {
         IsVisited[rowIndex, colIndex] = true;
         CurrentArea++;
-        if (rowIndex > 0 && Grid[rowIndex - 1][colIndex] == 1 && !IsVisited[rowIndex - 1, colIndex])
+
+        var adjacentCells = new int[][]
         {
-            Dfs(rowIndex - 1, colIndex);
-        }
-        if (colIndex > 0 && Grid[rowIndex][colIndex - 1] == 1 && !IsVisited[rowIndex, colIndex - 1])
+            new int[] { rowIndex - 1, colIndex },
+            new int[] { rowIndex, colIndex - 1 },
+            new int[] { rowIndex + 1, colIndex },
+            new int[] { rowIndex, colIndex + 1 }
+        };
+        foreach (var adjacentCell in adjacentCells)
         {
-            Dfs(rowIndex, colIndex - 1);
-        }
-        if (rowIndex < Grid.Length - 1 && Grid[rowIndex + 1][colIndex] == 1 && !IsVisited[rowIndex + 1, colIndex])
-        {
-            Dfs(rowIndex + 1, colIndex);
-        }
-        if (colIndex < Grid[0].Length - 1 && Grid[rowIndex][colIndex + 1] == 1 && !IsVisited[rowIndex, colIndex + 1])
-        {
-            Dfs(rowIndex, colIndex + 1);
+            if (adjacentCell[0] >= 0 &&
+                adjacentCell[0] <= Grid.Length - 1 &&
+                adjacentCell[1] >= 0 &&
+                adjacentCell[1] <= Grid[0].Length - 1 &&
+                Grid[adjacentCell[0]][adjacentCell[1]] == 1 &&
+                !IsVisited[adjacentCell[0], adjacentCell[1]])
+            {
+                Dfs(adjacentCell[0], adjacentCell[1]);
+            }
         }
     }
 }

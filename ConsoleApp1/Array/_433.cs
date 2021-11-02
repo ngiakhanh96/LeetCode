@@ -6,10 +6,6 @@ public class _433
 
     public HashSet<string> VisitedHashSet { get; set; } = new HashSet<string>();
 
-    public int CurrentLevel { get; set; }
-
-    public int NumOfGenesInCurrentLevel { get; set; }
-
     public string EndGene { get; set; }
 
     public int NumberOfMutationsInShortestTransformationSequence { get; set; } = -1;
@@ -62,46 +58,36 @@ public class _433
     private void Bfs(string beginGene)
     {
         BfsQueue.Enqueue(beginGene);
-        CurrentLevel = 0;
-        NumOfGenesInCurrentLevel = BfsQueue.Count;
+        var currentLevel = -1;
         VisitedHashSet.Add(beginGene);
-        Bfs();
-    }
 
-    private void Bfs()
-    {
-        if (BfsQueue.Count == 0)
+        while (BfsQueue.Count > 0)
         {
-            return;
-        }
-
-        var gene = BfsQueue.Dequeue();
-        NumOfGenesInCurrentLevel--;
-
-        if (gene == EndGene)
-        {
-            NumberOfMutationsInShortestTransformationSequence = CurrentLevel;
-            return;
-        }
-
-        var wildCardAdjacentGenes = BuildWildCardAdjacentGenes(gene);
-        foreach (var wildCardAdjacentGene in wildCardAdjacentGenes)
-        {
-            foreach (var adjacentWord in AdjacentGenesDict[wildCardAdjacentGene])
+            var numOfGenesInCurrentLevel = BfsQueue.Count;
+            currentLevel++;
+            for (var i = 0; i < numOfGenesInCurrentLevel; i++)
             {
-                if (!VisitedHashSet.Contains(adjacentWord))
+                var gene = BfsQueue.Dequeue();
+
+                if (gene == EndGene)
                 {
-                    VisitedHashSet.Add(adjacentWord);
-                    BfsQueue.Enqueue(adjacentWord);
+                    NumberOfMutationsInShortestTransformationSequence = currentLevel;
+                    return;
+                }
+
+                var wildCardAdjacentGenes = BuildWildCardAdjacentGenes(gene);
+                foreach (var wildCardAdjacentGene in wildCardAdjacentGenes)
+                {
+                    foreach (var adjacentWord in AdjacentGenesDict[wildCardAdjacentGene])
+                    {
+                        if (!VisitedHashSet.Contains(adjacentWord))
+                        {
+                            VisitedHashSet.Add(adjacentWord);
+                            BfsQueue.Enqueue(adjacentWord);
+                        }
+                    }
                 }
             }
         }
-
-        if (NumOfGenesInCurrentLevel == 0)
-        {
-            NumOfGenesInCurrentLevel = BfsQueue.Count;
-            CurrentLevel++;
-        }
-        Bfs();
     }
 }

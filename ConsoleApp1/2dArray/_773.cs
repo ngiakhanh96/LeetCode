@@ -6,10 +6,6 @@ public class _773
 
     public HashSet<string> VisitedHashSet { get; set; } = new HashSet<string>();
 
-    public int CurrentLevel { get; set; }
-
-    public int NumOfStatesInCurrentLevel { get; set; }
-
     public int MinMove { get; set; } = -1;
 
     public Dictionary<string, List<string>> AdjacentStatesDict { get; set; } =
@@ -79,42 +75,31 @@ public class _773
             }
         }
         BfsQueue.Enqueue(beginState);
-        CurrentLevel = 0;
-        NumOfStatesInCurrentLevel = BfsQueue.Count;
+        var currentLevel = -1;
         VisitedHashSet.Add(beginState);
-        Bfs();
-    }
-
-    private void Bfs()
-    {
-        if (BfsQueue.Count == 0)
+        while (BfsQueue.Count > 0)
         {
-            return;
-        }
-
-        var state = BfsQueue.Dequeue();
-        NumOfStatesInCurrentLevel--;
-
-        if (state == "123450")
-        {
-            MinMove = CurrentLevel;
-            return;
-        }
-
-        var adjacentStates = BuildAdjacentStates(state);
-        foreach (var adjacentState in adjacentStates)
-        {
-            if (VisitedHashSet.Add(adjacentState))
+            var numStatesInCurrentCell = BfsQueue.Count;
+            currentLevel++;
+            for (var i = 0; i < numStatesInCurrentCell; i++)
             {
-                BfsQueue.Enqueue(adjacentState);
+                var state = BfsQueue.Dequeue();
+
+                if (state == "123450")
+                {
+                    MinMove = currentLevel;
+                    return;
+                }
+
+                var adjacentStates = BuildAdjacentStates(state);
+                foreach (var adjacentState in adjacentStates)
+                {
+                    if (VisitedHashSet.Add(adjacentState))
+                    {
+                        BfsQueue.Enqueue(adjacentState);
+                    }
+                }
             }
         }
-
-        if (NumOfStatesInCurrentLevel == 0)
-        {
-            NumOfStatesInCurrentLevel = BfsQueue.Count;
-            CurrentLevel++;
-        }
-        Bfs();
     }
 }
