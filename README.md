@@ -35,5 +35,6 @@ Binary Tree: Using Prefix Sum, DFS (O(V + E)), BFS(O(V + E)), Dynamic Programmin
 *Fibonacci: O(2^n)
 *BFS use to find the shortest path, deal with level in tree
 *Binary Search: 
-**Can use with sorted list, rotated sorted list
-**Can Use for problems which have the only way to solve is to bruteforce
+**Can use with sorted list, rotated sorted list, binary search tree
+**Can use for problems which have the only way to solve is to bruteforce
+**Can use for finding max of min, min of max

@@ -6,6 +6,6 @@ class Program
 {
     static void Main(string[] args)
     {
-        var t = new _1631().MinimumEffortPath(new int[][] { new int[] { 1, 2, 2 }, new int[] { 3, 8, 2 }, new int[] { 5, 3, 5 } });
+        var t = new _1102().MaximumMinimumPath(new int[][] { new int[] { 5, 4, 5 }, new[] { 1, 2, 6 }, new[] { 7, 4, 6 } });
     }
 }
