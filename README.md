@@ -39,6 +39,7 @@ Binary Tree: Using Prefix Sum, DFS (O(V + E)), BFS(O(V + E)), Dynamic Programmin
 **Can use for problems which have the only way to solve is to bruteforce
 **Can use for finding max of min, min of max
 **Notice:
+***Look for more indepth instructions at https://www.evernote.com/shard/s601/sh/51bb4614-ef6b-b3b4-3eac-14e357413141/08dc2a9e498e3e4276edae0866ee01a7
 ***Be careful for the overflow issue when calculating middle = middle = low + (high - low) / 2
 ***If it is a search problem or something we don't know the answer is there or not, then while(low <= high)
 ***If it is min, max problem or something we know the answer must be there, then while(low < high) and one of low/high would be assigned to middle, 
