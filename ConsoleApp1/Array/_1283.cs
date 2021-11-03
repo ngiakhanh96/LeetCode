@@ -6,9 +6,8 @@ public class _1283
     {
         var minDivisor = 1;
         var maxDivisor = nums.Max();
-        var smallestDivisor = int.MaxValue;
 
-        while (minDivisor <= maxDivisor)
+        while (minDivisor < maxDivisor)
         {
             var midDivisor = minDivisor + (maxDivisor - minDivisor) / 2;
             var currentSum = 0;
@@ -19,8 +18,7 @@ public class _1283
 
             if (currentSum <= threshold)
             {
-                smallestDivisor = midDivisor;
-                maxDivisor = midDivisor - 1;
+                maxDivisor = midDivisor;
             }
             else
             {
@@ -28,6 +26,6 @@ public class _1283
             }
         }
 
-        return smallestDivisor;
+        return minDivisor;
     }
 }

@@ -8,11 +8,10 @@ public class _1231
     {
         var minMinSweetness = sweetness.Min();
         var maxMinSweetness = sweetness.Sum() / (k + 1);
-        var res = 0;
 
-        while (minMinSweetness <= maxMinSweetness)
+        while (minMinSweetness < maxMinSweetness)
         {
-            var midMinSweetness = minMinSweetness + (maxMinSweetness - minMinSweetness) / 2;
+            var midMinSweetness = minMinSweetness + (maxMinSweetness - minMinSweetness + 1) / 2;
             var pieces = 0;
             var currentSumSingleSweetness = 0;
             foreach (var singleSweetness in sweetness)
@@ -37,10 +36,9 @@ public class _1231
             // otherwise in case we have more pieces than expected, we can combine them with the other pieces
             else
             {
-                res = midMinSweetness;
                 minMinSweetness = midMinSweetness;
             }
         }
-        return res;
+        return minMinSweetness;
     }
 }

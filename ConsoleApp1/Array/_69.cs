@@ -4,23 +4,21 @@ public class _69
 {
     public int MySqrt(int x)
     {
-        var startNum = 0;
-        var endNum = x;
-        var res = int.MinValue;
+        long startNum = 0;
+        var endNum = (long)x;
 
-        while (startNum <= endNum)
+        while (startNum < endNum)
         {
-            var midNum = startNum + (endNum - startNum) / 2;
-            if ((long)midNum * midNum > x)
+            var midNum = startNum + (endNum - startNum + 1) / 2;
+            if (midNum * midNum > x)
             {
                 endNum = midNum - 1;
             }
             else
             {
-                res = midNum;
-                startNum = midNum + 1;
+                startNum = midNum;
             }
         }
-        return res;
+        return (int)startNum;
     }
 }
