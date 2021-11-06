@@ -1,4 +1,4 @@
-﻿using ConsoleApp1._2dArray;
+﻿using ConsoleApp1.BinaryTree;
 
 namespace ConsoleApp1;
 
@@ -6,6 +6,6 @@ class Program
 {
     static void Main(string[] args)
     {
-        var t = new _1102().MaximumMinimumPath(new int[][] { new int[] { 5, 4, 5 }, new[] { 1, 2, 6 }, new[] { 7, 4, 6 } });
+        var t = new _669().TrimBST(new TreeNode(1, new TreeNode(0), new TreeNode(2)), 1, 2);
     }
 }
