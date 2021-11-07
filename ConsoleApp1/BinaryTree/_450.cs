@@ -63,7 +63,7 @@ public class _450
             return (root, parentNode);
         }
 
-        return val > root.val ? SearchBST(root.right, val, root) : SearchBST(root.left, val, root);
+        return SearchBST(val > root.val ? root.right : root.left, val, root);
     }
 
     private (TreeNode node, TreeNode parentNode) FindInOrderSuccessor(TreeNode node, TreeNode parentNode)

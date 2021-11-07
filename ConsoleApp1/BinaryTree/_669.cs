@@ -19,26 +19,21 @@ public class _669
             return;
         }
 
-        if (node.val < low)
+        if (node.val < low || node.val > high)
         {
-            var replacement = FindReplacement(node.right, low, high);
+            var isFromLeft = node.val < low;
+            var replacement = FindReplacement(node, low, high);
             node = replacement;
             if (parentNode is not null)
             {
-                parentNode.left = replacement;
-            }
-            else
-            {
-                Root = replacement;
-            }
-        }
-        else if (node.val > high)
-        {
-            var replacement = FindReplacement(node.left, low, high);
-            node = replacement;
-            if (parentNode is not null)
-            {
-                parentNode.right = replacement;
+                if (isFromLeft)
+                {
+                    parentNode.left = replacement;
+                }
+                else
+                {
+                    parentNode.right = replacement;
+                }
             }
             else
             {
