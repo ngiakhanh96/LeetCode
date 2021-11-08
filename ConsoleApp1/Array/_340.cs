@@ -7,7 +7,7 @@ public class _340
         var currentJ = 0;
         var dict = new Dictionary<int, int>();
         var maxLength = 0;
-        var shouldContinue = false;
+        var shouldContinue = true;
         for (int i = 0; i < s.Length; i++)
         {
             if (i > 0)
@@ -28,7 +28,6 @@ public class _340
 
             for (int j = currentJ; j < s.Length; j++)
             {
-                shouldContinue = false;
                 if (!dict.TryAdd(s[j], 1))
                 {
                     dict[s[j]]++;
@@ -38,10 +37,13 @@ public class _340
                 {
                     currentJ = j;
                     dict.Remove(s[j]);
-                    shouldContinue = true;
                     break;
                 }
                 maxLength = j - i + 1 > maxLength ? j - i + 1 : maxLength;
+                if (j + 1 >= s.Length)
+                {
+                    shouldContinue = false;
+                }
             }
 
             if (!shouldContinue)
