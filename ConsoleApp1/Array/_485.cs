@@ -6,7 +6,7 @@ public class _485
     {
         var firstPointer = 0;
         var secondPointer = 0;
-        var k = nums[0] == 0 ? 0 : 1;
+        var k = 0;
         while (secondPointer < nums.Length)
         {
             while (secondPointer < nums.Length && nums[secondPointer] == 0)
