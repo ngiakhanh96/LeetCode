@@ -12,6 +12,7 @@ Array: Prefix Sum, Range Addition (Prefix Sum with input (0,0,0,0)), Prefix XOR,
 *Merge sort: Use to find any number a[i], a[r] (i < r) when a[i], a[r] statisfy a condition
 *Two pointers same direction template: see _485, _674, _845
 *Two pointers opposite direction template: see _15
+*1/-1 First occurence: see _525, _1124
 
 Bit Manipulation: n &= (n - 1), Subset a bitmask from 0 to 2^n - 1, Get Bit, Clear Bit, ~ for flip, & for get/clear, | for get/set | ^ for get/set/clear/flip
 *XOR: 

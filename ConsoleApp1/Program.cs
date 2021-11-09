@@ -6,6 +6,6 @@ class Program
 {
     static void Main(string[] args)
     {
-        var t = new _259().ThreeSumSmaller(new int[] { -2, 0, 1, 3 }, 2);
+        var t = new _76().MinWindow("a", "aa");
     }
 }
