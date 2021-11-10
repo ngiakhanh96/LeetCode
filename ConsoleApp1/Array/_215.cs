@@ -110,4 +110,33 @@ public class _215
 
         return boundary;
     }
+
+    public MinHeap MinHeap { get; set; }
+    public int FindKthLargest3(int[] nums, int k)
+    {
+        MinHeap = new MinHeap(k);
+        foreach (var num in nums)
+        {
+            AddToHeap(num);
+        }
+
+        return MinHeap.Peek();
+    }
+
+    private void AddToHeap(int num)
+    {
+        if (!MinHeap.IsFull())
+        {
+            MinHeap.Add(num);
+        }
+        else
+        {
+            var currentSmallest = MinHeap.Peek();
+            if (num > currentSmallest)
+            {
+                MinHeap.Pop();
+                MinHeap.Add(num);
+            }
+        }
+    }
 }

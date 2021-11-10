@@ -10,6 +10,8 @@ Array: Prefix Sum, Range Addition (Prefix Sum with input (0,0,0,0)), Prefix XOR,
     Sort or find the value with max frequency in array,
     Find how many Numbers Are Smaller Than the Current Number (Leetcode 1365)
 *Merge sort: Use to find any number a[i], a[r] (i < r) when a[i], a[r] statisfy a condition
+*Counting sort: Use element as index in the second array, value as the frequency
+*Bucket sort: Use frequency(or array.size() * val) as index in the second array, value as the dynamic list (or linked-list) of elements
 *Two pointers same direction template: see _485, _674, _845
 *Two pointers opposite direction template: see _15
 *1/-1 First occurence: see _525, _1124
@@ -31,6 +33,10 @@ Deque: Find max in a sliding window
 Queue: Find sum/product in a sliding window
 
 Stack: Deal with invalid ({) or remove duplicated characters, Evaluate Reverse Polish Notation (2,3,+)
+
+Heap(Priority Queue): 
+*Use to get 2 smallest(largest) values, update or combine them then add back to the heap
+*Use to find K smallest(largest) in a stream
 
 Binary Tree: Using Prefix Sum, DFS (O(V + E)), BFS(O(V + E)), Dynamic Programming
 *DFS use to find connected graph, dynamic programming
