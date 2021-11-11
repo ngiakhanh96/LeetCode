@@ -5,11 +5,9 @@ public class _295
 {
     public class MedianFinder
     {
-        public IHeap LeftHeap { get; set; }
+        public MaxHeap MaxHeap { get; set; } = new MaxHeap(50000);
 
-        public IHeap RightHeap { get; set; }
-
-        public List<int> Temp { get; set; } = new List<int>();
+        public MinHeap MinHeap { get; set; } = new MinHeap(50000);
         public MedianFinder()
         {
 
@@ -17,65 +15,41 @@ public class _295
 
         public void AddNum(int num)
         {
-            if (Temp != null)
+            if (MaxHeap.Count == MinHeap.Count)
             {
-                Temp.Add(num);
-                if (Temp.Count > 1)
+                if (MaxHeap.IsEmpty() || num <= MaxHeap.Peek())
                 {
-                    if (Temp[0] > Temp[1])
-                    {
-                        LeftHeap = new MinHeap(1000);
-                        RightHeap = new MaxHeap(1000);
-                    }
-                    else
-                    {
-                        LeftHeap = new MaxHeap(1000);
-                        RightHeap = new MinHeap(1000);
-                    }
-
-                    AddHeap(Temp[0]);
-                    AddHeap(Temp[1]);
-                    Temp = null;
-                }
-            }
-            else
-            {
-                AddHeap(num);
-            }
-        }
-
-        private void AddHeap(int val)
-        {
-            if (LeftHeap.Count == RightHeap.Count)
-            {
-                if (!RightHeap.IsEmpty())
-                {
-                    LeftHeap.Add(RightHeap.Pop());
-                    RightHeap.Add(val);
+                    MaxHeap.Add(num);
                 }
                 else
                 {
-                    LeftHeap.Add(val);
+                    MinHeap.Add(num);
+                    MaxHeap.Add(MinHeap.Pop());
+
                 }
             }
             else
             {
-                RightHeap.Add(val);
+                if (!MinHeap.IsEmpty() && num >= MinHeap.Peek())
+                {
+                    MinHeap.Add(num);
+                }
+                else
+                {
+                    MaxHeap.Add(num);
+                    MinHeap.Add(MaxHeap.Pop());
+                }
             }
         }
 
         public double FindMedian()
         {
-            if (Temp != null)
+            if (MaxHeap.Count > MinHeap.Count)
             {
-                return Temp[0];
-            }
-            if (LeftHeap.Count > RightHeap.Count)
-            {
-                return LeftHeap.Peek();
+                return MaxHeap.Peek();
             }
 
-            return ((double)LeftHeap.Peek() + RightHeap.Peek()) / 2;
+            return ((double)MaxHeap.Peek() + MinHeap.Peek()) / 2;
         }
     }
 
@@ -93,12 +67,25 @@ public class _295
         {
             if (MaxHeap.Count == MinHeap.Count)
             {
-                if (MinHeap.Count > 0)
+                if (MaxHeap.Count == 0 || num <= MaxHeap.Peek())
                 {
-                    MaxHeap.Enqueue(MinHeap.Dequeue());
+                    MaxHeap.Enqueue(num);
                 }
-
-                MaxHeap.Enqueue(num);
+                else
+                {
+                    MaxHeap.Enqueue(MinHeap.EnqueueDequeue(num));
+                }
+            }
+            else
+            {
+                if (MinHeap.Count > 0 && num >= MinHeap.Peek())
+                {
+                    MinHeap.Enqueue(num);
+                }
+                else
+                {
+                    MinHeap.Enqueue(MaxHeap.EnqueueDequeue(num));
+                }
             }
         }
 

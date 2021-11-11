@@ -34,9 +34,10 @@ Queue: Find sum/product in a sliding window
 
 Stack: Deal with invalid ({) or remove duplicated characters, Evaluate Reverse Polish Notation (2,3,+)
 
-Heap(Priority Queue): 
+Binary Heap(Priority Queue): 
 *Use to get 2 smallest(largest) values, update or combine them then add back to the heap
 *Use to find K smallest(largest) in a stream
+*Use 2 heaps (max and min) to track the median value (see _295)
 
 Binary Tree: Using Prefix Sum, DFS (O(V + E)), BFS(O(V + E)), Dynamic Programming
 *DFS use to find connected graph, dynamic programming

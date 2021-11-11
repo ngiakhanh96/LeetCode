@@ -1,23 +1,27 @@
 ﻿namespace ConsoleApp1.Array;
 
 // Only used for Leetcode
-public class MinHeap : IHeap
+public class MinHeap
 {
-    private readonly int[] _elements;
-    private int _size;
-    public int Count => _size;
+    private readonly List<int> _elements;
+    public int Count => _elements.Count;
 
-    public MinHeap(int size)
+    public MinHeap()
     {
-        _elements = new int[size];
+        _elements = new List<int>();
+    }
+
+    public MinHeap(int initialSize)
+    {
+        _elements = new List<int>(initialSize);
     }
 
     private int GetLeftChildIndex(int elementIndex) => 2 * elementIndex + 1;
     private int GetRightChildIndex(int elementIndex) => 2 * elementIndex + 2;
     private int GetParentIndex(int elementIndex) => (elementIndex - 1) / 2;
 
-    private bool HasLeftChild(int elementIndex) => GetLeftChildIndex(elementIndex) < _size;
-    private bool HasRightChild(int elementIndex) => GetRightChildIndex(elementIndex) < _size;
+    private bool HasLeftChild(int elementIndex) => GetLeftChildIndex(elementIndex) < Count;
+    private bool HasRightChild(int elementIndex) => GetRightChildIndex(elementIndex) < Count;
     private bool IsRoot(int elementIndex) => elementIndex == 0;
 
     private int GetLeftChild(int elementIndex) => _elements[GetLeftChildIndex(elementIndex)];
@@ -33,12 +37,7 @@ public class MinHeap : IHeap
 
     public bool IsEmpty()
     {
-        return _size == 0;
-    }
-
-    public bool IsFull()
-    {
-        return _size == _elements.Length;
+        return Count == 0;
     }
 
     public int Peek()
@@ -55,8 +54,8 @@ public class MinHeap : IHeap
             throw new IndexOutOfRangeException();
 
         var result = _elements[0];
-        _elements[0] = _elements[_size - 1];
-        _size--;
+        _elements[0] = _elements.Last();
+        _elements.RemoveAt(Count - 1);
 
         ReCalculateDown();
 
@@ -65,11 +64,7 @@ public class MinHeap : IHeap
 
     public void Add(int element)
     {
-        if (IsFull())
-            throw new IndexOutOfRangeException();
-
-        _elements[_size] = element;
-        _size++;
+        _elements.Add(element);
 
         ReCalculateUp();
     }
@@ -97,7 +92,7 @@ public class MinHeap : IHeap
 
     private void ReCalculateUp()
     {
-        var index = _size - 1;
+        var index = Count - 1;
         while (!IsRoot(index) && _elements[index] < GetParent(index))
         {
             var parentIndex = GetParentIndex(index);

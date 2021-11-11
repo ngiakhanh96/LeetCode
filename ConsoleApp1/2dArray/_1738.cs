@@ -1,10 +1,12 @@
-﻿namespace ConsoleApp1._2dArray;
+﻿using ConsoleApp1.Array;
+
+namespace ConsoleApp1._2dArray;
 
 public class _1738
 {
     public int KthLargestValue(int[][] matrix, int k)
     {
-        //var fakePriorityQueue = new List<int>();
+        var minHeap = new MinHeap();
         //var priorityQueue = new PriorityQueue<int, int>();
         var count = 0;
         var temp = new int[matrix.Length * matrix[0].Length];
@@ -19,42 +21,34 @@ public class _1738
                     matrix[i][j];
                 //if (priorityQueue.Count < k)
                 //{
-                //    priorityQueue.Enqueue(matrix[i][j], matrix[i][j]);
+                //    priorityQueue.Enqueue(matrix[i][j]);
                 //}
                 //else
                 //{
                 //    if (matrix[i][j] > priorityQueue.Peek())
                 //    {
-                //        priorityQueue.EnqueueDequeue(matrix[i][j], matrix[i][j]);
+                //        priorityQueue.DequeueEnqueue(matrix[i][j]);
                 //    }
                 //}
-                //if (fakePriorityQueue.Count < k)
-                //{
-                //    fakePriorityQueue.Add(matrix[i][j]);
-                //    if (fakePriorityQueue.Count == k)
-                //    {
-                //        fakePriorityQueue.Sort();
-                //    }
-                //}
-                //else
-                //{
-                //    if (matrix[i][j] > fakePriorityQueue.First())
-                //    {
-                //        fakePriorityQueue.RemoveAt(0);
-                //        fakePriorityQueue.Add(matrix[i][j]);
-                //        fakePriorityQueue.Sort();
-                //    }
-                //}
+                if (minHeap.Count < k)
+                {
+                    minHeap.Add(matrix[i][j]);
+                }
+                else
+                {
+                    if (matrix[i][j] > minHeap.Peek())
+                    {
+                        minHeap.Pop();
+                        minHeap.Add(matrix[i][j]);
+                    }
+                }
                 temp[count++] = matrix[i][j];
             }
         }
         //Time: O(MNlogk)
         //Space: O(k)
         //return priorityQueue.Peek();
-
-        //Time: O(MNklogk) can be optimized to O(MNk) by rebuilding the fakePriorityQueue
-        //Space: O(k)
-        //return fakePriorityQueue.First();
+        return minHeap.Peek();
 
         //Time: O(MNlog(MN))
         //Space: O(MN)
@@ -63,7 +57,7 @@ public class _1738
 
         //Time: O(MN)
         //Space: O(MN)
-        return FindKthLargest(temp, k - 1);
+        //return FindKthLargest(temp, k - 1);
     }
 
     private int FindKthLargest(int[] nums, int k, int start = 0, int end = -1)

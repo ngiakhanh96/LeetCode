@@ -5,9 +5,13 @@ public class _703
     public class KthLargest
     {
         public MinHeap MinHeap { get; set; }
+
+        public int Size { get; set; }
+
         public KthLargest(int k, int[] nums)
         {
-            MinHeap = new MinHeap(k);
+            Size = k;
+            MinHeap = new MinHeap();
             foreach (var num in nums)
             {
                 AddToHeap(num);
@@ -17,7 +21,7 @@ public class _703
 
         private void AddToHeap(int num)
         {
-            if (!MinHeap.IsFull())
+            if (MinHeap.Count < Size)
             {
                 MinHeap.Add(num);
             }
@@ -62,8 +66,7 @@ public class _703
                 var currentSmallest = MinHeap.Peek();
                 if (num > currentSmallest)
                 {
-                    MinHeap.Dequeue();
-                    MinHeap.Enqueue(num);
+                    MinHeap.DequeueEnqueue(num);
                 }
             }
         }

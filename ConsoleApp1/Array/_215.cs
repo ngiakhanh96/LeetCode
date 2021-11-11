@@ -112,9 +112,13 @@ public class _215
     }
 
     public MinHeap MinHeap { get; set; }
+
+    public int Size { get; set; }
+
     public int FindKthLargest3(int[] nums, int k)
     {
-        MinHeap = new MinHeap(k);
+        Size = k;
+        MinHeap = new MinHeap();
         foreach (var num in nums)
         {
             AddToHeap(num);
@@ -125,7 +129,7 @@ public class _215
 
     private void AddToHeap(int num)
     {
-        if (!MinHeap.IsFull())
+        if (MinHeap.Count < Size)
         {
             MinHeap.Add(num);
         }
