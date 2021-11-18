@@ -10,6 +10,7 @@ Array: Prefix Sum, Range Addition (Prefix Sum with input (0,0,0,0)), Prefix XOR,
     Sort or find the value with max frequency in array,
     Find how many Numbers Are Smaller Than the Current Number (Leetcode 1365)
 *Merge sort: Use to find any number a[i], a[r] (i < r) when a[i], a[r] statisfy a condition
+*Merge sort and heap sort can be used on LinkedList while quicksort can't
 *Counting sort: Use element as index in the second array, value as the frequency
 *Bucket sort: Use frequency(or array.size() * val) as index in the second array, value as the dynamic list (or linked-list) of elements
 *Two pointers same direction template: see _485, _674, _845
@@ -24,11 +25,11 @@ Bit Manipulation: n &= (n - 1), Subset a bitmask from 0 to 2^n - 1, Get Bit, Cle
     x^y = y^x
     (x^y)^z =  x^(y^z)
 
-LinkedList: Floyd Algorithm, Reverse, Merge Sort
+LinkedList: Floyd Algorithm, Reverse, Merge/Heap Sort
 
 CircularQueue
 
-Deque: Find max in a sliding window
+Deque: Use doubly linked-list. Find max in a sliding window
 
 Queue: Find sum/product in a sliding window
 
