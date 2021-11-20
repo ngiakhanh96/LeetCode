@@ -1,6 +1,4 @@
-﻿using ConsoleApp1.LinkedList;
-
-namespace ConsoleApp1.Array;
+﻿namespace ConsoleApp1.Array;
 
 public class _23
 {

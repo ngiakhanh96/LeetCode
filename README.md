@@ -57,5 +57,8 @@ Binary Tree: Using Prefix Sum, DFS (O(V + E)), BFS(O(V + E)), Dynamic Programmin
 the other has to be assigned like this: For low = middle + 1, for high = middle - 1; 
 **** If in case low = middle + 1, high = middle, then middle = low + (high - low) / 2
 **** If in case low = middle, high = middle - 1, then middle = low + (high - low + 1) / 2
+*Dijkstra algorithm: Use to find shortest path in a non negative weight map. See reverse Dijkstra in _1514
 
 Binary Search Tree: Not balanced, unique values, In order traversal gives increasing sequence and In order traversal reversed gives decreasing sequence
+
+

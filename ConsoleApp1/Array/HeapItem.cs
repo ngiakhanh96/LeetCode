@@ -2,5 +2,5 @@
 
 public class HeapItem
 {
-    public int Num { get; set; }
+    public float Num { get; set; }
 }

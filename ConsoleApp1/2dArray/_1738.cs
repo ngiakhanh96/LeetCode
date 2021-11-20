@@ -1,6 +1,4 @@
-﻿using ConsoleApp1.Array;
-
-namespace ConsoleApp1._2dArray;
+﻿namespace ConsoleApp1._2dArray;
 
 public class _1738
 {
