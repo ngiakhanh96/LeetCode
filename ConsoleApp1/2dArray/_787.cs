@@ -34,12 +34,13 @@ public class _787
             NodeIndex = src,
             RemainingStops = k
         });
-
+        var minFlightPrice = int.MaxValue;
         while (!minHeap.IsEmpty())
         {
             var currentNode = minHeap.Pop();
             if (currentNode.NodeIndex == dst)
             {
+                minFlightPrice = (int)currentNode.Num;
                 break;
             }
 
@@ -64,11 +65,6 @@ public class _787
             }
         }
 
-        var minFlightPrice = int.MaxValue;
-        for (int i = 0; i < d.GetLength(1); i++)
-        {
-            minFlightPrice = minFlightPrice < d[dst, i] ? minFlightPrice : d[dst, i];
-        }
         return minFlightPrice == int.MaxValue ? -1 : minFlightPrice;
     }
 
