@@ -110,4 +110,40 @@ public class _200
             }
         }
     }
+
+    public int NumIslands3(char[][] grid)
+    {
+        Grid = grid;
+
+        var unionFind = new UnionFind<char>(grid, ele => ele == '1');
+        for (var i = 0; i < Grid.Length; i++)
+        {
+            for (int j = 0; j < Grid[0].Length; j++)
+            {
+                if (Grid[i][j] == '1')
+                {
+                    var adjacentCells = new int[][]
+                    {
+                        new int[] { i - 1, j },
+                        new int[] { i, j - 1 },
+                        new int[] { i + 1, j },
+                        new int[] { i, j + 1 }
+                    };
+                    foreach (var adjacentCell in adjacentCells)
+                    {
+                        if (adjacentCell[0] >= 0 &&
+                            adjacentCell[0] <= Grid.Length - 1 &&
+                            adjacentCell[1] >= 0 &&
+                            adjacentCell[1] <= Grid[0].Length - 1 &&
+                            Grid[adjacentCell[0]][adjacentCell[1]] == '1')
+                        {
+                            unionFind.TryUnion(i, j, adjacentCell[0], adjacentCell[1]);
+                        }
+                    }
+                }
+            }
+        }
+        return unionFind.Count;
+
+    }
 }

@@ -61,4 +61,6 @@ the other has to be assigned like this: For low = middle + 1, for high = middle 
 
 Binary Search Tree: Not balanced, unique values, In order traversal gives increasing sequence and In order traversal reversed gives decreasing sequence
 
+Union Find: Use to combine things which share common patterns into one group with runtime nearly O(1). For more info https://docs.google.com/presentation/d/1_j8xIydyYzjB_M9J4qGC-YYYvzRrRDW2UUMhTy8Rl6g/edit#slide=id.gfc60fc96f0_0_310
+
 
