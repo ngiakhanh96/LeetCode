@@ -1,6 +1,6 @@
-﻿global using ConsoleApp1.Array;
-global using ConsoleApp1.LinkedList;
-using ConsoleApp1._2dArray;
+﻿global using ConsoleApp1.LinkedList;
+global using ConsoleApp1.UnionFind;
+using ConsoleApp1.MinimumSpanningTree;
 
 namespace ConsoleApp1;
 
@@ -8,6 +8,6 @@ class Program
 {
     static void Main(string[] args)
     {
-        var t = new _305().NumIslands2(2, 2, new int[][] { new[] { 0, 0 }, new[] { 1, 1 }, new[] { 0, 1 } });
+        var t = new _1584().MinCostConnectPoints(new int[][] { new int[] { 0, 0 }, new[] { 2, 2 }, new[] { 3, 10 }, new[] { 5, 2 }, new[] { 7, 0 } });
     }
 }
