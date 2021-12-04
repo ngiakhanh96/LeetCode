@@ -67,4 +67,4 @@ MinimumSpanningTree: a sorted version of UnionFind. Used to find the minimum cos
 
 LeftToRightMinimaTree: Use to find (left/right) nearest position that contains a smaller/bigger value in an array. Runtime O(n). Proof: https://hoangdinhquang.me/on-lrm-trees-lemma-application/
 
-Trie: Use to find the prefix words from the set of given words. May combine with Dfs
+Trie: Use to find the prefix words from the set of given words. May combine with Dfs, Dictionary, Min/Max Heap

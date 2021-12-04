@@ -57,7 +57,7 @@ public class _295
     {
         public PriorityQueue<int, int> MinHeap { get; set; } = new PriorityQueue<int, int>();
 
-        public PriorityQueue<int, int> MaxHeap { get; set; } = new PriorityQueue<int, int>(new MaxHeapComparer());
+        public PriorityQueue<int, int> MaxHeap { get; set; } = new PriorityQueue<int, int>(new MaxHeapIntComparer());
         public MedianFinder2()
         {
 

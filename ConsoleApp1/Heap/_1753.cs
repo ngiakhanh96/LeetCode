@@ -15,7 +15,7 @@ public class _1753
             var largest = maxHeap.Pop();
             var secondLargest = maxHeap.Pop();
 
-            if (largest == 0 && secondLargest == 0)
+            if (largest == 0 || secondLargest == 0)
             {
                 break;
             }
@@ -29,7 +29,7 @@ public class _1753
 
     public int MaximumScore2(int a, int b, int c)
     {
-        var maxHeap = new PriorityQueue<int, int>(3, new MaxHeapComparer());
+        var maxHeap = new PriorityQueue<int, int>(3, new MaxHeapIntComparer());
         maxHeap.Enqueue(a);
         maxHeap.Enqueue(b);
         maxHeap.Enqueue(c);
@@ -40,7 +40,7 @@ public class _1753
             var largest = maxHeap.Dequeue();
             var secondLargest = maxHeap.Dequeue();
 
-            if (largest == 0 && secondLargest == 0)
+            if (largest == 0 || secondLargest == 0)
             {
                 break;
             }

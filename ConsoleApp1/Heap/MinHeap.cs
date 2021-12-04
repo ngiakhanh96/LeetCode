@@ -102,6 +102,8 @@ public class MinHeap
     }
 }
 
+// Keep for compatible with old problems
+[Obsolete("This class is obsolete. Use Heap/CustomPriorityQueue instead.", false)]
 public class MinHeap<T> where T : HeapItem
 {
     private readonly List<T> _elements;

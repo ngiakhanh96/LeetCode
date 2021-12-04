@@ -1,4 +1,5 @@
-﻿global using ConsoleApp1.LinkedList;
+﻿global using ConsoleApp1.Heap;
+global using ConsoleApp1.LinkedList;
 global using ConsoleApp1.UnionFind;
 using ConsoleApp1.Tree.Trie;
 
@@ -8,6 +9,7 @@ class Program
 {
     static void Main(string[] args)
     {
-        var trie = new _720().LongestWord(new string[] { "e", "opt", "o" });
+        var t = new _745.WordFilter(new string[] { "apple" });
+        var ty = t.F("a", "e");
     }
 }

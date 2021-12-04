@@ -102,6 +102,8 @@ public class MaxHeap
     }
 }
 
+// Keep for compatible with old problems
+[Obsolete("This class is obsolete. Use Heap/CustomPriorityQueue with MaxHeapComparer instead.", false)]
 public class MaxHeap<T> where T : HeapItem
 {
     private readonly List<T> _elements;

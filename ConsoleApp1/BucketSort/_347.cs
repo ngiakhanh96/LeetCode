@@ -99,7 +99,7 @@ public class _347
         return res;
     }
 
-    public PriorityQueue<int, int> Maxheap { get; set; } = new PriorityQueue<int, int>(new MaxHeapComparer());
+    public PriorityQueue<int, int> Maxheap { get; set; } = new PriorityQueue<int, int>(new MaxHeapIntComparer());
     public int[] TopKFrequent3(int[] nums, int k)
     {
 
