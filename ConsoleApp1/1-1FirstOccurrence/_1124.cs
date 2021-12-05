@@ -8,7 +8,7 @@ public class _1124
         var count = 0;
         var longestWPI = 0;
         var dict = new Dictionary<int, int>();
-        for (int i = 0; i < hours.Length; i++)
+        for (var i = 0; i < hours.Length; i++)
         {
             count += hours[i] > 8 ? 1 : -1;
 

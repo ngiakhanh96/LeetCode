@@ -19,7 +19,7 @@ public class _1863
     public int SubsetXORSum2(int[] nums)
     {
         var sum = 0;
-        for (int i = 0; i < Math.Pow(2, nums.Length); i++)
+        for (var i = 0; i < Math.Pow(2, nums.Length); i++)
         {
             sum += GetUnmaskIndex(i, nums.Length).Aggregate(0, (currentXor, nextIndex) => nums[nextIndex] ^ currentXor);
         }

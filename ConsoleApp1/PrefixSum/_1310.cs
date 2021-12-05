@@ -6,12 +6,12 @@ public class _1310
     {
         var res = new int[queries.Length];
         var prefixXor = new int[arr.Length];
-        for (int i = 0; i < arr.Length; i++)
+        for (var i = 0; i < arr.Length; i++)
         {
             prefixXor[i] = (i > 0 ? prefixXor[i - 1] : 0) ^ arr[i];
         }
 
-        for (int i = 0; i < queries.Length; i++)
+        for (var i = 0; i < queries.Length; i++)
         {
             res[i] = prefixXor[queries[i][1]] ^ (
                 queries[i][0] > 0

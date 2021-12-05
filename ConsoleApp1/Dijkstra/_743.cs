@@ -1,13 +1,11 @@
-﻿using ConsoleApp1.Heap;
-
-namespace ConsoleApp1.Dijkstra;
+﻿namespace ConsoleApp1.Dijkstra;
 
 public class _743
 {
     public int NetworkDelayTime(int[][] times, int n, int k)
     {
         var adjacentNodes = new List<int[]>[n];
-        for (int i = 0; i < adjacentNodes.Length; i++)
+        for (var i = 0; i < adjacentNodes.Length; i++)
         {
             adjacentNodes[i] = new List<int[]>();
         }
@@ -53,7 +51,7 @@ public class _743
     public int NetworkDelayTime2(int[][] times, int n, int k)
     {
         var adjacentNodes = new List<int[]>[n];
-        for (int i = 0; i < adjacentNodes.Length; i++)
+        for (var i = 0; i < adjacentNodes.Length; i++)
         {
             adjacentNodes[i] = new List<int[]>();
         }

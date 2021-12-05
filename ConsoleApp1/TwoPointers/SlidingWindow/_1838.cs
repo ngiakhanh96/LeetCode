@@ -9,7 +9,7 @@ public class _1838
         var currentJ = 0;
         var maxFrequency = 0;
         var shouldContinue = true;
-        for (int i = 0; i < nums.Length; i++)
+        for (var i = 0; i < nums.Length; i++)
         {
             if (i > 0)
             {
@@ -20,7 +20,7 @@ public class _1838
                 currentJ = i > currentJ ? i : currentJ;
             }
 
-            for (int j = currentJ; j < nums.Length; j++)
+            for (var j = currentJ; j < nums.Length; j++)
             {
                 sum += nums[j];
                 if (k < (long)nums[j] * (j - i + 1) - sum)

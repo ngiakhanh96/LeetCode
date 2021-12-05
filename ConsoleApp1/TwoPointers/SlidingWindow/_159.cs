@@ -8,7 +8,7 @@ public class _159
         var dict = new Dictionary<int, int>();
         var maxLength = 0;
         var shouldContinue = true;
-        for (int i = 0; i < s.Length; i++)
+        for (var i = 0; i < s.Length; i++)
         {
             if (i > 0)
             {
@@ -26,7 +26,7 @@ public class _159
                 currentJ = i > currentJ ? i : currentJ;
             }
 
-            for (int j = currentJ; j < s.Length; j++)
+            for (var j = currentJ; j < s.Length; j++)
             {
                 if (!dict.TryAdd(s[j], 1))
                 {

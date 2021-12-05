@@ -10,7 +10,7 @@ public class _15
             return res;
         }
         System.Array.Sort(nums);
-        for (int i = 0; i < nums.Length - 2; i++)
+        for (var i = 0; i < nums.Length - 2; i++)
         {
             if (i > 0 && nums[i - 1] == nums[i])
             {

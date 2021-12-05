@@ -42,7 +42,7 @@ public class _542
         {
             var numOfCellsInCurrentLevel = BfsQueue.Count;
             currentLevel++;
-            for (int i = 0; i < numOfCellsInCurrentLevel; i++)
+            for (var i = 0; i < numOfCellsInCurrentLevel; i++)
             {
                 var cell = BfsQueue.Dequeue();
                 var rowIndex = cell[0];

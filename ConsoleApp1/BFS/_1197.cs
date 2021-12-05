@@ -38,7 +38,7 @@ public class _1197
         {
             var numberOfCellsInCurrentLevel = BfsQueue.Count;
             currentLevel++;
-            for (int i = 0; i < numberOfCellsInCurrentLevel; i++)
+            for (var i = 0; i < numberOfCellsInCurrentLevel; i++)
             {
                 var currentPosition = BfsQueue.Dequeue();
                 var rowIndex = currentPosition[0];

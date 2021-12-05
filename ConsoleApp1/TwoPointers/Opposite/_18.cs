@@ -10,14 +10,14 @@ public class _18
             return res;
         }
         System.Array.Sort(nums);
-        for (int i = 0; i < nums.Length - 3; i++)
+        for (var i = 0; i < nums.Length - 3; i++)
         {
             if (i > 0 && nums[i - 1] == nums[i])
             {
                 continue;
             }
 
-            for (int l = i + 1; l < nums.Length - 2; l++)
+            for (var l = i + 1; l < nums.Length - 2; l++)
             {
                 if (l > i + 1 && nums[l - 1] == nums[l])
                 {

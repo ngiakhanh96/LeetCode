@@ -13,7 +13,7 @@ public class _547
         IsConnected = isConnected;
         IsVisited = new bool[isConnected.Length];
         var numOfProvinces = 0;
-        for (int i = 0; i < IsVisited.Length; i++)
+        for (var i = 0; i < IsVisited.Length; i++)
         {
             if (!IsVisited[i])
             {
@@ -27,7 +27,7 @@ public class _547
     private void Dfs(int index)
     {
         IsVisited[index] = true;
-        for (int i = 0; i < IsConnected[index].Length; i++)
+        for (var i = 0; i < IsConnected[index].Length; i++)
         {
             if (i != index && IsConnected[index][i] == 1 && !IsVisited[i])
             {
@@ -42,7 +42,7 @@ public class _547
         IsConnected = isConnected;
         IsVisited = new bool[isConnected.Length];
         var numOfProvinces = 0;
-        for (int i = 0; i < IsVisited.Length; i++)
+        for (var i = 0; i < IsVisited.Length; i++)
         {
             if (!IsVisited[i])
             {
@@ -60,7 +60,7 @@ public class _547
         while (BfsQueue.Count > 0)
         {
             var numCellsInCurrentLevel = BfsQueue.Count;
-            for (int i = 0; i < numCellsInCurrentLevel; i++)
+            for (var i = 0; i < numCellsInCurrentLevel; i++)
             {
                 var index = BfsQueue.Dequeue();
                 for (var j = 0; j < IsConnected[index].Length; j++)

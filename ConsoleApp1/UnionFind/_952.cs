@@ -28,7 +28,7 @@ public class _952
     private List<int> Factorize(int n)
     {
         var res = new List<int>();
-        for (int i = 2; i * i <= n; ++i)
+        for (var i = 2; i * i <= n; ++i)
         {
             while (n % i == 0)
             {

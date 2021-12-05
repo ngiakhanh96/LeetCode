@@ -13,7 +13,7 @@ public class _642
         public AutocompleteSystem(string[] sentences, int[] times)
         {
             RootNode = new TrieNode2<int>();
-            for (int i = 0; i < sentences.Length; i++)
+            for (var i = 0; i < sentences.Length; i++)
             {
                 RootNode.Insert(sentences[i], times[i]);
             }

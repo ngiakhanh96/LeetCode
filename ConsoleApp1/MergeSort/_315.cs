@@ -13,7 +13,7 @@ public class _315
     {
         var res = new int[nums.Length];
         var valueWithOriginalIndex = new ValueWithOriginalIndex[nums.Length];
-        for (int i = 0; i < nums.Length; i++)
+        for (var i = 0; i < nums.Length; i++)
         {
             valueWithOriginalIndex[i] = new ValueWithOriginalIndex
             {

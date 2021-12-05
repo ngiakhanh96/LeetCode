@@ -53,7 +53,7 @@ public class _429
         {
             var numberOfNodeInCurrentLevel = BfsQueue.Count;
             currentLevel++;
-            for (int i = 0; i < numberOfNodeInCurrentLevel; i++)
+            for (var i = 0; i < numberOfNodeInCurrentLevel; i++)
             {
                 var node = BfsQueue.Dequeue();
                 if (LevelOrderNodeValues[currentLevel] == null)

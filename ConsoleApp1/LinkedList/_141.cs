@@ -8,8 +8,8 @@ public class _141
         {
             return false;
         }
-        ListNode slowPointer = head;
-        ListNode fastPointer = head;
+        var slowPointer = head;
+        var fastPointer = head;
         while (true)
         {
             slowPointer = slowPointer.next ?? slowPointer;

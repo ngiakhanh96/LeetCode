@@ -4,38 +4,32 @@
 /// Default is MinHeap
 /// </summary>
 /// <typeparam name="T"></typeparam>
-public class Heap<T> where T : IComparable<T>
+public class Heap<T>
 {
     private readonly List<T> _elements;
     public int Count => _elements.Count;
 
     private Func<T, T, int> Comparer { get; }
 
-    public Heap(IComparer<T> comparer = null) : this(null, comparer)
+    public Heap(Func<T, T, int> comparer = null) : this(null, comparer)
     {
+
     }
 
-    public Heap(IEnumerable<T> elementList = null, IComparer<T> comparer = null)
+    public Heap(IEnumerable<T> elementList = null, Func<T, T, int> comparer = null)
     {
         _elements = elementList?.ToList() ?? new List<T>();
-        if (comparer != null)
-        {
-            Comparer = comparer.Compare;
-        }
-        else
-        {
-            Comparer = (ele1, ele2) => ele1.CompareTo(ele2);
-        }
+        Comparer = comparer ?? Comparer<T>.Default.Compare;
 
-        for (int i = Count - 1; i >= 0; i--)
+        for (var i = Count - 1; i >= 0; i--)
         {
             SiftDown(i);
         }
     }
 
-    private int GetLeftChildIndex(int elementIndex) => 2 * elementIndex + 1;
-    private int GetRightChildIndex(int elementIndex) => 2 * elementIndex + 2;
-    private int GetParentIndex(int elementIndex) => (elementIndex - 1) / 2;
+    private int GetLeftChildIndex(int elementIndex) => (elementIndex << 1) + 1;
+    private int GetRightChildIndex(int elementIndex) => (elementIndex << 1) + 2;
+    private int GetParentIndex(int elementIndex) => (elementIndex - 1) >> 1;
 
     private bool HasLeftChild(int elementIndex) => GetLeftChildIndex(elementIndex) < Count;
     private bool HasRightChild(int elementIndex) => GetRightChildIndex(elementIndex) < Count;
@@ -65,7 +59,7 @@ public class Heap<T> where T : IComparable<T>
         return _elements[0];
     }
 
-    public T Dequeue()
+    public T Pop()
     {
         if (IsEmpty())
             throw new IndexOutOfRangeException();
@@ -79,7 +73,7 @@ public class Heap<T> where T : IComparable<T>
         return result;
     }
 
-    public void Enqueue(T element)
+    public void Add(T element)
     {
         _elements.Add(element);
 

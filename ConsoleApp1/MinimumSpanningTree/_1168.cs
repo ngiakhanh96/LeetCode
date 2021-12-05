@@ -5,7 +5,7 @@ public class _1168
     public int MinCostToSupplyWater(int n, int[] wells, int[][] pipes)
     {
         var pipeList = pipes.ToList();
-        for (int i = 0; i < wells.Length; i++)
+        for (var i = 0; i < wells.Length; i++)
         {
             pipeList.Add(new int[] { 0, i + 1, wells[i] });
         }

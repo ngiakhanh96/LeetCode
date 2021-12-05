@@ -1,18 +1,16 @@
-﻿using ConsoleApp1.Heap;
-
-namespace ConsoleApp1.Dijkstra;
+﻿namespace ConsoleApp1.Dijkstra;
 
 public class _1514
 {
     public double MaxProbability(int n, int[][] edges, double[] succProb, int start, int end)
     {
         var adjacentNodes = new List<double[]>[n];
-        for (int i = 0; i < adjacentNodes.Length; i++)
+        for (var i = 0; i < adjacentNodes.Length; i++)
         {
             adjacentNodes[i] = new List<double[]>();
         }
 
-        for (int i = 0; i < edges.Length; i++)
+        for (var i = 0; i < edges.Length; i++)
         {
             var startNode = edges[i][0];
             var endNode = edges[i][1];
@@ -58,12 +56,12 @@ public class _1514
     public double MaxProbability2(int n, int[][] edges, double[] succProb, int start, int end)
     {
         var adjacentNodes = new List<double[]>[n];
-        for (int i = 0; i < adjacentNodes.Length; i++)
+        for (var i = 0; i < adjacentNodes.Length; i++)
         {
             adjacentNodes[i] = new List<double[]>();
         }
 
-        for (int i = 0; i < edges.Length; i++)
+        for (var i = 0; i < edges.Length; i++)
         {
             var startNode = edges[i][0];
             var endNode = edges[i][1];

@@ -57,7 +57,7 @@ public class _731
                 {
                     var newArr = new int[_sortedArr.Length + 1];
                     var added = false;
-                    for (int i = 0; i < _sortedArr.Length; i++)
+                    for (var i = 0; i < _sortedArr.Length; i++)
                     {
                         if (_sortedArr[i] < pos)
                         {

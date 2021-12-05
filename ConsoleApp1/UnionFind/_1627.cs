@@ -5,7 +5,7 @@ public class _1627
     public IList<bool> AreConnected(int n, int threshold, int[][] queries)
     {
         var unionFind = new UnionFind<int>(n + 1);
-        for (int i = 1; i < n + 1; i++)
+        for (var i = 1; i < n + 1; i++)
         {
             var factors = FindDivisorsWithThreshold(i, threshold);
             foreach (var factor in factors)
@@ -32,7 +32,7 @@ public class _1627
     private List<int> FindDivisorsWithThreshold(int n, int threshold)
     {
         var res = new List<int>();
-        for (int i = threshold + 1; i <= n / 2; ++i)
+        for (var i = threshold + 1; i <= n / 2; ++i)
         {
             if (n % i == 0)
             {

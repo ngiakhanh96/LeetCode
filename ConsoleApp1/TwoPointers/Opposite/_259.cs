@@ -10,7 +10,7 @@ public class _259
             return res;
         }
         System.Array.Sort(nums);
-        for (int i = 0; i < nums.Length - 2; i++)
+        for (var i = 0; i < nums.Length - 2; i++)
         {
             var newTarget = target - nums[i];
             var (j, k) = (i + 1, nums.Length - 1);

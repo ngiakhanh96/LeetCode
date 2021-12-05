@@ -6,7 +6,7 @@ public class _973
     {
         var dict = new Dictionary<int, HashSet<int>>();
         var pointDistanceSquare = new int[points.Length];
-        for (int i = 0; i < points.Length; i++)
+        for (var i = 0; i < points.Length; i++)
         {
             var distanceSquare = points[i][0] * points[i][0] + points[i][1] * points[i][1];
             if (!dict.TryAdd(distanceSquare, new HashSet<int> { i }))
@@ -21,7 +21,7 @@ public class _973
         var res = new int[k][];
         var j = 0;
         var shouldContinue = true;
-        for (int i = 0; i < k; i++)
+        for (var i = 0; i < k; i++)
         {
             var distance = pointDistanceSquare[i];
             foreach (var index in dict[distance])
@@ -61,7 +61,7 @@ public class _973
 
         var pivot = pointDistanceSquare[endIndexPlusOne - 1];
         var boundary = fromIndex;
-        for (int i = fromIndex; i < endIndexPlusOne - 1; i++)
+        for (var i = fromIndex; i < endIndexPlusOne - 1; i++)
         {
             if (pointDistanceSquare[i] < pivot)
             {

@@ -8,7 +8,7 @@ public class _904
         var max = 0;
         var currentJ = 0;
         var shouldContinue = true;
-        for (int i = 0; i < fruits.Length; i++)
+        for (var i = 0; i < fruits.Length; i++)
         {
             if (i > 0)
             {
@@ -24,7 +24,7 @@ public class _904
                 currentJ = i > currentJ ? i : currentJ;
             }
 
-            for (int j = currentJ; j < fruits.Length; j++)
+            for (var j = currentJ; j < fruits.Length; j++)
             {
                 if (dict.TryAdd(fruits[j], 1))
                 {

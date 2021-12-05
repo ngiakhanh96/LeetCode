@@ -15,9 +15,9 @@ public class _695
         Grid = grid;
         IsVisited = new bool[Grid.Length, Grid[0].Length];
 
-        for (int i = 0; i < grid.Length; i++)
+        for (var i = 0; i < grid.Length; i++)
         {
-            for (int j = 0; j < grid[i].Length; j++)
+            for (var j = 0; j < grid[i].Length; j++)
             {
                 if (Grid[i][j] == 1 && !IsVisited[i, j])
                 {

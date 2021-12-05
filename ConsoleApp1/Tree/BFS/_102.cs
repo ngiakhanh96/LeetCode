@@ -27,7 +27,7 @@ public class _102
             var numberOfNodesInCurrentLevel = BfsQueue.Count;
             currentLevel++;
             NodesInLevel.Add(new List<int>());
-            for (int i = 0; i < numberOfNodesInCurrentLevel; i++)
+            for (var i = 0; i < numberOfNodesInCurrentLevel; i++)
             {
                 var node = BfsQueue.Dequeue();
 

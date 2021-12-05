@@ -7,9 +7,9 @@ public class _304
         private readonly int[][] _matrix;
         public NumMatrix(int[][] matrix)
         {
-            for (int i = 0; i < matrix.Length; i++)
+            for (var i = 0; i < matrix.Length; i++)
             {
-                for (int j = 0; j < matrix[0].Length; j++)
+                for (var j = 0; j < matrix[0].Length; j++)
                 {
                     matrix[i][j] +=
                         (i > 0 ? matrix[i - 1][j] : 0) +

@@ -7,7 +7,7 @@ public class _713
         var product = 1;
         var currentJ = 0;
         var count = 0;
-        for (int i = 0; i < nums.Length; i++)
+        for (var i = 0; i < nums.Length; i++)
         {
             if (i > 0)
             {
@@ -19,7 +19,7 @@ public class _713
                 count += currentJ - i;
             }
 
-            for (int j = currentJ; j < nums.Length; j++)
+            for (var j = currentJ; j < nums.Length; j++)
             {
                 product *= nums[j];
                 if (product >= k)

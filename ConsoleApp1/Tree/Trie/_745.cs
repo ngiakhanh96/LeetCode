@@ -10,10 +10,10 @@ public class _745
             for (var index = 0; index < words.Length; index++)
             {
                 var word = words[index];
-                for (int i = word.Length - 1; i >= 0; i--)
+                for (var i = word.Length - 1; i >= 0; i--)
                 {
                     var suffix = "";
-                    for (int j = i; j < word.Length; j++)
+                    for (var j = i; j < word.Length; j++)
                     {
                         suffix += word[j];
                     }

@@ -7,7 +7,7 @@ public class _53
         var count = 0;
         var minValue = 0;
         var maxSum = int.MinValue;
-        for (int i = 0; i < array.Length; i++)
+        for (var i = 0; i < array.Length; i++)
         {
             count += array[i];
             var currentMaxSum = count - minValue;
@@ -23,10 +23,10 @@ public class _53
 
     public int MaxSubArray2(int[] nums)
     {
-        int maxSum = nums[0];
-        int currentMax = nums[0];
+        var maxSum = nums[0];
+        var currentMax = nums[0];
 
-        for (int i = 1; i < nums.Length; i++)
+        for (var i = 1; i < nums.Length; i++)
         {
             currentMax = Math.Max(nums[i], currentMax + nums[i]);
             maxSum = Math.Max(maxSum, currentMax);

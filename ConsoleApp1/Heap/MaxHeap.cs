@@ -71,7 +71,7 @@ public class MaxHeap
 
     private void ReCalculateDown()
     {
-        int index = 0;
+        var index = 0;
         while (HasLeftChild(index))
         {
             var biggerIndex = GetLeftChildIndex(index);
@@ -174,7 +174,7 @@ public class MaxHeap<T> where T : HeapItem
 
     private void ReCalculateDown()
     {
-        int index = 0;
+        var index = 0;
         while (HasLeftChild(index))
         {
             var biggerIndex = GetLeftChildIndex(index);

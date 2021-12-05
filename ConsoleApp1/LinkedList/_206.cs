@@ -20,7 +20,7 @@ public class _206
         if (head == null)
             return null;
         ListNode previousNode = null;
-        ListNode currNode = head;
+        var currNode = head;
         do
         {
             var initialNext = currNode.next;

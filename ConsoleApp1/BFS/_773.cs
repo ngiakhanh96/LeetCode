@@ -20,7 +20,7 @@ public class _773
     private List<string> BuildAdjacentStates(string state)
     {
         var adjacentStates = new List<string>();
-        for (int i = 0; i < state.Length; i++)
+        for (var i = 0; i < state.Length; i++)
         {
             if (state[i] == '0')
             {
@@ -45,7 +45,7 @@ public class _773
     private string BuildAdjacentState(int swapIndex1, int swapIndex2, string state)
     {
         var adjacentState = "";
-        for (int j = 0; j < state.Length; j++)
+        for (var j = 0; j < state.Length; j++)
         {
             if (j == swapIndex1)
             {

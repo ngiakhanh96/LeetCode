@@ -18,7 +18,7 @@ public class _200
         var count = 0;
         for (var i = 0; i < Grid.Length; i++)
         {
-            for (int j = 0; j < Grid[i].Length; j++)
+            for (var j = 0; j < Grid[i].Length; j++)
             {
                 if (Grid[i][j] == '1' && !IsVisited[i, j])
                 {
@@ -63,7 +63,7 @@ public class _200
         var count = 0;
         for (var i = 0; i < Grid.Length; i++)
         {
-            for (int j = 0; j < Grid[i].Length; j++)
+            for (var j = 0; j < Grid[i].Length; j++)
             {
                 if (Grid[i][j] == '1' && !IsVisited[i, j])
                 {
@@ -83,7 +83,7 @@ public class _200
         while (BfsQueue.Count > 0)
         {
             var numAdjacentCellsInCurrentLevel = BfsQueue.Count;
-            for (int i = 0; i < numAdjacentCellsInCurrentLevel; i++)
+            for (var i = 0; i < numAdjacentCellsInCurrentLevel; i++)
             {
                 var currentPosition = BfsQueue.Dequeue();
                 rowIndex = currentPosition[0];
@@ -120,7 +120,7 @@ public class _200
         var unionFind = new UnionFind<char>(grid, ele => ele == '1');
         for (var i = 0; i < Grid.Length; i++)
         {
-            for (int j = 0; j < Grid[0].Length; j++)
+            for (var j = 0; j < Grid[0].Length; j++)
             {
                 if (Grid[i][j] == '1')
                 {

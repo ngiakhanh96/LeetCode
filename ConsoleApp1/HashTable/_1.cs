@@ -5,7 +5,7 @@ public class _1
     public int[] TwoSum(int[] nums, int target)
     {
         var dict = new Dictionary<int, int>();
-        for (int i = 0; i < nums.Length; i++)
+        for (var i = 0; i < nums.Length; i++)
         {
             if (dict.ContainsKey(target - nums[i]))
             {

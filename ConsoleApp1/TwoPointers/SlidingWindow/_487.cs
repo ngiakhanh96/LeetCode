@@ -8,7 +8,7 @@ public class _487
         var currentNum0S = 0;
         var maxLength = 0;
         var shouldContinue = true;
-        for (int i = 0; i < nums.Length; i++)
+        for (var i = 0; i < nums.Length; i++)
         {
             if (i > 0)
             {
@@ -19,7 +19,7 @@ public class _487
                 currentJ = i > currentJ ? i : currentJ;
             }
 
-            for (int j = currentJ; j < nums.Length; j++)
+            for (var j = currentJ; j < nums.Length; j++)
             {
                 currentNum0S += nums[j] == 0 ? 1 : 0;
                 if (currentNum0S > 1)

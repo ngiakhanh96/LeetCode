@@ -27,11 +27,9 @@ public class _127
         var wildCardAdjacentWords = new List<string>();
         for (var starPosition = 0; starPosition < word.Length; starPosition++)
         {
-            var wildCardAdjacentWord = "";
-            for (var chr = 0; chr < word.Length; chr++)
-            {
-                wildCardAdjacentWord += chr != starPosition ? word[chr] : "*";
-            }
+            var wildCardAdjacentArray = word.ToCharArray();
+            wildCardAdjacentArray[starPosition] = '*';
+            var wildCardAdjacentWord = new string(wildCardAdjacentArray);
 
             wildCardAdjacentWords.Add(wildCardAdjacentWord);
         }

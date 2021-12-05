@@ -7,7 +7,7 @@ public class _239
         var resArr = new int[nums.Length - k + 1];
         var deque = new LinkedList<int>();
         var tempQueue = new Queue<int>();
-        for (int i = 0; i < nums.Length; i++)
+        for (var i = 0; i < nums.Length; i++)
         {
             if (tempQueue.Count == k)
             {

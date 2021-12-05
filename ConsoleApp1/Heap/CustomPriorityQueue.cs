@@ -98,9 +98,9 @@ public class CustomPriorityQueue<TElement, TPriority>
         return Dequeue();
     }
 
-    private int GetLeftChildIndex(int elementIndex) => 2 * elementIndex + 1;
-    private int GetRightChildIndex(int elementIndex) => 2 * elementIndex + 2;
-    private int GetParentIndex(int elementIndex) => (elementIndex - 1) / 2;
+    private int GetLeftChildIndex(int elementIndex) => (elementIndex << 1) + 1;
+    private int GetRightChildIndex(int elementIndex) => (elementIndex << 1) + 2;
+    private int GetParentIndex(int elementIndex) => (elementIndex - 1) >> 1;
 
     private bool HasLeftChild(int elementIndex) => GetLeftChildIndex(elementIndex) < Count;
     private bool HasRightChild(int elementIndex) => GetRightChildIndex(elementIndex) < Count;
@@ -148,7 +148,6 @@ public class CustomPriorityQueue<TElement, TPriority>
     private void SiftUp()
     {
         var index = Count - 1;
-
 
         while (!IsRoot(index) && Comparer.Compare(_elements[index].Priority, GetParent(index).Priority) < 0)
         {

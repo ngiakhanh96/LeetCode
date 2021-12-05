@@ -24,7 +24,7 @@ public class _720
     private void Dfs(TrieNode<int> trieNode, string word = "")
     {
         var haveChild = false;
-        for (int i = 0; i < trieNode.Children.Length; i++)
+        for (var i = 0; i < trieNode.Children.Length; i++)
         {
             var child = trieNode.Children[i];
             if (child != null && child.IsWord)

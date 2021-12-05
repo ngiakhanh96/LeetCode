@@ -1,6 +1,4 @@
-﻿using ConsoleApp1.Heap;
-
-namespace ConsoleApp1.QuickSelect;
+﻿namespace ConsoleApp1.QuickSelect;
 
 public class _215
 {
@@ -30,7 +28,7 @@ public class _215
     {
         var pivot = nums[end - 1];
         var boundary = start;
-        for (int i = start; i < end - 1; i++)
+        for (var i = start; i < end - 1; i++)
         {
             if (nums[i] > pivot)
             {

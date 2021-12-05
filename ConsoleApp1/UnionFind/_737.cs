@@ -25,7 +25,7 @@ public class _737
             unionFind.TryUnion(dict[similarPair[0]], dict[similarPair[1]]);
         }
 
-        for (int i = 0; i < sentence1.Length; i++)
+        for (var i = 0; i < sentence1.Length; i++)
         {
             var word1 = sentence1[i];
             var word2 = sentence2[i];

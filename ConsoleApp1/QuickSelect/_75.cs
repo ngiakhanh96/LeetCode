@@ -54,7 +54,7 @@ public class _75
     {
         var pivot = 1;
         var boundary = 0;
-        for (int i = 0; i < nums.Length; i++)
+        for (var i = 0; i < nums.Length; i++)
         {
             if (nums[i] < pivot)
             {
@@ -66,7 +66,7 @@ public class _75
         }
 
         boundary = nums.Length - 1;
-        for (int i = nums.Length - 1; i >= 0; i--)
+        for (var i = nums.Length - 1; i >= 0; i--)
         {
             if (nums[i] > pivot)
             {

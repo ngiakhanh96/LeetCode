@@ -48,7 +48,7 @@ public class _1032
         {
             var currentNode = this;
 
-            for (int i = word.Length - 1; i >= 0; i--)
+            for (var i = word.Length - 1; i >= 0; i--)
             {
                 var chr = word[i];
                 currentNode.Children[chr - 'a'] ??= new TrieNode2<T>();

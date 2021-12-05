@@ -15,7 +15,7 @@ public class _421
             index++;
         }
 
-        for (int i = index; i >= 0; i--)
+        for (var i = index; i >= 0; i--)
         {
             max_xor <<= 1;
             var curr_xor = max_xor | 1;

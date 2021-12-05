@@ -20,7 +20,7 @@ public class _513
         {
             var numberOfNodesInCurrentLevel = BfsQueue.Count;
             currentLevel++;
-            for (int i = 0; i < numberOfNodesInCurrentLevel; i++)
+            for (var i = 0; i < numberOfNodesInCurrentLevel; i++)
             {
                 var node = BfsQueue.Dequeue();
                 if (i == 0)

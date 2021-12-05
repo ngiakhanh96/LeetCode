@@ -22,7 +22,7 @@ public class _199
         while (BfsQueue.Count > 0)
         {
             var numberOfNodesInCurrentLevel = BfsQueue.Count;
-            for (int i = 0; i < numberOfNodesInCurrentLevel; i++)
+            for (var i = 0; i < numberOfNodesInCurrentLevel; i++)
             {
                 var node = BfsQueue.Dequeue();
 

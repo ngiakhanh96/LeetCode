@@ -1,6 +1,4 @@
-﻿using ConsoleApp1.Heap;
-
-namespace ConsoleApp1.LinkedListMergeSort;
+﻿namespace ConsoleApp1.LinkedListMergeSort;
 
 public class _23
 {
@@ -10,7 +8,7 @@ public class _23
         var interval = 1;
         while (interval < lists.Length)
         {
-            for (int i = 0; i < lists.Length - interval; i += interval * 2)
+            for (var i = 0; i < lists.Length - interval; i += interval * 2)
             {
                 lists[i] = Merge2Lists(lists[i], lists[i + interval]);
             }

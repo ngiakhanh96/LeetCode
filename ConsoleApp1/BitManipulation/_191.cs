@@ -20,7 +20,7 @@ public class _191
 
     public int HammingWeight2(uint n)
     {
-        int count = 0;
+        var count = 0;
 
         while (n != 0)
         {

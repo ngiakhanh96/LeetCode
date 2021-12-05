@@ -5,7 +5,7 @@ public class _78
     public IList<IList<int>> Subsets(int[] nums)
     {
         var returnList = new List<IList<int>>();
-        for (int i = 0; i < Math.Pow(2, nums.Length); i++)
+        for (var i = 0; i < Math.Pow(2, nums.Length); i++)
         {
             returnList.Add(GetUnmaskIndex(i, nums.Length).Select(ele => nums[ele]).ToList());
         }

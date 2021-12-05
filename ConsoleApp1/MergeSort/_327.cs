@@ -6,7 +6,7 @@ public class _327
     {
         var count = 0;
         var prefixSum = new long[nums.Length + 1];
-        for (int i = 0; i < nums.Length; i++)
+        for (var i = 0; i < nums.Length; i++)
         {
             prefixSum[i + 1] = prefixSum[i] + nums[i];
         }
@@ -58,7 +58,7 @@ public class _327
         var j1 = 0;
         var j2 = 0;
         var stop = false;
-        for (int l = 0; l < left.Length; l++)
+        for (var l = 0; l < left.Length; l++)
         {
             while (right[j1] - left[l] < lower)
             {

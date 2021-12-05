@@ -8,9 +8,9 @@ public class _1738
         //var priorityQueue = new PriorityQueue<int, int>();
         var count = 0;
         var temp = new int[matrix.Length * matrix[0].Length];
-        for (int i = 0; i < matrix.Length; i++)
+        for (var i = 0; i < matrix.Length; i++)
         {
-            for (int j = 0; j < matrix[0].Length; j++)
+            for (var j = 0; j < matrix[0].Length; j++)
             {
                 matrix[i][j] =
                     (i > 0 ? matrix[i - 1][j] : 0) ^
@@ -81,7 +81,7 @@ public class _1738
     {
         var pivot = nums[end - 1];
         var boundary = start;
-        for (int i = start; i < end - 1; i++)
+        for (var i = start; i < end - 1; i++)
         {
             if (nums[i] > pivot)
             {

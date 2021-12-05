@@ -5,7 +5,7 @@ public class _905
     public int[] SortArrayByParity(int[] nums)
     {
         var boundary = 0;
-        for (int i = 0; i < nums.Length; i++)
+        for (var i = 0; i < nums.Length; i++)
         {
             if (nums[i] % 2 == 0)
             {

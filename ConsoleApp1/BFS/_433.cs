@@ -28,11 +28,9 @@ public class _433
         var wildCardAdjacentGeneList = new List<string>();
         for (var starPosition = 0; starPosition < gene.Length; starPosition++)
         {
-            var wildCardAdjacentGene = "";
-            for (var chr = 0; chr < gene.Length; chr++)
-            {
-                wildCardAdjacentGene += chr != starPosition ? gene[chr] : "*";
-            }
+            var wildCardAdjacentGeneArray = gene.ToCharArray();
+            wildCardAdjacentGeneArray[starPosition] = '*';
+            var wildCardAdjacentGene = new string(wildCardAdjacentGeneArray);
 
             wildCardAdjacentGeneList.Add(wildCardAdjacentGene);
         }

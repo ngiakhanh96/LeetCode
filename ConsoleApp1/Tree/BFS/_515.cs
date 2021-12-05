@@ -25,7 +25,7 @@ public class _515
             var numberOfNodesInCurrentLevel = BfsQueue.Count;
             currentLevel++;
             var currentLargestValueInCurrentLevel = int.MinValue;
-            for (int i = 0; i < numberOfNodesInCurrentLevel; i++)
+            for (var i = 0; i < numberOfNodesInCurrentLevel; i++)
             {
                 var node = BfsQueue.Dequeue();
 

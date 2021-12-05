@@ -9,11 +9,11 @@ public class _922
             return nums;
         }
         var lastPointer = 1;
-        for (int i = 0; i < nums.Length; i += 2)
+        for (var i = 0; i < nums.Length; i += 2)
         {
             if (nums[i] % 2 != 0)
             {
-                for (int j = lastPointer; j < nums.Length; j += 2)
+                for (var j = lastPointer; j < nums.Length; j += 2)
                 {
                     if (nums[j] % 2 == 0)
                     {

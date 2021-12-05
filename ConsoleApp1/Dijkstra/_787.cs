@@ -1,13 +1,11 @@
-﻿using ConsoleApp1.Heap;
-
-namespace ConsoleApp1.Dijkstra;
+﻿namespace ConsoleApp1.Dijkstra;
 
 public class _787
 {
     public int FindCheapestPrice(int n, int[][] flights, int src, int dst, int k)
     {
         var adjacentNodes = new List<int[]>[n];
-        for (int i = 0; i < adjacentNodes.Length; i++)
+        for (var i = 0; i < adjacentNodes.Length; i++)
         {
             adjacentNodes[i] = new List<int[]>();
         }
@@ -21,9 +19,9 @@ public class _787
         }
 
         var d = new int[n, k + 1];
-        for (int i = 0; i < d.GetLength(0); i++)
+        for (var i = 0; i < d.GetLength(0); i++)
         {
-            for (int j = 0; j < d.GetLength(1); j++)
+            for (var j = 0; j < d.GetLength(1); j++)
             {
                 d[i, j] = int.MaxValue;
             }
@@ -73,7 +71,7 @@ public class _787
     public int FindCheapestPrice2(int n, int[][] flights, int src, int dst, int k)
     {
         var adjacentNodes = new List<int[]>[n];
-        for (int i = 0; i < adjacentNodes.Length; i++)
+        for (var i = 0; i < adjacentNodes.Length; i++)
         {
             adjacentNodes[i] = new List<int[]>();
         }
@@ -87,9 +85,9 @@ public class _787
         }
 
         var d = new int[n, k + 1];
-        for (int i = 0; i < d.GetLength(0); i++)
+        for (var i = 0; i < d.GetLength(0); i++)
         {
-            for (int j = 0; j < d.GetLength(1); j++)
+            for (var j = 0; j < d.GetLength(1); j++)
             {
                 d[i, j] = int.MaxValue;
             }

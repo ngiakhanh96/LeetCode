@@ -17,7 +17,7 @@ public class UnionFind<T>
     public UnionFind(T[] array, Func<T, bool> condition = null)
     {
         Parents = new int[array.Length];
-        for (int i = 0; i < Parents.Length; i++)
+        for (var i = 0; i < Parents.Length; i++)
         {
             if (condition == null || condition(array[i]))
             {
@@ -34,9 +34,9 @@ public class UnionFind<T>
         Parents = new int[grid.GetLength(0) * grid.GetLength(1)];
         GridDimension[0] = grid.GetLength(0);
         GridDimension[1] = grid.GetLength(1);
-        for (int i = 0; i < grid.GetLength(0); i++)
+        for (var i = 0; i < grid.GetLength(0); i++)
         {
-            for (int j = 0; j < grid.GetLength(1); j++)
+            for (var j = 0; j < grid.GetLength(1); j++)
             {
                 if (condition == null || condition(grid[i, j]))
                 {
@@ -54,9 +54,9 @@ public class UnionFind<T>
         Parents = new int[grid.Length * grid[0].Length];
         GridDimension[0] = grid.Length;
         GridDimension[1] = grid[0].Length;
-        for (int i = 0; i < grid.Length; i++)
+        for (var i = 0; i < grid.Length; i++)
         {
-            for (int j = 0; j < grid[0].Length; j++)
+            for (var j = 0; j < grid[0].Length; j++)
             {
                 if (condition == null || condition(grid[i][j]))
                 {

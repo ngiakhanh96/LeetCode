@@ -1,15 +1,13 @@
-﻿using ConsoleApp1.Heap;
-
-namespace ConsoleApp1.MinimumSpanningTree;
+﻿namespace ConsoleApp1.MinimumSpanningTree;
 
 public class _1584
 {
     public int MinCostConnectPoints(int[][] points)
     {
         var minHeap = new MinHeap<PointIndicesWithDistance>();
-        for (int i = 0; i < points.Length; i++)
+        for (var i = 0; i < points.Length; i++)
         {
-            for (int j = i + 1; j < points.Length; j++)
+            for (var j = i + 1; j < points.Length; j++)
             {
                 var currentPoint = points[i];
                 var nextPoint = points[j];
@@ -45,9 +43,9 @@ public class _1584
     {
         var edges = new List<(int[], int)>();
 
-        for (int i = 0; i < points.Length; i++)
+        for (var i = 0; i < points.Length; i++)
         {
-            for (int j = i + 1; j < points.Length; j++)
+            for (var j = i + 1; j < points.Length; j++)
             {
                 var currentPoint = points[i];
                 var nextPoint = points[j];
