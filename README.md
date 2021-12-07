@@ -68,3 +68,8 @@ MinimumSpanningTree: a sorted version of UnionFind. Used to find the minimum cos
 LeftToRightMinimaTree: Use to find (left/right) nearest position that contains a smaller/bigger value in an array. Runtime O(n). Proof: https://hoangdinhquang.me/on-lrm-trees-lemma-application/
 
 Trie: Use to find the prefix words from the set of given words. May combine with Dfs, Dictionary, Min/Max Heap
+
+Dynamic Programming (DP): Can be realized by 2 approach: Bottom-up and Top-down with memoization (cache)
+*If f[i] only relies on f[i - 1], then maybe don't need cache for top-down approach
+*If f[i] relies on many i - 1, i - 2, ...(finite), then maybe need cache for top-down approach
+*If f[i] relies on all i - 1, i - 2, ..., 0, then maybe need cache even for bottom-up

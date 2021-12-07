@@ -9,6 +9,6 @@ class Program
 {
     static void Main(string[] args)
     {
-        var heap = new _300().LengthOfLIS2(new int[] { 10, 9, 2, 5, 3, 7, 101, 18 });
+        var t = new _931().MinFallingPathSum(new int[][] { new[] { 2, 1, 3 }, new[] { 6, 5, 4 }, new[] { 7, 8, 9 } });
     }
 }
