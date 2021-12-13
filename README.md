@@ -69,7 +69,8 @@ LeftToRightMinimaTree: Use to find (left/right) nearest position that contains a
 
 Trie: Use to find the prefix words from the set of given words. May combine with Dfs, Dictionary, Min/Max Heap
 
-Dynamic Programming (DP): Can be realized by 2 approach: Bottom-up and Top-down with memoization (cache)
-*If f[i] only relies on f[i - 1], then maybe don't need cache for top-down approach
-*If f[i] relies on many i - 1, i - 2, ...(finite), then maybe need cache for top-down approach
-*If f[i] relies on all i - 1, i - 2, ..., 0, then maybe need cache even for bottom-up
+Dynamic Programming (DP): Can be realized by 2 approaches: Bottom-up and Top-down with memoization (cache)
+*If f[i] only relies on f[i - 1], then maybe don't need cache for both bottom-up and top-down approach
+More general case: see _650. f[i] only relies on f[i - j] (j < i and j satisfies a given condition), then don't need cache for top-down but need stack for bottom-up to calculate up
+*If f[i] relies on many i - 1, i - 2, ...(finite), then maybe need cache(with constant size) for top-down approach
+*If f[i] relies on all i - 1, i - 2, ..., 0, then maybe need cache even for bottom-up and top-down approach
