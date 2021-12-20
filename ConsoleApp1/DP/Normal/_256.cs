@@ -1,4 +1,4 @@
-﻿namespace ConsoleApp1.DP
+﻿namespace ConsoleApp1.DP.Normal
 {
     public class _256
     {

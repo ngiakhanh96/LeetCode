@@ -1,4 +1,4 @@
-﻿namespace ConsoleApp1.DP
+﻿namespace ConsoleApp1.DP.LIS
 {
     public class _300
     {
@@ -8,9 +8,9 @@
         public int LengthOfLIS(int[] nums)
         {
             LengthOfLISEndAt = Enumerable.Repeat(1, nums.Length).ToArray();
-            for (int i = 1; i < nums.Length; i++)
+            for (int i = 0; i < nums.Length; i++)
             {
-                for (int j = i - 1; j >= 0; j--)
+                for (int j = 0; j < i; j++)
                 {
                     if (nums[i] > nums[j])
                     {

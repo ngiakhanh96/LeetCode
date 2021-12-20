@@ -74,3 +74,18 @@ Dynamic Programming (DP): Can be realized by 2 approaches: Bottom-up and Top-dow
 More general case: see _650. f[i] only relies on f[i - j] (j < i and j satisfies a given condition), then don't need cache for top-down but need stack for bottom-up to calculate up
 *If f[i] relies on many i - 1, i - 2, ...(finite), then maybe need cache(with constant size) for top-down approach
 *If f[i] relies on all i - 1, i - 2, ..., 0, then maybe need cache even for bottom-up and top-down approach
+*Classic problems:
+ - Normal: 
+     - N-th Fibonacci
+     - Min/Max Cost Climbing Steps
+     - House Robber series
+     - https://leetcode.com/problems/2-keys-keyboard/
+ - Longest increasing subsequence (LIS)
+ - Multi-dimensional
+  - Longest common subsequence (LCS)
+  - Others
+ - Matrix
+ - Palindrome
+ - Coin change
+ - Edit distance
+

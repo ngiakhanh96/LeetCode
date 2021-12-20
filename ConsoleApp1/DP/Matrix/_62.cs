@@ -1,4 +1,4 @@
-﻿namespace ConsoleApp1.DP
+﻿namespace ConsoleApp1.DP.Matrix
 {
     public class _62
     {
