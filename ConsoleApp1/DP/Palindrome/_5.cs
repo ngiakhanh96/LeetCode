@@ -1,67 +1,66 @@
-﻿namespace ConsoleApp1.DP.Palindrome
+﻿namespace ConsoleApp1.DP.Palindrome;
+
+public class _5
 {
-    public class _5
+    public bool[,] IsPalindromeFromTo { get; set; }
+
+    public int LongestPalindromeFrom { get; set; }
+
+    public int LongestPalindromeTo { get; set; }
+
+    // Bottom-up
+    public string LongestPalindrome(string s)
     {
-        public bool[,] IsPalindromeFromTo { get; set; }
+        IsPalindromeFromTo = new bool[s.Length, s.Length];
+        LongestPalindromeFrom = 0;
+        LongestPalindromeTo = 0;
 
-        public int LongestPalindromeFrom { get; set; }
-
-        public int LongestPalindromeTo { get; set; }
-
-        // Bottom-up
-        public string LongestPalindrome(string s)
+        for (int i = 0; i < s.Length; i++)
         {
-            IsPalindromeFromTo = new bool[s.Length, s.Length];
-            LongestPalindromeFrom = 0;
-            LongestPalindromeTo = 0;
+            // Length 1
+            IsPalindromeFromTo[i, i] = true;
 
-            for (int i = 0; i < s.Length; i++)
+            // Length 2
+            var j = i + 1;
+            if (j < s.Length)
             {
-                // Length 1
-                IsPalindromeFromTo[i, i] = true;
-
-                // Length 2
-                var j = i + 1;
-                if (j < s.Length)
+                IsPalindromeFromTo[i, j] = s[i] == s[j];
+                if (IsPalindromeFromTo[i, j])
                 {
-                    IsPalindromeFromTo[i, j] = s[i] == s[j];
-                    if (IsPalindromeFromTo[i, j])
+                    LongestPalindromeFrom = i;
+                    LongestPalindromeTo = j;
+                }
+            }
+        }
+
+        // Length 3+
+        for (int length = 3; length <= s.Length; length++)
+        {
+            for (int i = 0; i + length <= s.Length; i++)
+            {
+                var j = i + length - 1;
+                if (s[i] != s[j])
+                {
+                    IsPalindromeFromTo[i, j] = false;
+                }
+                else
+                {
+                    IsPalindromeFromTo[i, j] = IsPalindromeFromTo[i + 1, j - 1];
+                    if (IsPalindromeFromTo[i, j] && length > LongestPalindromeTo - LongestPalindromeFrom + 1)
                     {
                         LongestPalindromeFrom = i;
                         LongestPalindromeTo = j;
                     }
                 }
             }
-
-            // Length 3+
-            for (int length = 3; length <= s.Length; length++)
-            {
-                for (int i = 0; i + length <= s.Length; i++)
-                {
-                    var j = i + length - 1;
-                    if (s[i] != s[j])
-                    {
-                        IsPalindromeFromTo[i, j] = false;
-                    }
-                    else
-                    {
-                        IsPalindromeFromTo[i, j] = IsPalindromeFromTo[i + 1, j - 1];
-                        if (IsPalindromeFromTo[i, j] && length > LongestPalindromeTo - LongestPalindromeFrom + 1)
-                        {
-                            LongestPalindromeFrom = i;
-                            LongestPalindromeTo = j;
-                        }
-                    }
-                }
-            }
-
-            var res = "";
-            for (int i = LongestPalindromeFrom; i <= LongestPalindromeTo; i++)
-            {
-                res += s[i];
-            }
-
-            return res;
         }
+
+        var res = "";
+        for (int i = LongestPalindromeFrom; i <= LongestPalindromeTo; i++)
+        {
+            res += s[i];
+        }
+
+        return res;
     }
 }

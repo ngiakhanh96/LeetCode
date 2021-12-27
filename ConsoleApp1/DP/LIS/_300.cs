@@ -1,58 +1,57 @@
-﻿namespace ConsoleApp1.DP.LIS
+﻿namespace ConsoleApp1.DP.LIS;
+
+public class _300
 {
-    public class _300
+    public int[] LengthOfLISEndAt { get; set; }
+
+    // Bottom-up
+    public int LengthOfLIS(int[] nums)
     {
-        public int[] LengthOfLISEndAt { get; set; }
-
-        // Bottom-up
-        public int LengthOfLIS(int[] nums)
+        LengthOfLISEndAt = Enumerable.Repeat(1, nums.Length).ToArray();
+        for (int i = 0; i < nums.Length; i++)
         {
-            LengthOfLISEndAt = Enumerable.Repeat(1, nums.Length).ToArray();
-            for (int i = 0; i < nums.Length; i++)
+            for (int j = 0; j < i; j++)
             {
-                for (int j = 0; j < i; j++)
+                if (nums[i] > nums[j])
                 {
-                    if (nums[i] > nums[j])
-                    {
-                        LengthOfLISEndAt[i] = Math.Max(LengthOfLISEndAt[i], LengthOfLISEndAt[j] + 1);
-                    }
+                    LengthOfLISEndAt[i] = Math.Max(LengthOfLISEndAt[i], LengthOfLISEndAt[j] + 1);
                 }
             }
-
-            return LengthOfLISEndAt.Max();
         }
 
-        // Top-down
-        public int LengthOfLIS2(int[] nums)
+        return LengthOfLISEndAt.Max();
+    }
+
+    // Top-down
+    public int LengthOfLIS2(int[] nums)
+    {
+        LengthOfLISEndAt = new int[nums.Length];
+        LengthOfLISEndAt[0] = 1;
+        for (int i = LengthOfLISEndAt.Length - 1; i >= 0; i--)
         {
-            LengthOfLISEndAt = new int[nums.Length];
-            LengthOfLISEndAt[0] = 1;
-            for (int i = LengthOfLISEndAt.Length - 1; i >= 0; i--)
-            {
-                LengthOfLISEndAt[i] = LengthOfLIS2Impl(i, nums);
-            }
-
-            return LengthOfLISEndAt.Max();
-
+            LengthOfLISEndAt[i] = LengthOfLIS2Impl(i, nums);
         }
 
-        private int LengthOfLIS2Impl(int index, int[] nums)
+        return LengthOfLISEndAt.Max();
+
+    }
+
+    private int LengthOfLIS2Impl(int index, int[] nums)
+    {
+        if (LengthOfLISEndAt[index] > 0)
         {
-            if (LengthOfLISEndAt[index] > 0)
-            {
-                return LengthOfLISEndAt[index];
-            }
-
-            LengthOfLISEndAt[index] = 1;
-            for (int j = index - 1; j >= 0; j--)
-            {
-                if (nums[index] > nums[j])
-                {
-                    LengthOfLISEndAt[index] = Math.Max(LengthOfLISEndAt[index], LengthOfLIS2Impl(j, nums) + 1);
-                }
-            }
-
             return LengthOfLISEndAt[index];
         }
+
+        LengthOfLISEndAt[index] = 1;
+        for (int j = index - 1; j >= 0; j--)
+        {
+            if (nums[index] > nums[j])
+            {
+                LengthOfLISEndAt[index] = Math.Max(LengthOfLISEndAt[index], LengthOfLIS2Impl(j, nums) + 1);
+            }
+        }
+
+        return LengthOfLISEndAt[index];
     }
 }

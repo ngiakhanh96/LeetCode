@@ -87,5 +87,9 @@ More general case: see _650. f[i] only relies on f[i - j] (j < i and j satisfies
  - Matrix
  - Palindrome
  - Coin change
+ *Like DP normal climbing step. Except _518
  - Edit distance
+ *Notice _72 with base case
+ - MaxSumDiv
+ *Super hard DP _1262
 
