@@ -93,3 +93,5 @@ More general case: see _650. f[i] only relies on f[i - j] (j < i and j satisfies
  - MaxSumDiv
  *Super hard DP _1262
 
+ Database: LRU, LFU, RandomizedSet buffer pool replacement policy (cache invalidation policy)
+

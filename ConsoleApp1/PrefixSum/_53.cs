@@ -21,6 +21,7 @@ public class _53
         return maxSum;
     }
 
+    // DP approach
     public int MaxSubArray2(int[] nums)
     {
         var maxSum = nums[0];
