@@ -9,7 +9,7 @@ public class _33
 
         while (leftMostIndex <= rightMostIndex)
         {
-            var middlePivotIndex = (leftMostIndex + rightMostIndex) / 2;
+            var middlePivotIndex = leftMostIndex + (rightMostIndex - leftMostIndex) / 2;
             var rightMost = nums[rightMostIndex];
             var leftMost = nums[leftMostIndex];
             var middlePivot = nums[middlePivotIndex];

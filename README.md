@@ -51,15 +51,17 @@ Binary Tree: Using Prefix Sum, DFS (O(V + E)), BFS(O(V + E)), Dynamic Programmin
 **Can use for finding max of min, min of max
 **Notice:
 ***Look for more indepth instructions at https://www.evernote.com/shard/s601/sh/51bb4614-ef6b-b3b4-3eac-14e357413141/08dc2a9e498e3e4276edae0866ee01a7
-***Be careful for the overflow issue when calculating middle = middle = low + (high - low) / 2
-***If it is a search problem or something we don't know the answer is there or not, then while(low <= high)
+***Be careful for the overflow issue when calculating middle = low + (high - low) / 2
+***If it is a search problem or something we don't know the answer is there or not, then while(low <= high),
+low = middle + 1, high = middle + 1, middle = low + (high - low) / 21
 ***If it is min, max problem or something we know the answer must be there, then while(low < high) and one of low/high would be assigned to middle, 
 the other has to be assigned like this: For low = middle + 1, for high = middle - 1; 
-**** If in case low = middle + 1, high = middle, then middle = low + (high - low) / 2
-**** If in case low = middle, high = middle - 1, then middle = low + (high - low + 1) / 2
+**** If in case low = middle + 1, or high = middle,     then middle = low + (high - low) / 2 (since high depends on middle, so middle has to round down)
+**** If in case low = middle,     or high = middle - 1, then middle = low + (high - low + 1) / 2 (since low depends on middle, so middle has to round up)
+
 *Dijkstra algorithm: Use to find shortest path in a non negative weight map. See reverse Dijkstra in _1514
 
-Binary Search Tree: Not balanced, unique values, In order traversal gives increasing sequence and In order traversal reversed gives decreasing sequence
+Binary Search Tree: Balanced, unique values, In order traversal gives increasing sequence and In order traversal reversed gives decreasing sequence
 
 Union Find: Use to combine things which share common patterns into one group with runtime nearly O(1). For more info https://docs.google.com/presentation/d/1_j8xIydyYzjB_M9J4qGC-YYYvzRrRDW2UUMhTy8Rl6g/edit#slide=id.gfc60fc96f0_0_310
 

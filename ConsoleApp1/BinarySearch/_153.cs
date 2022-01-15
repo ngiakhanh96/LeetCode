@@ -8,7 +8,7 @@ public class _153
         var endIndex = nums.Length - 1;
         while (startIndex < endIndex)
         {
-            var middleIndex = (startIndex + endIndex) / 2;
+            var middleIndex = startIndex + (endIndex - startIndex) / 2;
             var rightMost = nums[endIndex];
             var middlePivot = nums[middleIndex];
 
