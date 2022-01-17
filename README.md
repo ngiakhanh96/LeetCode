@@ -17,7 +17,19 @@ Array: Prefix Sum, Range Addition (Prefix Sum with input (0,0,0,0)), Prefix XOR,
 *Two pointers opposite direction template: see _15
 *1/-1 First occurence: see _525, _1124
 
-Bit Manipulation: n &= (n - 1), Subset a bitmask from 0 to 2^n - 1, Get Bit, Clear Bit, ~ for flip, & for get/clear, | for get/set | ^ for get/set/clear/flip
+Bit Manipulation:
+turn off the right most bit: n & (n - 1),
+check if power of 2: n & (n - 1) == 0
+get_bit(x, position) = (x >> position) & 1,
+set_bit(x, position): x | (1<<position),
+flip_bit(x, position): x ^ (1<<position)
+Clear Bit, 
+~ for flip, 
+& for get/clear, 
+| for get/set, 
+^ for get/set/flip/(clear)
+See https://drive.google.com/file/d/1jdIyIEwzXEmis0tj5hjrOspXpaYzI2P3/view?usp=sharing
+Subset a bitmask from 0 to 2^n - 1
 *XOR: 
     x^y^x = y, number of subsets with XOR result containing ith bit set will be half of subsets (see _1863)
     x^0 = x
