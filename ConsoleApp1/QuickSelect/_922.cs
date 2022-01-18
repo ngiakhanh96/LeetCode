@@ -4,6 +4,35 @@ public class _922
 {
     public int[] SortArrayByParityII(int[] nums)
     {
+        var even = 0;
+        var odd = 1;
+        while (even < nums.Length && odd < nums.Length)
+        {
+
+            if (nums[even] % 2 == 0)
+            {
+                even += 2;
+            }
+
+            else if (nums[odd] % 2 == 1)
+            {
+                odd += 2;
+            }
+
+            else
+            {
+                var temp = nums[even];
+                nums[even] = nums[odd];
+                nums[odd] = temp;
+                even += 2;
+                odd += 2;
+            }
+        }
+        return nums;
+    }
+
+    public int[] SortArrayByParityII2(int[] nums)
+    {
         if (nums.Length == 1)
         {
             return nums;

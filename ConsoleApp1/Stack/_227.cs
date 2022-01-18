@@ -41,7 +41,7 @@ public class _227
                     deque.AddLast(currentNumber);
                 }
                 currentNumber = "";
-                if (c.ToString() != ".")
+                if (c != '.')
                 {
                     deque.AddLast(c.ToString());
                 }

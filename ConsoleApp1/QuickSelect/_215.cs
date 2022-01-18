@@ -2,33 +2,34 @@
 
 public class _215
 {
-    public int FindKthLargest(int[] nums, int k, int start = 0, int end = -1)
+    public int FindKthLargest(int[] nums, int k)
     {
-        if (end == -1)
-        {
-            end = nums.Length;
-        }
-
+        var indexPos = k - 1;
+        var start = 0;
+        var end = nums.Length - 1;
         var boundary = LomutoPartition(nums, start, end);
 
-        var kLargestIndex = k - 1;
+        while (boundary != indexPos)
+        {
+            if (boundary < indexPos)
+            {
+                start = boundary + 1;
+            }
+            else
+            {
+                end = boundary - 1;
+            }
+            boundary = LomutoPartition(nums, start, end);
+        }
 
-        if (boundary < kLargestIndex)
-        {
-            return FindKthLargest(nums, k, boundary + 1, end);
-        }
-        if (boundary > kLargestIndex)
-        {
-            return FindKthLargest(nums, k, start, boundary);
-        }
         return nums[boundary];
     }
 
     private int LomutoPartition(int[] nums, int start, int end)
     {
-        var pivot = nums[end - 1];
+        var pivot = nums[end];
         var boundary = start;
-        for (var i = start; i < end - 1; i++)
+        for (var i = start; i <= end - 1; i++)
         {
             if (nums[i] > pivot)
             {
@@ -39,41 +40,42 @@ public class _215
             }
         }
 
-        var temp2 = nums[end - 1];
-        nums[end - 1] = nums[boundary];
+        var temp2 = nums[end];
+        nums[end] = nums[boundary];
         nums[boundary] = temp2;
         return boundary;
     }
 
-    public int FindKthLargest2(int[] nums, int k, int start = 0, int end = -1)
+    public int FindKthLargest2(int[] nums, int k)
     {
-        if (end == -1)
-        {
-            end = nums.Length;
-        }
-
+        var indexPos = k - 1;
+        var start = 0;
+        var end = nums.Length - 1;
         var boundary = HoarePartition(nums, start, end);
 
-        var kLargestIndex = k - 1;
+        while (boundary != indexPos)
+        {
+            if (boundary < indexPos)
+            {
+                start = boundary + 1;
+            }
+            else
+            {
+                end = boundary - 1;
+            }
+            boundary = HoarePartition(nums, start, end);
+        }
 
-        if (boundary < kLargestIndex)
-        {
-            return FindKthLargest(nums, k, boundary + 1, end);
-        }
-        if (boundary > kLargestIndex)
-        {
-            return FindKthLargest(nums, k, start, boundary);
-        }
         return nums[boundary];
     }
 
     private int HoarePartition(int[] nums, int start, int end)
     {
-        var pivotIndex = (end + start) / 2;
+        var pivotIndex = start + (end - start) / 2;
         var pivot = nums[pivotIndex];
         var boundary = start;
-        var j = end - 1;
-        while (boundary < j)
+        var j = end;
+        while (boundary <= j)
         {
             if (nums[boundary] > pivot)
             {
@@ -90,11 +92,6 @@ public class _215
                     pivotIndex = j;
                 }
 
-                else if (pivotIndex == j)
-                {
-                    pivotIndex = boundary;
-                }
-
                 var temp = nums[boundary];
                 nums[boundary] = nums[j];
                 nums[j] = temp;
@@ -102,7 +99,6 @@ public class _215
                 j--;
             }
         }
-        boundary += nums[boundary] <= pivot ? 0 : 1;
 
         var temp2 = nums[pivotIndex];
         nums[pivotIndex] = nums[boundary];

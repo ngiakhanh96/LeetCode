@@ -7,7 +7,7 @@ public class _75
         var pivot = 1;
         var from = 0;
         var to = nums.Length - 1;
-        while (from < to)
+        while (from <= to)
         {
             if (nums[from] < pivot)
             {
@@ -29,7 +29,7 @@ public class _75
 
         from = nums.Length - 1;
         to = 0;
-        while (from > to)
+        while (from >= to)
         {
             if (nums[from] > pivot)
             {

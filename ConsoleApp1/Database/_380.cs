@@ -1,45 +1,44 @@
-﻿namespace ConsoleApp1.Database
+﻿namespace ConsoleApp1.Database;
+
+public class _380
 {
-    public class _380
+    public class RandomizedSet
     {
-        public class RandomizedSet
+        private HashSet<int> Set { get; set; }
+
+        private Random Rand { get; set; }
+
+        public RandomizedSet()
         {
-            private HashSet<int> Set { get; set; }
+            Set = new HashSet<int>();
+            Rand = new Random();
+        }
 
-            private Random Rand { get; set; }
-
-            public RandomizedSet()
+        public bool Insert(int val)
+        {
+            if (Set.Contains(val))
             {
-                Set = new HashSet<int>();
-                Rand = new Random();
+                return false;
             }
 
-            public bool Insert(int val)
-            {
-                if (Set.Contains(val))
-                {
-                    return false;
-                }
+            Set.Add(val);
+            return true;
+        }
 
-                Set.Add(val);
-                return true;
+        public bool Remove(int val)
+        {
+            if (!Set.Contains(val))
+            {
+                return false;
             }
 
-            public bool Remove(int val)
-            {
-                if (!Set.Contains(val))
-                {
-                    return false;
-                }
+            Set.Remove(val);
+            return true;
+        }
 
-                Set.Remove(val);
-                return true;
-            }
-
-            public int GetRandom()
-            {
-                return Set.ElementAt(Rand.Next(Set.Count));
-            }
+        public int GetRandom()
+        {
+            return Set.ElementAt(Rand.Next(Set.Count));
         }
     }
 }

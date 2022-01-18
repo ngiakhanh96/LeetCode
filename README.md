@@ -20,10 +20,10 @@ Array: Prefix Sum, Range Addition (Prefix Sum with input (0,0,0,0)), Prefix XOR,
 Bit Manipulation:
 turn off the right most bit: n & (n - 1),
 check if power of 2: n & (n - 1) == 0
-get_bit(x, position) = (x >> position) & 1,
+get_bit(x, position): (x >> position) & 1,
 set_bit(x, position): x | (1<<position),
-flip_bit(x, position): x ^ (1<<position)
-Clear Bit, 
+flip_bit(x, position): x ^ (1<<position),
+clear_bit(x, position): x & ~(1<<position), 
 ~ for flip, 
 & for get/clear, 
 | for get/set, 

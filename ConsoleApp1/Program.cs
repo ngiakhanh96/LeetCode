@@ -9,9 +9,7 @@ class Program
 {
     static void Main(string[] args)
     {
-        var t = new _34().SearchRange(new int[] { 5, 7, 7, 8, 8, 10 }, 8);
-        var a = new NumMatrix();
-        var b = a.Subsets(new int[] { 1, 2, 3 });
+        var t = new _378().KthSmallest(new int[][] { new[] { 1, 2 }, new[] { 1, 3 } }, 4);
     }
 
     public class NumMatrix
@@ -20,29 +18,48 @@ class Program
         {
         }
 
-        public IList<IList<int>> Subsets(int[] nums)
+        public int FindKthLargest(int[] nums, int k)
         {
-            var res = new List<IList<int>>();
-            for (var i = 0; i < Math.Pow(2, nums.Length); i++)
+            var indexPos = k - 1;
+            var start = 0;
+            var end = nums.Length - 1;
+            var boundary = LomutoPartition(nums, start, end);
+
+            while (boundary != indexPos)
             {
-                res.Add(GetSubSet(i, nums));
+                if (boundary < indexPos)
+                {
+                    start = boundary + 1;
+                }
+                else
+                {
+                    end = boundary - 1;
+                }
+                boundary = LomutoPartition(nums, start, end);
             }
-            return res;
+
+            return nums[boundary];
         }
 
-        private List<int> GetSubSet(int num, int[] nums)
+        private int LomutoPartition(int[] nums, int start, int end)
         {
-            var unmaskedBits = new List<int>();
-            for (var i = nums.Length - 1; i >= 0; i--)
+            var pivot = nums[end];
+            var boundary = start;
+            for (var i = start; i <= end - 1; i++)
             {
-                if ((num & 1) == 1)
+                if (nums[i] > pivot)
                 {
-                    unmaskedBits.Add(i);
+                    var temp = nums[i];
+                    nums[i] = nums[boundary];
+                    nums[boundary] = temp;
+                    boundary++;
                 }
-                num = num >> 1;
             }
 
-            return unmaskedBits.Select(p => nums[p]).ToList();
+            var temp2 = nums[end];
+            nums[end] = nums[boundary];
+            nums[boundary] = temp2;
+            return boundary;
         }
     }
 }
