@@ -2,6 +2,71 @@
 
 public class _433
 {
+    public int MinMutation(string start, string end, string[] bank)
+    {
+        var adjacentGenesDict = new Dictionary<string, List<string>>();
+        var adjacentWildCardGenesDict = new Dictionary<string, List<string>>();
+        var bankList = bank.ToList();
+        bankList.Add(start);
+        foreach (var gene in bankList)
+        {
+            var geneArray = gene.ToCharArray();
+            for (var i = 0; i < geneArray.Length; i++)
+            {
+                var temp = geneArray[i];
+                geneArray[i] = '*';
+                var key = new string(geneArray);
+                if (!adjacentGenesDict.TryAdd(key, new List<string> { gene }))
+                {
+                    adjacentGenesDict[key].Add(gene);
+                }
+                if (!adjacentWildCardGenesDict.TryAdd(gene, new List<string> { key }))
+                {
+                    adjacentWildCardGenesDict[gene].Add(key);
+                }
+
+                geneArray[i] = temp;
+            }
+        }
+        return Bfs(start, end, adjacentGenesDict, adjacentWildCardGenesDict);
+    }
+
+    private int Bfs(string start, string end, Dictionary<string, List<string>> adjGenesDict, Dictionary<string, List<string>> adjWildCardGenesDict)
+    {
+        var bfsQueue = new Queue<string>();
+        bfsQueue.Enqueue(start);
+        var visitedGenes = new HashSet<string> { start };
+        var distance = -1;
+        while (bfsQueue.Any())
+        {
+            var count = bfsQueue.Count;
+            distance++;
+            for (var i = 0; i < count; i++)
+            {
+                var currentGene = bfsQueue.Dequeue();
+                if (currentGene == end)
+                {
+                    return distance;
+                }
+
+                foreach (var wildCardGene in adjWildCardGenesDict[currentGene])
+                {
+                    foreach (var gene in adjGenesDict[wildCardGene])
+                    {
+                        if (!visitedGenes.Contains(gene))
+                        {
+                            bfsQueue.Enqueue(gene);
+                            visitedGenes.Add(gene);
+                        }
+                    }
+                }
+
+            }
+        }
+
+        return -1;
+    }
+
     public Queue<string> BfsQueue { get; set; } = new Queue<string>();
 
     public HashSet<string> VisitedHashSet { get; set; } = new HashSet<string>();
@@ -13,7 +78,7 @@ public class _433
     public Dictionary<string, List<string>> AdjacentGenesDict { get; set; } =
         new Dictionary<string, List<string>>();
 
-    public int MinMutation(string start, string end, string[] bank)
+    public int MinMutation2(string start, string end, string[] bank)
     {
         EndGene = end;
         var bankList = bank.ToList();

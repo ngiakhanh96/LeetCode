@@ -53,10 +53,21 @@ Binary Heap(Priority Queue):
 *Use 2 heaps (max and min) to track the median value (see _295)
 
 Binary Tree: Using Prefix Sum, DFS (O(V + E)), BFS(O(V + E)), Dynamic Programming
-*DFS use to find connected graph, dynamic programming
+
+*DFS use to find connected graph. Can combine with DP. 
+Use bool[,] instead of HashSet<(int x, int y)>.
+Only use struct/primitive value for HashSet.
+See https://www.evernote.com/shard/s601/sh/2c10dcd2-2b7d-fb51-deed-4b6bff378ea0/fa5a97ade555ec93d5293299ae6e3b69
+** For distance with nodes only or edges only: See _104 vs _543
 *Dynamic Programming: 1. Choose optimal structure, 2. Avoid overlapping Subproblems (using cache/memoization)
 *Fibonacci: O(2^n)
-*BFS use to find the shortest path, deal with level in tree
+
+*BFS use to find the shortest path, deal with level in tree. 
+Use bool[,] instead of HashSet<(int x, int y)>.
+Only use struct/primitive value for HashSet and Queue.
+Try to calculate on the dequeuing node/value rather than its children
+
+
 *Binary Search: 
 **Can use with sorted list, rotated sorted list, binary search tree
 **Can use for problems which have the only way to solve is to bruteforce
