@@ -4,24 +4,33 @@ public class _153
 {
     public int FindMin(int[] nums)
     {
-        var startIndex = 0;
-        var endIndex = nums.Length - 1;
-        while (startIndex < endIndex)
-        {
-            var middleIndex = startIndex + (endIndex - startIndex) / 2;
-            var rightMost = nums[endIndex];
-            var middlePivot = nums[middleIndex];
+        var low = 0;
+        var high = nums.Length - 1;
 
-            if (rightMost > middlePivot)
+        while (low < high)
+        {
+            var middle = low + (high - low) / 2;
+            if (nums[high] > nums[low])
             {
-                endIndex = middleIndex;
+                high = low;
             }
             else
             {
-                startIndex = middleIndex + 1;
+                // Right branch
+                if (nums[middle] < nums[high])
+                {
+                    high = middle;
+                }
+
+                // Left branch
+                else
+                {
+                    low = middle + 1;
+                }
             }
         }
-        return nums[startIndex];
+
+        return nums[low];
     }
 
     public int FindMin2(int[] nums, int start = 0, int end = -1)

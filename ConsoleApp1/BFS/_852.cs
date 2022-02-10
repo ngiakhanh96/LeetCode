@@ -4,6 +4,27 @@ public class _852
 {
     public int PeakIndexInMountainArray(int[] arr)
     {
+        var low = 1;
+        var high = arr.Length - 2;
+
+        while (low < high)
+        {
+            var medium = low + (high - low) / 2;
+            // Compare to the right since medium can be low
+            if (arr[medium] < arr[medium + 1])
+            {
+                low = medium + 1;
+            }
+            else
+            {
+                high = medium;
+            }
+        }
+        return low;
+    }
+
+    public int PeakIndexInMountainArray2(int[] arr)
+    {
         var lowIndex = 0;
         var highIndex = arr.Length - 1;
 

@@ -92,4 +92,89 @@ public class _1102
 
         return false;
     }
+
+    // Dfs version
+    private HashSet<(int x, int y)> VisitedCells = new HashSet<(int x, int y)>();
+    public int MaximumMinimumPath2(int[][] grid)
+    {
+        var low = int.MaxValue;
+        var high = int.MinValue;
+
+        for (var i = 0; i < grid.Length; i++)
+        {
+            for (var j = 0; j < grid[0].Length; j++)
+            {
+                low = Math.Min(low, grid[i][j]);
+                high = Math.Max(high, grid[i][j]);
+            }
+        }
+
+        while (low < high)
+        {
+            var middle = low + (high - low) / 2;
+
+            var canDfs = CanDfs(grid, middle, high);
+            if (canDfs)
+            {
+                low = middle + 1;
+            }
+            else
+            {
+                high = middle;
+            }
+        }
+
+        return low;
+    }
+
+    private bool CanDfs(int[][] grid, int middle, int high)
+    {
+        if (grid[0][0] <= middle)
+        {
+            return false;
+        }
+        VisitedCells.Clear();
+        VisitedCells.Add((0, 0));
+        return Dfs(grid, 0, 0, middle, grid[0][0]);
+
+    }
+
+    private bool Dfs(int[][] grid, int row, int col, int middle, int currentScore)
+    {
+        var adjacentCells = new int[][] {
+                new int[] {row - 1, col},
+                new int[] {row + 1, col},
+                new int[] {row, col - 1},
+                new int[] {row, col + 1}
+        };
+
+        foreach (var cell in adjacentCells)
+        {
+            var adjacentCellRow = cell[0];
+            var adjacentCellCol = cell[1];
+
+            if (adjacentCellRow >= 0 && adjacentCellRow < grid.Length &&
+                adjacentCellCol >= 0 && adjacentCellCol < grid[0].Length &&
+                !VisitedCells.Contains((adjacentCellRow, adjacentCellCol)))
+            {
+                var newCurrentScore = Math.Min(currentScore, grid[adjacentCellRow][adjacentCellCol]);
+                if (newCurrentScore > middle)
+                {
+                    VisitedCells.Add((adjacentCellRow, adjacentCellCol));
+                    if (adjacentCellRow == grid.Length - 1 &&
+                        adjacentCellCol == grid[0].Length - 1)
+                    {
+                        return true;
+                    }
+
+                    if (Dfs(grid, adjacentCellRow, adjacentCellCol, middle, newCurrentScore))
+                    {
+                        return true;
+                    }
+                }
+            }
+        }
+
+        return false;
+    }
 }

@@ -1,7 +1,6 @@
 ﻿global using ConsoleApp1.Heap;
 global using ConsoleApp1.LinkedList;
 global using ConsoleApp1.UnionFind;
-using ConsoleApp1.BinarySearch;
 
 namespace ConsoleApp1;
 
@@ -9,7 +8,13 @@ class Program
 {
     static void Main(string[] args)
     {
-        var t = new _378().KthSmallest(new int[][] { new[] { 1, 2 }, new[] { 1, 3 } }, 4);
+        var t = new NumMatrix().MaximumMinimumPath(new int[][]
+        {
+            new int[] {5, 4},
+            new int[] {1, 2}
+        });
+
+
     }
 
     public class NumMatrix
@@ -18,48 +23,88 @@ class Program
         {
         }
 
-        public int FindKthLargest(int[] nums, int k)
+        private HashSet<(int x, int y, int z)> VisitedCells = new HashSet<(int x, int y, int z)>();
+        public int MaximumMinimumPath(int[][] grid)
         {
-            var indexPos = k - 1;
-            var start = 0;
-            var end = nums.Length - 1;
-            var boundary = LomutoPartition(nums, start, end);
 
-            while (boundary != indexPos)
+            var low = int.MaxValue;
+            var high = int.MinValue;
+
+            for (var i = 0; i < grid.Length; i++)
             {
-                if (boundary < indexPos)
+                for (var j = 0; j < grid[0].Length; j++)
                 {
-                    start = boundary + 1;
+                    low = Math.Min(low, grid[i][j]);
+                    high = Math.Max(high, grid[i][j]);
+                }
+            }
+
+            while (low < high)
+            {
+                var middle = low + (high - low) / 2;
+
+                var canDfs = CanDfs(grid, middle, high);
+                Console.WriteLine(low);
+                Console.WriteLine(high);
+                Console.WriteLine("-----------------");
+                if (canDfs)
+                {
+                    low = middle + 1;
                 }
                 else
                 {
-                    end = boundary - 1;
+                    high = middle;
                 }
-                boundary = LomutoPartition(nums, start, end);
             }
 
-            return nums[boundary];
+            return low;
         }
 
-        private int LomutoPartition(int[] nums, int start, int end)
+        private bool CanDfs(int[][] grid, int middle, int high)
         {
-            var pivot = nums[end];
-            var boundary = start;
-            for (var i = start; i <= end - 1; i++)
+            VisitedCells.Clear();
+            VisitedCells.Add((0, 0, grid[0][0]));
+            return Dfs(grid, 0, 0, middle, grid[0][0]);
+
+        }
+
+        private bool Dfs(int[][] grid, int row, int col, int middle, int currentScore)
+        {
+            var adjacentCells = new int[][] {
+                new int[] {row - 1, col},
+                new int[] {row + 1, col},
+                new int[] {row, col - 1},
+                new int[] {row, col + 1}
+        };
+
+            foreach (var cell in adjacentCells)
             {
-                if (nums[i] > pivot)
+                var adjacentCellRow = cell[0];
+                var adjacentCellCol = cell[1];
+
+                if (adjacentCellRow >= 0 && adjacentCellRow < grid.Length &&
+                    adjacentCellCol >= 0 && adjacentCellCol < grid[0].Length)
                 {
-                    var temp = nums[i];
-                    nums[i] = nums[boundary];
-                    nums[boundary] = temp;
-                    boundary++;
+                    var newCurrentScore = Math.Min(currentScore, grid[adjacentCellRow][adjacentCellCol]);
+                    if (!VisitedCells.Contains((adjacentCellRow, adjacentCellCol, newCurrentScore)))
+                    {
+                        VisitedCells.Add((adjacentCellRow, adjacentCellCol, newCurrentScore));
+                        if (adjacentCellRow == grid.Length - 1 &&
+                            adjacentCellCol == grid[0].Length - 1 &&
+                            newCurrentScore > middle)
+                        {
+                            return true;
+                        }
+
+                        if (Dfs(grid, adjacentCellRow, adjacentCellCol, middle, newCurrentScore))
+                        {
+                            return true;
+                        }
+                    }
                 }
             }
 
-            var temp2 = nums[end];
-            nums[end] = nums[boundary];
-            nums[boundary] = temp2;
-            return boundary;
+            return false;
         }
     }
 }

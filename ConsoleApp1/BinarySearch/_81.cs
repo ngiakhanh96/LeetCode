@@ -52,4 +52,82 @@ public class _81
 
         return false;
     }
+
+    public bool Search2(int[] nums, int target)
+    {
+        var low = 0;
+        var high = nums.Length - 1;
+        while (low < nums.Length - 1 && nums[low] == nums[low + 1])
+        {
+            low++;
+        }
+        while (high > 0 && nums[high] == nums[high - 1])
+        {
+            high--;
+        }
+        while (low <= high)
+        {
+            var middle = low + (high - low) / 2;
+            if (nums[middle] == target)
+            {
+                return true;
+            }
+
+            if (nums[high] > nums[low])
+            {
+                if (nums[middle] < target)
+                {
+                    low = middle + 1;
+                }
+                else
+                {
+                    high = middle - 1;
+                }
+            }
+            else
+            {
+                // Right branch
+                if (nums[middle] < nums[high])
+                {
+                    if (target > nums[middle] && target <= nums[high])
+                    {
+                        low = middle + 1;
+                    }
+                    else
+                    {
+                        high = middle - 1;
+                    }
+                }
+
+                // Left branch
+                else
+                {
+                    if (target < nums[middle] && target >= nums[low])
+                    {
+                        high = middle - 1;
+                    }
+                    else
+                    {
+                        low = middle + 1;
+                    }
+                }
+            }
+            while (low < nums.Length - 1 && nums[low] == nums[low + 1])
+            {
+                low++;
+            }
+
+            while (high > 0 && nums[high] == nums[high - 1])
+            {
+                high--;
+            }
+        }
+
+        if (low < nums.Length && nums[low] == target)
+        {
+            return true;
+        }
+
+        return false;
+    }
 }

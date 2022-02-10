@@ -75,12 +75,22 @@ Try to calculate on the dequeuing node/value rather than its children
 **Notice:
 ***Look for more indepth instructions at https://www.evernote.com/shard/s601/sh/51bb4614-ef6b-b3b4-3eac-14e357413141/08dc2a9e498e3e4276edae0866ee01a7
 ***Be careful for the overflow issue when calculating middle = low + (high - low) / 2
-***If it is a search problem or something we don't know the answer is there or not, then while(low <= high),
-low = middle + 1, high = middle + 1, middle = low + (high - low) / 21
-***If it is min, max problem or something we know the answer must be there, then while(low < high) and one of low/high would be assigned to middle, 
-the other has to be assigned like this: For low = middle + 1, for high = middle - 1; 
-**** If in case low = middle + 1, or high = middle,     then middle = low + (high - low) / 2 (since high depends on middle, so middle has to round down)
-**** If in case low = middle,     or high = middle - 1, then middle = low + (high - low + 1) / 2 (since low depends on middle, so middle has to round up)
+*** For comparing with surrounding (see _852):
+    ***If it is min, max problem or something we know the answer must be there, then while(low < high) and one of low/high would be assigned to middle, 
+    the other has to be assigned like this: For low = middle + 1, or high = middle - 1; 
+    **** If in case low = middle + 1 when (arr[middle] < arr[middle + 1]), or high = middle,                                           
+    then middle = low + (high - low) / 2 AND high runs from max - 1  (since high depends on middle, so middle has to be rounded down)
+    **** If in case low = middle,                                          or high = middle - 1 when (arr[middle] < arr[middle - 1]), 
+    then middle = low + (high - low + 1) / 2 AND low runs from min + 1 (since low depends on middle, so middle has to be rounded up)
+
+
+*** For comparing with fixed condition or with high/low (see _33):
+    ***If it is a search problem or something we don't know the answer is there or not, then while(low <= high),
+    low = middle + 1, high = middle + 1, middle = low + (high - low) / 2
+    ***If it is min, max problem or something we know the answer must be there, then while(low < high) and one of low/high would be assigned to middle, 
+    the other has to be assigned like this: For low = middle + 1, or high = middle - 1; 
+    **** If in case low = middle + 1, or high = middle,     then middle = low + (high - low) / 2     - Compare middle to high (since high depends on middle, so middle has to be rounded down)
+    **** If in case low = middle,     or high = middle - 1, then middle = low + (high - low + 1) / 2 - Compare middle to low (since low depends on middle, so middle has to be rounded up)
 
 *Dijkstra algorithm: Use to find shortest path in a non negative weight map. See reverse Dijkstra in _1514
 

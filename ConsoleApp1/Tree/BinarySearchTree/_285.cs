@@ -4,6 +4,52 @@ public class _285
 {
     public TreeNode InorderSuccessor(TreeNode root, TreeNode p)
     {
+        if (root == null)
+        {
+            return null;
+        }
+
+        var inorderSuccessorAbove = FindInorderSuccessorAbove(root, null, p.val);
+        var inorderSuccessorBelow = FindInorderSuccessorBelow(p);
+
+        return inorderSuccessorBelow ?? inorderSuccessorAbove;
+    }
+
+    private TreeNode FindInorderSuccessorAbove(TreeNode root, TreeNode parent, int val)
+    {
+        if (root == null)
+        {
+            return parent;
+        }
+
+        if (val == root.val)
+        {
+            return parent;
+        }
+
+        return val > root.val
+            ? FindInorderSuccessorAbove(root.right, parent, val)
+            : FindInorderSuccessorAbove(root.left, root, val);
+    }
+
+    private TreeNode FindInorderSuccessorBelow(TreeNode node)
+    {
+        if (node.right == null)
+        {
+            return null;
+        }
+
+        var currentNode = node.right;
+        while (currentNode.left != null)
+        {
+            currentNode = currentNode.left;
+        }
+
+        return currentNode;
+    }
+
+    public TreeNode InorderSuccessor2(TreeNode root, TreeNode p)
+    {
         var (node, maxRangeNode) = SearchBST(root, p.val, null);
         return node.right is null ? maxRangeNode : FindInOrderSuccessor(node.right);
     }
