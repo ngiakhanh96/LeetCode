@@ -1,6 +1,7 @@
 ﻿global using ConsoleApp1.Heap;
 global using ConsoleApp1.LinkedList;
 global using ConsoleApp1.UnionFind;
+using ConsoleApp1.Stack;
 
 namespace ConsoleApp1;
 
@@ -8,12 +9,7 @@ class Program
 {
     static void Main(string[] args)
     {
-        var t = new NumMatrix().MaximumMinimumPath(new int[][]
-        {
-            new int[] {5, 4},
-            new int[] {1, 2}
-        });
-
+        var t = new _456().Find132pattern(new int[] { 3, 5, 0, 1, 4 });
 
     }
 
