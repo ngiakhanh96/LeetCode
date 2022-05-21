@@ -1,6 +1,6 @@
 ﻿namespace ConsoleApp1.QuickSelect;
 
-// Last visit 22/05/2022
+// Last visit 21/5/2022
 public class _905
 {
     public int[] SortArrayByParity(int[] nums)
