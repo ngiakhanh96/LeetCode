@@ -1,5 +1,6 @@
 ﻿namespace ConsoleApp1.PrefixSum;
 
+//Last visit 21/5/2022
 public class _303
 {
     public class NumArray

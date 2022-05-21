@@ -1,5 +1,6 @@
-﻿namespace ConsoleApp1.QuickSelect;
+﻿namespace ConsoleApp1.TwoPointers;
 
+// Last visit 22/05/2022
 public class _922
 {
     public int[] SortArrayByParityII(int[] nums)

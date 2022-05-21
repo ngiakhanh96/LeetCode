@@ -1,5 +1,6 @@
 ﻿namespace ConsoleApp1.PrefixSum;
 
+//Last visit 21/5/2022
 public class _1480
 {
     public int[] RunningSum(int[] nums)
