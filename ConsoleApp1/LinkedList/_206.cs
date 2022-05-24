@@ -1,5 +1,6 @@
 ﻿namespace ConsoleApp1.LinkedList;
 
+//Last visit 24/5/2022
 public class _206
 {
     public ListNode ReverseList(ListNode head, ListNode previousNode = null)
@@ -17,17 +18,14 @@ public class _206
 
     public ListNode ReverseList2(ListNode head)
     {
-        if (head == null)
-            return null;
         ListNode previousNode = null;
-        var currNode = head;
-        do
+        while (head != null)
         {
-            var initialNext = currNode.next;
-            currNode.next = previousNode;
-            previousNode = currNode;
-            currNode = initialNext;
-        } while (currNode != null);
+            var temp = head.next;
+            head.next = previousNode;
+            previousNode = head;
+            head = temp;
+        }
 
         return previousNode;
 

@@ -1,25 +1,17 @@
 ﻿namespace ConsoleApp1.LinkedList;
 
+//Last visit 24/5/2022
 public class _876
 {
     public ListNode MiddleNode(ListNode head)
     {
-        if (head == null)
-        {
-            return null;
-        }
-        var slowPointer = head;
         var fastPointer = head;
-        while (true)
+        var slowPointer = head;
+        while (fastPointer?.next != null)
         {
-            slowPointer = slowPointer.next ?? slowPointer;
-            fastPointer = fastPointer.next?.next;
-
-            if (fastPointer?.next == null)
-            {
-                return slowPointer;
-            }
-
+            slowPointer = slowPointer.next;
+            fastPointer = fastPointer?.next?.next;
         }
+        return slowPointer;
     }
 }
