@@ -1,43 +1,31 @@
 ﻿namespace ConsoleApp1.LinkedList;
 
+//Last visit 4/6/2022
 public class _142
 {
     public ListNode DetectCycle(ListNode head)
     {
-        if (head == null)
-        {
-            return null;
-        }
         var slowPointer = head;
         var fastPointer = head;
-        while (true)
-        {
-            slowPointer = slowPointer.next ?? slowPointer;
-            fastPointer = fastPointer.next?.next;
 
-            if (fastPointer?.next == null)
-            {
-                return null;
-            }
+        while (fastPointer?.next != null)
+        {
+            slowPointer = slowPointer.next;
+            fastPointer = fastPointer.next?.next;
 
             if (slowPointer == fastPointer)
             {
-                slowPointer = head;
-                if (slowPointer == fastPointer)
-                {
-                    return slowPointer;
-                }
-                while (true)
+                fastPointer = head;
+                while (slowPointer != fastPointer)
                 {
                     slowPointer = slowPointer.next;
                     fastPointer = fastPointer.next;
-                    if (slowPointer == fastPointer)
-                    {
-                        return slowPointer;
-                    }
                 }
-            }
 
+                return slowPointer;
+            }
         }
+
+        return null;
     }
 }

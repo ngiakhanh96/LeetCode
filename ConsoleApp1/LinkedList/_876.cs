@@ -10,7 +10,7 @@ public class _876
         while (fastPointer?.next != null)
         {
             slowPointer = slowPointer.next;
-            fastPointer = fastPointer?.next?.next;
+            fastPointer = fastPointer.next?.next;
         }
         return slowPointer;
     }

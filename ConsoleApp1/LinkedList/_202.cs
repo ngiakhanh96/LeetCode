@@ -1,5 +1,6 @@
 ﻿namespace ConsoleApp1.LinkedList;
 
+// Last visit 4/6/2022
 public class _202
 {
     public bool IsHappy(int n)
@@ -22,6 +23,25 @@ public class _202
             }
 
         }
+    }
+
+    public bool IsHappy2(int n)
+    {
+        var slowPointer = n;
+        var fastPointer = n;
+
+        while (CalculateNextNumber(fastPointer) != 1)
+        {
+            slowPointer = CalculateNextNumber(slowPointer);
+            fastPointer = CalculateNextNumber(CalculateNextNumber(fastPointer));
+
+            if (slowPointer == fastPointer && slowPointer != 1)
+            {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     private int CalculateNextNumber(int n)

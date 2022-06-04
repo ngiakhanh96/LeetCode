@@ -27,7 +27,7 @@ clear_bit(x, position): x & ~(1<<position),
 ~ for flip, 
 & for get/clear, 
 | for get/set, 
-^ for get/set/flip/(clear)
+^ for get/set/flip/clear
 See https://drive.google.com/file/d/1jdIyIEwzXEmis0tj5hjrOspXpaYzI2P3/view?usp=sharing
 Subset a bitmask from 0 to 2^n - 1
 *XOR: 

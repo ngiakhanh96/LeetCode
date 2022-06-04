@@ -1,8 +1,14 @@
 ﻿namespace ConsoleApp1.BitManipulation;
 
+// Last visit 4/6/2022
 public class _231
 {
     public bool IsPowerOfTwo(int n)
+    {
+        return n > 0 && (n & (n - 1)) == 0;
+    }
+
+    public bool IsPowerOfTwo2(int n)
     {
         if (n <= 0)
         {
@@ -22,12 +28,6 @@ public class _231
 
             n >>= 1;
         }
-    }
-
-
-    public bool IsPowerOfTwo2(int n)
-    {
-        return n > 0 && (n & (n - 1)) == 0;
     }
 
     private int GetBit(int n, int position)
