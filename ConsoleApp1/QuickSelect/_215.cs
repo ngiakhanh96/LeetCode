@@ -75,6 +75,7 @@ public class _215
         var pivot = nums[pivotIndex];
         var boundary = start;
         var j = end;
+        // Need <= since in case of boundary == j; if (nums[boundary] > pivot) need boundary ++; else keep boundary. dont care about j
         while (boundary <= j)
         {
             if (nums[boundary] > pivot)
@@ -87,6 +88,7 @@ public class _215
             }
             else
             {
+                // compare to boundary only since j can never stuck to pivotIndex due to the fact that nums[j] <= pivot
                 if (pivotIndex == boundary)
                 {
                     pivotIndex = j;

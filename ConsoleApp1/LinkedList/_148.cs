@@ -1,5 +1,6 @@
 ﻿namespace ConsoleApp1.LinkedList;
 
+// Last visit 12/6/2022
 public class _148
 {
     public ListNode SortList(ListNode head)
@@ -8,66 +9,80 @@ public class _148
         {
             return head;
         }
-        var fastPointer = head;
-        var slowPointer = head;
-        while (true)
-        {
-            fastPointer = fastPointer.next ?? fastPointer;
-            fastPointer = fastPointer.next ?? fastPointer;
-
-            if (fastPointer.next == null)
-            {
-                break;
-            }
-            slowPointer = slowPointer.next ?? slowPointer;
-        }
-
-        var rightList = SortList(slowPointer.next);
-        slowPointer.next = null;
-        var leftList = SortList(head);
-
-        var leftPointer = leftList;
-        var rightPointer = rightList;
-        ListNode returnedListNode = null;
-        ListNode prevListNode = null;
+        var middleNode = FindMiddleNode(head);
+        var oldMiddleNode = middleNode.next;
+        middleNode.next = null;
+        var leftPointer = SortList(head);
+        var rightPointer = SortList(oldMiddleNode);
+        ListNode prevPointer = null;
+        ListNode newHead = null;
         while (leftPointer != null && rightPointer != null)
         {
-            var smallerPointer = leftPointer.val < rightPointer.val ? leftPointer : rightPointer;
+            if (leftPointer.val < rightPointer.val)
+            {
+                if (prevPointer == null)
+                {
+                    prevPointer = leftPointer;
+                    newHead = leftPointer;
+                }
+                else
+                {
+                    prevPointer.next = leftPointer;
+                    prevPointer = leftPointer;
+                }
 
-            if (prevListNode == null)
-            {
-                returnedListNode = smallerPointer;
-            }
-            else
-            {
-                prevListNode.next = smallerPointer;
-            }
-
-            prevListNode = smallerPointer;
-            if (smallerPointer == leftPointer)
-            {
                 leftPointer = leftPointer.next;
+
             }
             else
             {
+                if (prevPointer == null)
+                {
+                    prevPointer = rightPointer;
+                    newHead = rightPointer;
+                }
+                else
+                {
+                    prevPointer.next = rightPointer;
+                    prevPointer = rightPointer;
+                }
                 rightPointer = rightPointer.next;
             }
         }
 
         while (leftPointer != null)
         {
-            prevListNode!.next = leftPointer;
-            prevListNode = leftPointer;
+            prevPointer.next = leftPointer;
+            prevPointer = leftPointer;
             leftPointer = leftPointer.next;
         }
 
         while (rightPointer != null)
         {
-            prevListNode!.next = rightPointer;
-            prevListNode = rightPointer;
+            prevPointer.next = rightPointer;
+            prevPointer = rightPointer;
             rightPointer = rightPointer.next;
         }
+        prevPointer.next = null;
+        return newHead;
+    }
 
-        return returnedListNode;
+    private ListNode FindMiddleNode(ListNode head)
+    {
+        var fastPointer = head;
+        var slowPointer = head;
+
+        if (fastPointer.next is { next: null })
+        {
+            return slowPointer;
+        }
+
+        while (fastPointer?.next != null)
+        {
+            slowPointer = slowPointer.next;
+            fastPointer = fastPointer.next?.next;
+        }
+
+        return slowPointer;
     }
 }

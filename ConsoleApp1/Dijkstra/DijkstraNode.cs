@@ -1,6 +1,4 @@
-﻿using ConsoleApp1.Heap;
-
-namespace ConsoleApp1.Dijkstra;
+﻿namespace ConsoleApp1.Dijkstra;
 
 public class DijkstraNode : HeapItem
 {

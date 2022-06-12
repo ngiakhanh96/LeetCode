@@ -1,6 +1,4 @@
-﻿using ConsoleApp1.Heap;
-
-namespace ConsoleApp1.BucketSort;
+﻿namespace ConsoleApp1.BucketSort;
 
 public class _347
 {

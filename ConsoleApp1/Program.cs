@@ -1,7 +1,6 @@
 ﻿global using ConsoleApp1.Heap;
 global using ConsoleApp1.LinkedList;
 global using ConsoleApp1.UnionFind;
-using ConsoleApp1.Stack;
 
 namespace ConsoleApp1;
 
@@ -9,7 +8,7 @@ class Program
 {
     static void Main(string[] args)
     {
-        var t = new _456().Find132pattern(new int[] { 3, 5, 0, 1, 4 });
+        var t = new _148().SortList(new ListNode(4, new ListNode(2, new ListNode(1, new ListNode(3)))));
 
     }
 

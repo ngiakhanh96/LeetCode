@@ -1,6 +1,4 @@
-﻿using ConsoleApp1.Heap;
-
-namespace ConsoleApp1.Tree.Trie;
+﻿namespace ConsoleApp1.Tree.Trie;
 
 public class _1268
 {
