@@ -7,9 +7,8 @@ public class _215
         var indexPos = k - 1;
         var start = 0;
         var end = nums.Length - 1;
-        var boundary = LomutoPartition(nums, start, end);
-
-        while (boundary != indexPos)
+        var boundary = -1;
+        do
         {
             if (boundary < indexPos)
             {
@@ -20,7 +19,7 @@ public class _215
                 end = boundary - 1;
             }
             boundary = LomutoPartition(nums, start, end);
-        }
+        } while (boundary != indexPos);
 
         return nums[boundary];
     }
@@ -51,9 +50,8 @@ public class _215
         var indexPos = k - 1;
         var start = 0;
         var end = nums.Length - 1;
-        var boundary = HoarePartition(nums, start, end);
-
-        while (boundary != indexPos)
+        var boundary = -1;
+        do
         {
             if (boundary < indexPos)
             {
@@ -64,12 +62,43 @@ public class _215
                 end = boundary - 1;
             }
             boundary = HoarePartition(nums, start, end);
-        }
+        } while (boundary != indexPos);
 
         return nums[boundary];
     }
 
     private int HoarePartition(int[] nums, int start, int end)
+    {
+        var pivot = nums[end];
+        var leftPointer = start;
+        var rightPointer = end - 1;
+
+        while (leftPointer <= rightPointer)
+        {
+            if (nums[leftPointer] > pivot)
+            {
+                leftPointer++;
+            }
+            else if (nums[rightPointer] <= pivot)
+            {
+                rightPointer--;
+            }
+            else
+            {
+                var temp = nums[leftPointer];
+                nums[leftPointer++] = nums[rightPointer];
+                nums[rightPointer--] = temp;
+            }
+        }
+
+        var temp2 = nums[end];
+        nums[end] = nums[leftPointer];
+        nums[leftPointer] = temp2;
+
+        return leftPointer;
+    }
+
+    private int HoarePartition2(int[] nums, int start, int end)
     {
         var pivotIndex = start + (end - start) / 2;
         var pivot = nums[pivotIndex];

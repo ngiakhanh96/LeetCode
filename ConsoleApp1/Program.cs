@@ -1,6 +1,7 @@
 ﻿global using ConsoleApp1.Heap;
 global using ConsoleApp1.LinkedList;
 global using ConsoleApp1.UnionFind;
+using ConsoleApp1.QuickSort;
 
 namespace ConsoleApp1;
 
@@ -8,7 +9,7 @@ class Program
 {
     static void Main(string[] args)
     {
-        var t = new _148().SortList(new ListNode(4, new ListNode(2, new ListNode(1, new ListNode(3)))));
+        var a = new _912().SortArray(new[] { 5, 2, 3, 1 });
 
     }
 
