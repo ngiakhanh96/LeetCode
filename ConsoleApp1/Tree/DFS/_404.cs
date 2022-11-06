@@ -2,7 +2,7 @@
 
 public class _404
 {
-    public int Sum { get; set; } = 0;
+    public int Sum { get; set; }
 
     public int SumOfLeftLeaves(TreeNode root, bool isLeft = false)
     {
@@ -15,7 +15,7 @@ public class _404
             Sum += root.val;
         }
         SumOfLeftLeaves(root.left, true);
-        SumOfLeftLeaves(root.right, false);
+        SumOfLeftLeaves(root.right);
         return Sum;
     }
 }

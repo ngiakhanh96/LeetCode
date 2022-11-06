@@ -34,7 +34,7 @@ public class _72
                 {
                     if (word1[i] == word2[j])
                     {
-                        minDistanceUntil[i, j] = new int[]
+                        minDistanceUntil[i, j] = new[]
                         {
                             i - 1 >= 0 && j - 1 >= 0 ? minDistanceUntil[i - 1, j - 1] : int.MaxValue,
                             j - 1 >= 0 ? minDistanceUntil[i, j - 1] + 1 : int.MaxValue,
@@ -43,7 +43,7 @@ public class _72
                     }
                     else
                     {
-                        minDistanceUntil[i, j] = new int[]
+                        minDistanceUntil[i, j] = new[]
                         {
                             i - 1 >= 0 && j - 1 >= 0 ? minDistanceUntil[i - 1, j - 1] + 1 : int.MaxValue,
                             j - 1 >= 0 ? minDistanceUntil[i, j - 1] + 1 : int.MaxValue,

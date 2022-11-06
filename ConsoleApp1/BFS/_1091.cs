@@ -25,7 +25,7 @@ public class _1091
         {
             return;
         }
-        BfsQueue.Enqueue(new int[] { rowStartIndex, colStartIndex });
+        BfsQueue.Enqueue(new[] { rowStartIndex, colStartIndex });
         IsVisited[rowStartIndex, colStartIndex] = true;
         var currentLevel = 0;
 
@@ -45,16 +45,16 @@ public class _1091
                     return;
                 }
 
-                var adjacentCells = new int[][]
+                var adjacentCells = new[]
                 {
-                    new int[] { rowIndex - 1, colIndex },
-                    new int[] { rowIndex, colIndex - 1 },
-                    new int[] { rowIndex + 1, colIndex },
-                    new int[] { rowIndex, colIndex + 1 },
-                    new int[] { rowIndex - 1, colIndex - 1 },
-                    new int[] { rowIndex - 1, colIndex + 1 },
-                    new int[] { rowIndex + 1, colIndex - 1 },
-                    new int[] { rowIndex + 1, colIndex + 1 }
+                    new[] { rowIndex - 1, colIndex },
+                    new[] { rowIndex, colIndex - 1 },
+                    new[] { rowIndex + 1, colIndex },
+                    new[] { rowIndex, colIndex + 1 },
+                    new[] { rowIndex - 1, colIndex - 1 },
+                    new[] { rowIndex - 1, colIndex + 1 },
+                    new[] { rowIndex + 1, colIndex - 1 },
+                    new[] { rowIndex + 1, colIndex + 1 }
                 };
 
                 foreach (var adjacentCell in adjacentCells)

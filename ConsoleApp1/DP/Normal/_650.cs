@@ -47,10 +47,10 @@ public class _650
             }
         }
 
-        var currentMinStepAt = new int[] { stack.Pop(), 0 };
+        var currentMinStepAt = new[] { stack.Pop(), 0 };
         foreach (var minStepAt in stack)
         {
-            currentMinStepAt = new int[] { minStepAt, currentMinStepAt[1] + (minStepAt / currentMinStepAt[0]) };
+            currentMinStepAt = new[] { minStepAt, currentMinStepAt[1] + (minStepAt / currentMinStepAt[0]) };
         }
         return currentMinStepAt[1];
     }

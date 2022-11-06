@@ -29,10 +29,10 @@ public class _198
     {
         if (index == 0)
         {
-            return new int[] { 0, nums[0] };
+            return new[] { 0, nums[0] };
         }
 
         var robHouseBefore = Rob2Impl(index - 1, nums);
-        return new int[] { robHouseBefore.Max(), robHouseBefore[0] + nums[index] };
+        return new[] { robHouseBefore.Max(), robHouseBefore[0] + nums[index] };
     }
 }

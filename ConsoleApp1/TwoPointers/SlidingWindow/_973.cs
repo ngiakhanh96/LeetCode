@@ -3,7 +3,68 @@
 public class _973
 {
     private Random Random { get; } = new Random();
+
     public int[][] KClosest(int[][] points, int k)
+    {
+        var dict = new Dictionary<int[], int>();
+        for (var i = 0; i < points.Length; i++)
+        {
+            var distanceSquare = points[i][0] * points[i][0] + points[i][1] * points[i][1];
+            dict[points[i]] = distanceSquare;
+        }
+        k--;
+        var start = 0;
+        var end = points.Length - 1;
+        var boundary = -1;
+        while (boundary != k)
+        {
+            if (boundary < k)
+            {
+                start = boundary + 1;
+            }
+            else
+            {
+                end = boundary - 1;
+            }
+
+            boundary = LomutoPartition(points, start, end, dict);
+        }
+
+        var result = new int[boundary + 1][];
+        for (var i = 0; i <= boundary; i++)
+        {
+            result[i] = points[i];
+        }
+        return result;
+    }
+
+    private int LomutoPartition(int[][] points, int start, int end, Dictionary<int[], int> dict)
+    {
+        var randomIndex = Random.Next(start, end + 1);
+        var temp3 = points[randomIndex];
+        points[randomIndex] = points[end];
+        points[end] = temp3;
+
+        var boundary = start;
+        var pivot = dict[points[end]];
+        for (var i = start; i < end; i++)
+        {
+            if (dict[points[i]] < pivot)
+            {
+                var temp = points[i];
+                points[i] = points[boundary];
+                points[boundary++] = temp;
+            }
+        }
+
+        var temp2 = points[end];
+        points[end] = points[boundary];
+        points[boundary] = temp2;
+
+        return boundary;
+    }
+
+    public int[][] KClosest2(int[][] points, int k)
     {
         var dict = new Dictionary<int, List<int>>();
         var pointDistanceSquares = new int[points.Length];

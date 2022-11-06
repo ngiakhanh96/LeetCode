@@ -18,12 +18,12 @@ public class _305
 
             count++;
             grid[position[0], position[1]] = 1;
-            var adjacentCells = new int[][]
+            var adjacentCells = new[]
             {
-                new int[] { position[0] - 1, position[1] },
-                new int[] { position[0], position[1] - 1 },
-                new int[] { position[0] + 1, position[1] },
-                new int[] { position[0], position[1] + 1 }
+                new[] { position[0] - 1, position[1] },
+                new[] { position[0], position[1] - 1 },
+                new[] { position[0] + 1, position[1] },
+                new[] { position[0], position[1] + 1 }
             };
             foreach (var adjacentCell in adjacentCells)
             {

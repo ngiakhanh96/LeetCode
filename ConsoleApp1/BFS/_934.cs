@@ -43,11 +43,12 @@ public class _934
             for (int i = 0; i < numOfCellInCurrentLevel; i++)
             {
                 var (row, col) = BfsQueue.Dequeue();
-                var nextCells = new int[][] {
-                    new int[] {row-1, col},
-                    new int[] {row+1, col},
-                    new int[] {row, col-1},
-                    new int[] {row, col+1},
+                var nextCells = new[]
+                {
+                    new[] {row-1, col},
+                    new[] {row+1, col},
+                    new[] {row, col-1},
+                    new[] {row, col+1},
                 };
 
                 foreach (var nextCell in nextCells)
@@ -74,11 +75,12 @@ public class _934
     private void Dfs(int row, int col)
     {
         VisitedCell.Add((row, col));
-        var nextCells = new int[][] {
-            new int[] {row-1, col},
-            new int[] {row+1, col},
-            new int[] {row, col-1},
-            new int[] {row, col+1},
+        var nextCells = new[]
+        {
+            new[] {row-1, col},
+            new[] {row+1, col},
+            new[] {row, col-1},
+            new[] {row, col+1},
         };
 
         foreach (var nextCell in nextCells)

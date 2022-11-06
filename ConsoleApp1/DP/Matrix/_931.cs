@@ -21,7 +21,7 @@ public class _931
                     var upLeftMinValue = i - 1 >= 0 && j - 1 >= 0 ? result[i - 1, j - 1] : int.MaxValue;
                     var upMiddleMinValue = i - 1 >= 0 ? result[i - 1, j] : int.MaxValue;
                     var upRightMinValue = i - 1 >= 0 && j + 1 <= matrix[0].Length - 1 ? result[i - 1, j + 1] : int.MaxValue;
-                    result[i, j] = new int[] { upLeftMinValue, upMiddleMinValue, upRightMinValue }.Min() + matrix[i][j];
+                    result[i, j] = new[] { upLeftMinValue, upMiddleMinValue, upRightMinValue }.Min() + matrix[i][j];
                 }
             }
         }

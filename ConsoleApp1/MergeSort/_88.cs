@@ -15,7 +15,8 @@ public class _88
                 nums1[i] = nums2[pointer2--];
                 continue;
             }
-            else if (pointer2 < 0)
+
+            if (pointer2 < 0)
             {
                 nums1[i] = nums1[pointer1--];
                 continue;

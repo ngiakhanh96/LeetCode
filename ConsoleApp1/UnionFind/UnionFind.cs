@@ -8,7 +8,7 @@ public class UnionFind<T>
 
     public int[] Ranks { get; }
 
-    public int[] GridDimension { get; set; } = new int[] { 0, 0 };
+    public int[] GridDimension { get; set; } = { 0, 0 };
 
     public UnionFind(int capacity, Func<T, bool> condition = null) : this(new T[capacity], condition)
     {

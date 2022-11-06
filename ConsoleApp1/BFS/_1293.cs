@@ -20,16 +20,16 @@ public class _1293
 
     private void Bfs(int startRowIndex, int startColIndex, int k)
     {
-        var startCell = new int[] { startRowIndex, startColIndex, k };
+        var startCell = new[] { startRowIndex, startColIndex, k };
         var currentBomb = startCell[2];
         if (Grid[startRowIndex][startColIndex] == 1 && currentBomb > 0)
         {
-            BfsQueue.Enqueue(new int[] { startRowIndex, startColIndex, currentBomb - 1 });
+            BfsQueue.Enqueue(new[] { startRowIndex, startColIndex, currentBomb - 1 });
             Visited[startRowIndex, startColIndex, currentBomb - 1] = true;
         }
         else if (Grid[startRowIndex][startColIndex] == 0)
         {
-            BfsQueue.Enqueue(new int[] { startRowIndex, startColIndex, currentBomb });
+            BfsQueue.Enqueue(new[] { startRowIndex, startColIndex, currentBomb });
             Visited[startRowIndex, startColIndex, currentBomb] = true;
         }
         var currentLevel = -1;
@@ -52,12 +52,12 @@ public class _1293
                     return;
                 }
 
-                var adjacentCells = new int[][]
+                var adjacentCells = new[]
                 {
-                    new int[]{rowIndex - 1, colIndex},
-                    new int[]{rowIndex, colIndex - 1},
-                    new int[]{rowIndex + 1, colIndex},
-                    new int[]{rowIndex, colIndex + 1}
+                    new[]{rowIndex - 1, colIndex},
+                    new[]{rowIndex, colIndex - 1},
+                    new[]{rowIndex + 1, colIndex},
+                    new[]{rowIndex, colIndex + 1}
                 };
 
                 foreach (var adjacentCell in adjacentCells)
@@ -71,13 +71,13 @@ public class _1293
                             currentBomb > 0 &&
                             !Visited[adjacentCell[0], adjacentCell[1], currentBomb - 1])
                         {
-                            BfsQueue.Enqueue(new int[] { adjacentCell[0], adjacentCell[1], currentBomb - 1 });
+                            BfsQueue.Enqueue(new[] { adjacentCell[0], adjacentCell[1], currentBomb - 1 });
                             Visited[adjacentCell[0], adjacentCell[1], currentBomb - 1] = true;
                         }
                         else if (Grid[adjacentCell[0]][adjacentCell[1]] == 0 &&
                                  !Visited[adjacentCell[0], adjacentCell[1], currentBomb])
                         {
-                            BfsQueue.Enqueue(new int[] { adjacentCell[0], adjacentCell[1], currentBomb });
+                            BfsQueue.Enqueue(new[] { adjacentCell[0], adjacentCell[1], currentBomb });
                             Visited[adjacentCell[0], adjacentCell[1], currentBomb] = true;
                         }
                     }

@@ -11,10 +11,8 @@ public class _217
             {
                 return true;
             }
-            else
-            {
-                hashset.Add(i);
-            }
+
+            hashset.Add(i);
         }
         return false;
     }

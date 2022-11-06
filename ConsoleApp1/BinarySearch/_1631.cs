@@ -44,7 +44,7 @@ public class _1631
     {
         BfsQueue.Clear();
         IsVisitedCells = new bool[Heights.Length, Heights[0].Length];
-        BfsQueue.Enqueue(new int[] { startRowIndex, startColIndex, 0 });
+        BfsQueue.Enqueue(new[] { startRowIndex, startColIndex, 0 });
         IsVisitedCells[startRowIndex, startColIndex] = true;
         while (BfsQueue.Count > 0)
         {
@@ -61,12 +61,12 @@ public class _1631
                     return true;
                 }
 
-                var adjacentCells = new int[][]
+                var adjacentCells = new[]
                 {
-                    new int[]{rowIndex - 1, colIndex},
-                    new int[]{rowIndex, colIndex - 1},
-                    new int[]{rowIndex + 1, colIndex},
-                    new int[]{rowIndex, colIndex + 1}
+                    new[]{rowIndex - 1, colIndex},
+                    new[]{rowIndex, colIndex - 1},
+                    new[]{rowIndex + 1, colIndex},
+                    new[]{rowIndex, colIndex + 1}
                 };
 
                 foreach (var adjacentCell in adjacentCells)

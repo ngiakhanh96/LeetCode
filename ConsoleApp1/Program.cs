@@ -1,7 +1,6 @@
 ﻿global using ConsoleApp1.Heap;
 global using ConsoleApp1.LinkedList;
 global using ConsoleApp1.UnionFind;
-using ConsoleApp1.QuickSort;
 
 namespace ConsoleApp1;
 
@@ -9,9 +8,10 @@ class Program
 {
     static void Main(string[] args)
     {
-        var a = new _912().SortArray(new[] { 5, 2, 3, 1 });
-
+        var a = new _1738().KthLargestValue(new[] { new[] { 5, 2 }, new[] { 1, 6 } }, 2);
     }
+
+
 
     public class NumMatrix
     {

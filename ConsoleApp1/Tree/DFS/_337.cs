@@ -19,15 +19,15 @@ public class _337
     {
         if (node == null)
         {
-            return new int[] { 0, 0 };
+            return new[] { 0, 0 };
         }
 
         var left = Dfs(node.left);
         var right = Dfs(node.right);
 
-        return new int[] {
+        return new[] {
             left[1] + right[1] + node.val,
-            new int[]
+            new[]
             {
                 left[0] + right[0],
                 left[1] + right[0],

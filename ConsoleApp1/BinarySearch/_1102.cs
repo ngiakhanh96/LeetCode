@@ -49,7 +49,7 @@ public class _1102
         BfsQueue.Clear();
         IsVisited = new bool[Grid.Length, Grid[0].Length];
         IsVisited[0, 0] = true;
-        BfsQueue.Enqueue(new int[] { 0, 0 });
+        BfsQueue.Enqueue(new[] { 0, 0 });
 
         while (BfsQueue.Count > 0)
         {
@@ -65,12 +65,12 @@ public class _1102
                     return true;
                 }
 
-                var adjacentCells = new int[][]
+                var adjacentCells = new[]
                 {
-                    new int[] { rowIndex - 1, colIndex },
-                    new int[] { rowIndex, colIndex - 1 },
-                    new int[] { rowIndex + 1, colIndex },
-                    new int[] { rowIndex, colIndex + 1 }
+                    new[] { rowIndex - 1, colIndex },
+                    new[] { rowIndex, colIndex - 1 },
+                    new[] { rowIndex + 1, colIndex },
+                    new[] { rowIndex, colIndex + 1 }
                 };
 
                 foreach (var adjacentCell in adjacentCells)
@@ -83,7 +83,7 @@ public class _1102
                         !IsVisited[adjacentCell[0], adjacentCell[1]] &&
                         Grid[adjacentCell[0]][adjacentCell[1]] >= midMinPath)
                     {
-                        BfsQueue.Enqueue(new int[] { adjacentCell[0], adjacentCell[1] });
+                        BfsQueue.Enqueue(new[] { adjacentCell[0], adjacentCell[1] });
                         IsVisited[adjacentCell[0], adjacentCell[1]] = true;
                     }
                 }
@@ -141,11 +141,12 @@ public class _1102
 
     private bool Dfs(int[][] grid, int row, int col, int middle, int currentScore)
     {
-        var adjacentCells = new int[][] {
-                new int[] {row - 1, col},
-                new int[] {row + 1, col},
-                new int[] {row, col - 1},
-                new int[] {row, col + 1}
+        var adjacentCells = new[]
+        {
+                new[] {row - 1, col},
+                new[] {row + 1, col},
+                new[] {row, col - 1},
+                new[] {row, col + 1}
         };
 
         foreach (var cell in adjacentCells)

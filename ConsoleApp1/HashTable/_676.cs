@@ -5,10 +5,6 @@ public class _676
     public class MagicDictionary
     {
         public Dictionary<string, List<string>> Dictionary { get; } = new Dictionary<string, List<string>>();
-        public MagicDictionary()
-        {
-
-        }
 
         public void BuildDict(string[] dictionary)
         {

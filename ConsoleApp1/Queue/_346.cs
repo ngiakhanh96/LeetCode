@@ -1,5 +1,6 @@
 ﻿namespace ConsoleApp1.Queue;
 
+[LastVisited(2022, 11, 7)]
 public class _346
 {
     public class MovingAverage

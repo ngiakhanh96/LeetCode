@@ -7,11 +7,6 @@ public class _731
         private readonly Dictionary<int, int> _dictionary = new Dictionary<int, int>();
         private int[] _sortedArr;
 
-        public MyCalendarTwo()
-        {
-
-        }
-
         public bool Book(int start, int end)
         {
             Set(_dictionary, start, 1);

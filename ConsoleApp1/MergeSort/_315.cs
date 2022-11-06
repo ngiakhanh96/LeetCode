@@ -30,7 +30,7 @@ public class _315
     {
         if (nums.Length == 1)
         {
-            return new ValueWithOriginalIndex[] { nums[0] };
+            return new[] { nums[0] };
         }
         var left = MergeSort(nums[..(nums.Length / 2)], resultList);
         var right = MergeSort(nums[(nums.Length / 2)..], resultList);

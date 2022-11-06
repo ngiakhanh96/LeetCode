@@ -6,7 +6,7 @@ public class _523
     {
         var currentSum = 0;
         var hashSet = new HashSet<int>();
-        var queue = new Queue<int>(new int[] { 0 });
+        var queue = new Queue<int>(new[] { 0 });
         for (var i = 0; i < nums.Length; i++)
         {
             currentSum += nums[i];

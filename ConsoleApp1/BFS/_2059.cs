@@ -8,8 +8,7 @@ public class _2059
 
     public int[] Nums { get; set; }
 
-    public Func<int, int, int>[] TransformList { get; set; } = new Func<int, int, int>[]
-    {
+    public Func<int, int, int>[] TransformList { get; set; } = {
         (a, b) => a + b,
         (a, b) => a - b,
         (a, b) => a ^ b

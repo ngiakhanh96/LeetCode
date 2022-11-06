@@ -11,7 +11,8 @@ public class _240
             {
                 return true;
             }
-            else if (matrix[x][y] < target)
+
+            if (matrix[x][y] < target)
             {
                 x++;
             }

@@ -22,7 +22,7 @@ public class _256
                 Math.Min(minimumCostIfPaintUntilPreviousHouseRed, minimumCostIfPaintUntilPreviousHouseBlue) + costs[i][2];
         }
 
-        return new int[] { minimumCostIfPaintUntilCurrentHouseRed, minimumCostIfPaintUntilCurrentHouseBlue, minimumCostIfPaintUntilCurrentHouseGreen }.Min();
+        return new[] { minimumCostIfPaintUntilCurrentHouseRed, minimumCostIfPaintUntilCurrentHouseBlue, minimumCostIfPaintUntilCurrentHouseGreen }.Min();
     }
 
     // Top-down
@@ -39,7 +39,7 @@ public class _256
         }
 
         var previousMinCost = MinCost2Impl(costs, index - 1);
-        return new int[]
+        return new[]
         {
             Math.Min(previousMinCost[1], previousMinCost[2]) + costs[index][0],
             Math.Min(previousMinCost[0], previousMinCost[2]) + costs[index][1],

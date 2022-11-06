@@ -14,7 +14,7 @@ public class _56
             if (interval[0] <= previousInterval[1])
             {
                 res.RemoveAt(res.Count - 1);
-                res.Add(new int[] { previousInterval[0], Math.Max(previousInterval[1], interval[1]) });
+                res.Add(new[] { previousInterval[0], Math.Max(previousInterval[1], interval[1]) });
             }
             else
             {

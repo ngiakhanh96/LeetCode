@@ -18,6 +18,6 @@ public class _167
             }
         }
 
-        return new int[] { leftPointer + 1, rightPointer + 1 };
+        return new[] { leftPointer + 1, rightPointer + 1 };
     }
 }

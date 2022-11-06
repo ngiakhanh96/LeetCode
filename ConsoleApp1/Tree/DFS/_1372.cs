@@ -6,8 +6,8 @@ public class _1372
 
     public int LongestZigZag(TreeNode root)
     {
-        Dfs(root, true, 0);
-        Dfs(root, false, 0);
+        Dfs(root, true);
+        Dfs(root, false);
 
         return LongestZZ;
     }
@@ -43,13 +43,13 @@ public class _1372
     {
         if (root == null)
         {
-            return new int[] { -1, -1, -1 };
+            return new[] { -1, -1, -1 };
         }
 
         var left = Dfs2(root.left);
         var right = Dfs2(root.right);
 
         var res = Math.Max(Math.Max(left[1], right[0]) + 1, Math.Max(left[2], right[2]));
-        return new int[] { left[1] + 1, right[0] + 1, res };
+        return new[] { left[1] + 1, right[0] + 1, res };
     }
 }

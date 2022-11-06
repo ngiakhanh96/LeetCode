@@ -12,7 +12,7 @@ public class _1035
             {
                 if (nums1[i] == nums2[j])
                 {
-                    maxUncrossedUntil[i, j] = new int[]
+                    maxUncrossedUntil[i, j] = new[]
                     {
                         (i - 1 >= 0 && j - 1 >= 0
                             ? maxUncrossedUntil[i - 1, j - 1]
@@ -28,7 +28,7 @@ public class _1035
                 }
                 else
                 {
-                    maxUncrossedUntil[i, j] = new int[]
+                    maxUncrossedUntil[i, j] = new[]
                     {
                         j - 1 >= 0
                             ? maxUncrossedUntil[i, j - 1]
@@ -71,13 +71,13 @@ public class _1035
         {
             MaxUncrossedUntil[i, j] =
                 nums1[i] == nums2[j]
-                    ? new int[]
+                    ? new[]
                     {
                         MaxUncrossedLines2Impl(nums1, nums2, i - 1, j - 1) + 1,
                         MaxUncrossedLines2Impl(nums1, nums2, i, j - 1),
                         MaxUncrossedLines2Impl(nums1, nums2, i - 1, j)
                     }.Max()
-                    : new int[]
+                    : new[]
                     {
                         MaxUncrossedLines2Impl(nums1, nums2, i, j - 1),
                         MaxUncrossedLines2Impl(nums1, nums2, i - 1, j)

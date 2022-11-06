@@ -15,7 +15,7 @@ public class _787
             var startNode = flight[0];
             var endNode = flight[1];
             var weight = flight[2];
-            adjacentNodes[startNode].Add(new int[] { endNode, weight });
+            adjacentNodes[startNode].Add(new[] { endNode, weight });
         }
 
         var d = new int[n, k + 1];
@@ -81,7 +81,7 @@ public class _787
             var startNode = flight[0];
             var endNode = flight[1];
             var weight = flight[2];
-            adjacentNodes[startNode].Add(new int[] { endNode, weight });
+            adjacentNodes[startNode].Add(new[] { endNode, weight });
         }
 
         var d = new int[n, k + 1];

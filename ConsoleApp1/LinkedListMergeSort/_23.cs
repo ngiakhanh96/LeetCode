@@ -21,7 +21,7 @@ public class _23
 
     private ListNode Merge2Lists(ListNode listNode1, ListNode listNode2)
     {
-        var head = new ListNode(0);
+        var head = new ListNode();
         var tail = head;
         var firstPointer = listNode1;
         var secondPointer = listNode2;
@@ -80,7 +80,7 @@ public class _23
             }
         }
 
-        var head = new ListNode(0);
+        var head = new ListNode();
         var tail = head;
         while (minHeap.Count > 0)
         {
@@ -112,7 +112,7 @@ public class _23
             }
         }
 
-        var head = new ListNode(0);
+        var head = new ListNode();
         var tail = head;
         while (minHeap.Count > 0)
         {

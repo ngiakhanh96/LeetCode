@@ -8,11 +8,6 @@ public class _732
         private readonly Dictionary<int, int> _dictionary = new Dictionary<int, int>();
         private int[] _sortedArr;
 
-        public MyCalendarThree()
-        {
-
-        }
-
         public int Book(int start, int end)
         {
             Set(_dictionary, start, 1);

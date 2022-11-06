@@ -4,7 +4,7 @@ public class _34
 {
     public int[] SearchRange(int[] nums, int target)
     {
-        var res = new int[] { -1, -1 };
+        var res = new[] { -1, -1 };
         var low = 0;
         var high = nums.Length - 1;
 

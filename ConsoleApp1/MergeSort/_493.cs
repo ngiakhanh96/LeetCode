@@ -13,7 +13,7 @@ public class _493
     {
         if (nums.Length == 1)
         {
-            return new int[] { nums[0] };
+            return new[] { nums[0] };
         }
         var left = MergeSort(nums[..(nums.Length / 2)], ref count);
         var right = MergeSort(nums[(nums.Length / 2)..], ref count);

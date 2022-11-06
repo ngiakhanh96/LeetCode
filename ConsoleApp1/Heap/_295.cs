@@ -8,10 +8,6 @@ public class _295
         public MaxHeap MaxHeap { get; set; } = new MaxHeap(50000);
 
         public MinHeap MinHeap { get; set; } = new MinHeap(50000);
-        public MedianFinder()
-        {
-
-        }
 
         public void AddNum(int num)
         {
@@ -58,10 +54,6 @@ public class _295
         public PriorityQueue<int, int> MinHeap { get; set; } = new PriorityQueue<int, int>();
 
         public PriorityQueue<int, int> MaxHeap { get; set; } = new PriorityQueue<int, int>(new MaxHeapIntComparer());
-        public MedianFinder2()
-        {
-
-        }
 
         public void AddNum(int num)
         {

@@ -34,12 +34,12 @@ public class _200
     private void Dfs(int rowIndex, int colIndex)
     {
         IsVisited[rowIndex, colIndex] = true;
-        var adjacentCells = new int[][]
+        var adjacentCells = new[]
         {
-            new int[] { rowIndex - 1, colIndex },
-            new int[] { rowIndex, colIndex - 1 },
-            new int[] { rowIndex + 1, colIndex },
-            new int[] { rowIndex, colIndex + 1 }
+            new[] { rowIndex - 1, colIndex },
+            new[] { rowIndex, colIndex - 1 },
+            new[] { rowIndex + 1, colIndex },
+            new[] { rowIndex, colIndex + 1 }
         };
         foreach (var adjacentCell in adjacentCells)
         {
@@ -78,7 +78,7 @@ public class _200
 
     private void Bfs(int rowIndex, int colIndex)
     {
-        BfsQueue.Enqueue(new int[] { rowIndex, colIndex });
+        BfsQueue.Enqueue(new[] { rowIndex, colIndex });
         IsVisited[rowIndex, colIndex] = true;
         while (BfsQueue.Count > 0)
         {
@@ -89,12 +89,12 @@ public class _200
                 rowIndex = currentPosition[0];
                 colIndex = currentPosition[1];
 
-                var adjacentCells = new int[][]
+                var adjacentCells = new[]
                 {
-                    new int[] { rowIndex - 1, colIndex },
-                    new int[] { rowIndex, colIndex - 1 },
-                    new int[] { rowIndex + 1, colIndex },
-                    new int[] { rowIndex, colIndex + 1 }
+                    new[] { rowIndex - 1, colIndex },
+                    new[] { rowIndex, colIndex - 1 },
+                    new[] { rowIndex + 1, colIndex },
+                    new[] { rowIndex, colIndex + 1 }
                 };
                 foreach (var adjacentCell in adjacentCells)
                 {
@@ -124,12 +124,12 @@ public class _200
             {
                 if (Grid[i][j] == '1')
                 {
-                    var adjacentCells = new int[][]
+                    var adjacentCells = new[]
                     {
-                        new int[] { i - 1, j },
-                        new int[] { i, j - 1 },
-                        new int[] { i + 1, j },
-                        new int[] { i, j + 1 }
+                        new[] { i - 1, j },
+                        new[] { i, j - 1 },
+                        new[] { i + 1, j },
+                        new[] { i, j + 1 }
                     };
                     foreach (var adjacentCell in adjacentCells)
                     {

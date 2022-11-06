@@ -54,7 +54,9 @@ public class _1738
 
         //Time: O(MN)
         //Space: O(MN)
-        //return FindKthLargest(temp, k - 1);
+        //return FindKthLargest(temp, k);
+
+
     }
 
     private int FindKthLargest(int[] nums, int k)
@@ -137,5 +139,77 @@ public class _1738
         nums[boundary] = temp2;
 
         return boundary;
+    }
+
+    //Time: O(MN)
+    //Space: O(1)
+    public int KthLargestValue2(int[][] matrix, int k)
+    {
+        for (var i = 0; i < matrix.Length; i++)
+        {
+            for (var j = 0; j < matrix[0].Length; j++)
+            {
+                matrix[i][j] ^= (i - 1 >= 0 ? matrix[i - 1][j] : 0)
+                ^ (j - 1 >= 0 ? matrix[i][j - 1] : 0)
+                ^ (i - 1 >= 0 && j - 1 >= 0 ? matrix[i - 1][j - 1] : 0);
+            }
+        }
+
+        k--;
+        var start = 0;
+        var end = (matrix.Length * matrix[0].Length) - 1;
+        var boundary = -1;
+        while (boundary != k)
+        {
+            if (boundary < k)
+            {
+                start = boundary + 1;
+            }
+            else
+            {
+                end = boundary - 1;
+            }
+            boundary = Partition(matrix, start, end);
+        }
+        var boundary2D = Convert1DPosTo2DPos(boundary, matrix[0].Length);
+        return matrix[boundary2D[0]][boundary2D[1]];
+    }
+
+    private int Partition(int[][] matrix, int start, int end)
+    {
+        var end2D = Convert1DPosTo2DPos(end, matrix[0].Length);
+        var start2D = Convert1DPosTo2DPos(start, matrix[0].Length);
+        var pivot = matrix[end2D[0]][end2D[1]];
+        var boundary = start;
+
+        for (var i = start; i < end; i++)
+        {
+            var i2D = Convert1DPosTo2DPos(i, matrix[0].Length);
+            if (matrix[i2D[0]][i2D[1]] > pivot)
+            {
+                var boundary2D = Convert1DPosTo2DPos(boundary, matrix[0].Length);
+                var temp = matrix[i2D[0]][i2D[1]];
+                matrix[i2D[0]][i2D[1]] = matrix[boundary2D[0]][boundary2D[1]];
+                matrix[boundary2D[0]][boundary2D[1]] = temp;
+                boundary++;
+            }
+        }
+
+        var boundary2D2 = Convert1DPosTo2DPos(boundary, matrix[0].Length);
+        var temp2 = matrix[end2D[0]][end2D[1]];
+        matrix[end2D[0]][end2D[1]] = matrix[boundary2D2[0]][boundary2D2[1]];
+        matrix[boundary2D2[0]][boundary2D2[1]] = temp2;
+
+        return boundary;
+    }
+
+    private int Convert2DPosTo1DPos(int[] pos, int n)
+    {
+        return pos[0] * n + pos[1];
+    }
+
+    private int[] Convert1DPosTo2DPos(int pos, int n)
+    {
+        return new[] { pos / n, pos % n };
     }
 }

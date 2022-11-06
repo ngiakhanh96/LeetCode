@@ -15,14 +15,14 @@ public class _1197
 
     public int MinKnightMoves(int x, int y)
     {
-        EndCell = new int[] { x, y };
+        EndCell = new[] { x, y };
         Bfs(0, 0);
         return MinMoves;
     }
 
     private void Bfs(int rowStartIndex, int colStartIndex)
     {
-        BfsQueue.Enqueue(new int[] { rowStartIndex, colStartIndex });
+        BfsQueue.Enqueue(new[] { rowStartIndex, colStartIndex });
         //if (!IsVisitedDict.ContainsKey(rowStartIndex))
         //{
         //    IsVisitedDict[rowStartIndex] = new Dictionary<int, bool>();
@@ -50,16 +50,16 @@ public class _1197
                     return;
                 }
 
-                var possibleKnightMoves = new int[][]
+                var possibleKnightMoves = new[]
                 {
-                    new int[] { rowIndex - 2, colIndex - 1 },
-                    new int[] { rowIndex - 1, colIndex - 2 },
-                    new int[] { rowIndex - 2, colIndex + 1 },
-                    new int[] { rowIndex - 1, colIndex + 2 },
-                    new int[] { rowIndex + 1, colIndex - 2 },
-                    new int[] { rowIndex + 2, colIndex - 1 },
-                    new int[] { rowIndex + 1, colIndex + 2 },
-                    new int[] { rowIndex + 2, colIndex + 1 }
+                    new[] { rowIndex - 2, colIndex - 1 },
+                    new[] { rowIndex - 1, colIndex - 2 },
+                    new[] { rowIndex - 2, colIndex + 1 },
+                    new[] { rowIndex - 1, colIndex + 2 },
+                    new[] { rowIndex + 1, colIndex - 2 },
+                    new[] { rowIndex + 2, colIndex - 1 },
+                    new[] { rowIndex + 1, colIndex + 2 },
+                    new[] { rowIndex + 2, colIndex + 1 }
                 };
 
                 foreach (var possibleKnightMove in possibleKnightMoves)

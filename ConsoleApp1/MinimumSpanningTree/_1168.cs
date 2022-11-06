@@ -7,7 +7,7 @@ public class _1168
         var pipeList = pipes.ToList();
         for (var i = 0; i < wells.Length; i++)
         {
-            pipeList.Add(new int[] { 0, i + 1, wells[i] });
+            pipeList.Add(new[] { 0, i + 1, wells[i] });
         }
 
         pipeList.Sort((ele1, ele2) => ele1[2].CompareTo(ele2[2]));

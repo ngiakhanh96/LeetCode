@@ -32,7 +32,7 @@ public class _542
             {
                 if (mat[rowIndex][colIndex] == 0)
                 {
-                    BfsQueue.Enqueue(new int[] { rowIndex, colIndex });
+                    BfsQueue.Enqueue(new[] { rowIndex, colIndex });
                 }
             }
         }
@@ -53,12 +53,12 @@ public class _542
                     DistanceToNearest0s[rowIndex][colIndex] = currentLevel;
                 }
 
-                var adjacentCells = new int[][]
+                var adjacentCells = new[]
                 {
-                    new int[] { rowIndex - 1, colIndex },
-                    new int[] { rowIndex, colIndex - 1 },
-                    new int[] { rowIndex + 1, colIndex },
-                    new int[] { rowIndex, colIndex + 1 }
+                    new[] { rowIndex - 1, colIndex },
+                    new[] { rowIndex, colIndex - 1 },
+                    new[] { rowIndex + 1, colIndex },
+                    new[] { rowIndex, colIndex + 1 }
                 };
                 foreach (var adjacentCell in adjacentCells)
                 {

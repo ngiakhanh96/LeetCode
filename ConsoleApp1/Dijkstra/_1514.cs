@@ -14,8 +14,8 @@ public class _1514
         {
             var startNode = edges[i][0];
             var endNode = edges[i][1];
-            adjacentNodes[startNode].Add(new double[] { endNode, succProb[i] });
-            adjacentNodes[endNode].Add(new double[] { startNode, succProb[i] });
+            adjacentNodes[startNode].Add(new[] { endNode, succProb[i] });
+            adjacentNodes[endNode].Add(new[] { startNode, succProb[i] });
         }
 
         var d = new double[n];
@@ -65,8 +65,8 @@ public class _1514
         {
             var startNode = edges[i][0];
             var endNode = edges[i][1];
-            adjacentNodes[startNode].Add(new double[] { endNode, succProb[i] });
-            adjacentNodes[endNode].Add(new double[] { startNode, succProb[i] });
+            adjacentNodes[startNode].Add(new[] { endNode, succProb[i] });
+            adjacentNodes[endNode].Add(new[] { startNode, succProb[i] });
         }
 
         var d = new double[n];

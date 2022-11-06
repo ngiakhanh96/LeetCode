@@ -50,7 +50,7 @@ public class _1584
                 var currentPoint = points[i];
                 var nextPoint = points[j];
                 var distance = Math.Abs(currentPoint[0] - nextPoint[0]) + Math.Abs(currentPoint[1] - nextPoint[1]);
-                edges.Add((new int[] { distance, i, j }, distance));
+                edges.Add((new[] { distance, i, j }, distance));
             }
         }
 
