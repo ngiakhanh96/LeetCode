@@ -1,6 +1,7 @@
 ﻿global using ConsoleApp1.Heap;
 global using ConsoleApp1.LinkedList;
 global using ConsoleApp1.UnionFind;
+using ConsoleApp1.Stack;
 
 namespace ConsoleApp1;
 
@@ -8,17 +9,68 @@ class Program
 {
     static void Main(string[] args)
     {
-        var a = new _1738().KthLargestValue(new[] { new[] { 5, 2 }, new[] { 1, 6 } }, 2);
+        var a = new _227().Calculate("3+2*2");
+    }
+
+    public static int Calculate(string s)
+    {
+        s += "+";
+        var dict = new Dictionary<char, Func<int, int, int>>{
+            {'+', (a, b) => a+b},
+            {'-', (a, b) => a-b},
+            {'*', (a, b) => a*b},
+            {'/', (a, b) => a/b}
+        };
+        var numStack = new Stack<int>();
+        var oprStack = new Stack<char>();
+        var currentNumber = 0;
+
+        foreach (var chr in s)
+        {
+            if (chr == ' ')
+            {
+                continue;
+            }
+            if (dict.ContainsKey(chr))
+            {
+                if (oprStack.TryPeek(out var previousOpr) && (previousOpr == '*' || previousOpr == '/'))
+                {
+                    previousOpr = oprStack.Pop();
+                    var firstNum = numStack.Pop();
+                    var result = dict[previousOpr](firstNum, currentNumber);
+                    numStack.Push(result);
+                }
+                else
+                {
+                    numStack.Push(currentNumber);
+                }
+                if (chr == '+' || chr == '-')
+                {
+                    if (numStack.Count > 1)
+                    {
+                        var secondNum = numStack.Pop();
+                        var opr = oprStack.Pop();
+                        var firstNum = numStack.Pop();
+                        var result = dict[opr](firstNum, secondNum);
+                        numStack.Push(result);
+                    }
+                }
+                oprStack.Push(chr);
+                currentNumber = 0;
+            }
+            else
+            {
+                currentNumber = (currentNumber * 10) + int.Parse(chr.ToString());
+            }
+        }
+
+        return numStack.Pop();
     }
 
 
 
     public class NumMatrix
     {
-        public NumMatrix()
-        {
-        }
-
         private HashSet<(int x, int y, int z)> VisitedCells = new HashSet<(int x, int y, int z)>();
         public int MaximumMinimumPath(int[][] grid)
         {
@@ -66,11 +118,12 @@ class Program
 
         private bool Dfs(int[][] grid, int row, int col, int middle, int currentScore)
         {
-            var adjacentCells = new int[][] {
-                new int[] {row - 1, col},
-                new int[] {row + 1, col},
-                new int[] {row, col - 1},
-                new int[] {row, col + 1}
+            var adjacentCells = new[]
+            {
+                new[] {row - 1, col},
+                new[] {row + 1, col},
+                new[] {row, col - 1},
+                new[] {row, col + 1}
         };
 
             foreach (var cell in adjacentCells)

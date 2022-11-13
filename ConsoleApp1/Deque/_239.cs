@@ -1,8 +1,36 @@
 ﻿namespace ConsoleApp1.Deque;
 
+[LastVisited(2022, 11, 9)]
 public class _239
 {
     public int[] MaxSlidingWindow(int[] nums, int k)
+    {
+        var st = new Stack<int>();
+        var deque = new LinkedList<int[]>();
+        var result = new int[nums.Length - (k - 1)];
+        var count = 0;
+        var resultCount = 0;
+        do
+        {
+            if (deque.First != null && deque.First.Value[1] <= count - k)
+            {
+                deque.RemoveFirst();
+            }
+            while (deque.Last != null && deque.Last.Value[0] < nums[count])
+            {
+                deque.RemoveLast();
+            }
+            deque.AddLast(new int[] { nums[count], count });
+            if (count >= k - 1)
+            {
+                result[resultCount++] = deque.First.Value[0];
+            }
+            count++;
+        } while (resultCount < result.Length);
+        return result;
+    }
+
+    public int[] MaxSlidingWindow2(int[] nums, int k)
     {
         var dequeue = new LinkedList<int>();
         var res = new int[nums.Length - (k - 1)];
@@ -33,7 +61,7 @@ public class _239
 
         return res;
     }
-    public int[] MaxSlidingWindow2(int[] nums, int k)
+    public int[] MaxSlidingWindow3(int[] nums, int k)
     {
         var resArr = new int[nums.Length - k + 1];
         var deque = new LinkedList<int>();

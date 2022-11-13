@@ -1,5 +1,6 @@
 ﻿namespace ConsoleApp1.Stack;
 
+[LastVisited(2022, 11, 14)]
 public class _150
 {
     public int EvalRPN(string[] tokens)
