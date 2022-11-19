@@ -1,5 +1,6 @@
 ﻿namespace ConsoleApp1.HashTable;
 
+[LastVisited(2022, 11, 16)]
 public class _1
 {
     public int[] TwoSum(int[] nums, int target)

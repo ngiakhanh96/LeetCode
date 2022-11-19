@@ -1,5 +1,6 @@
 ﻿namespace ConsoleApp1.HashTable;
 
+[LastVisited(2022, 11, 20)]
 public class _974
 {
     public int SubarraysDivByK(int[] nums, int k)

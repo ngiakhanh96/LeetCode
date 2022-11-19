@@ -1,5 +1,6 @@
 ﻿namespace ConsoleApp1.HashTable;
 
+[LastVisited(2022, 11, 16)]
 public class _219
 {
     public bool ContainsNearbyDuplicate(int[] nums, int k)

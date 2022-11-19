@@ -1,5 +1,6 @@
 ﻿namespace ConsoleApp1.HashTable;
 
+[LastVisited(2022, 11, 16)]
 public class _217
 {
     public bool ContainsDuplicate(int[] nums)

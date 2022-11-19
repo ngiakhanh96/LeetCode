@@ -1,5 +1,6 @@
 ﻿namespace ConsoleApp1.HashTable;
 
+[LastVisited(2022, 11, 16)]
 public class _454
 {
     public int FourSumCount(int[] nums1, int[] nums2, int[] nums3, int[] nums4)
