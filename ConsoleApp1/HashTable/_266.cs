@@ -1,5 +1,6 @@
 ﻿namespace ConsoleApp1.HashTable;
 
+[LastVisited(2022, 11, 20)]
 public class _266
 {
     public bool CanPermutePalindrome(string s)
@@ -7,11 +8,7 @@ public class _266
         var hashSet = new HashSet<char>();
         foreach (var c in s)
         {
-            if (!hashSet.Contains(c))
-            {
-                hashSet.Add(c);
-            }
-            else
+            if (!hashSet.Add(c))
             {
                 hashSet.Remove(c);
             }
