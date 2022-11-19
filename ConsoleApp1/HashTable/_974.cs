@@ -5,31 +5,25 @@ public class _974
 {
     public int SubarraysDivByK(int[] nums, int k)
     {
-        var sum = 0;
-        var sumDict = new Dictionary<int, int> { { 0, 1 } };
-        var res = 0;
-        foreach (var num in nums)
+        var dict = new Dictionary<int, int> { { 0, 1 } };
+        var count = 0;
+        for (var i = 0; i < nums.Length; i++)
         {
-            sum += num;
+            nums[i] += i - 1 >= 0 ? nums[i - 1] : 0;
+            nums[i] %= k;
+            var remainder1 = nums[i];
+            dict.TryGetValue(remainder1, out var value);
+            count += value;
 
-            var remainder = sum % k;
-            if (sumDict.ContainsKey(remainder))
+            var remainder2 = nums[i] > 0 ? -(k - remainder1) : remainder1 + k;
+            dict.TryGetValue(remainder2, out value);
+            count += value;
+            if (!dict.TryAdd(nums[i], 1))
             {
-                res += sumDict[remainder];
-            }
-
-            var remainder2 = Math.Abs(-k + sum % k) < k ? -k + sum % k : k + sum % k;
-            if (sumDict.ContainsKey(remainder2))
-            {
-                res += sumDict[remainder2];
-            }
-
-            if (!sumDict.TryAdd(remainder, 1))
-            {
-                sumDict[remainder]++;
+                dict[nums[i]]++;
             }
         }
-        return res;
+        return count;
     }
 
     public int SubarraysDivByK2(int[] nums, int k)
