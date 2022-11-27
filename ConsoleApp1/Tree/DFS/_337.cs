@@ -1,11 +1,11 @@
 ﻿namespace ConsoleApp1.Tree.DFS;
 
+[LastVisited(2022, 11, 28)]
 public class _337
 {
     public int Rob(TreeNode root)
     {
-        var dfs = Dfs(root);
-        return Math.Max(dfs[0], dfs[1]);
+        return Dfs(root).Max();
     }
 
     /// <summary>
@@ -27,13 +27,7 @@ public class _337
 
         return new[] {
             left[1] + right[1] + node.val,
-            new[]
-            {
-                left[0] + right[0],
-                left[1] + right[0],
-                left[0] + right[1],
-                left[1] + right[1]
-            }.Max()
+            left.Max() + right.Max()
         };
     }
 }

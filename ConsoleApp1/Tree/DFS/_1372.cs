@@ -1,5 +1,6 @@
 ﻿namespace ConsoleApp1.Tree.DFS;
 
+[LastVisited(2022, 11, 28)]
 public class _1372
 {
     public int LongestZZ { get; set; }
@@ -43,7 +44,7 @@ public class _1372
     {
         if (root == null)
         {
-            return new[] { -1, -1, -1 };
+            return new[] { -1, -1, 0 };
         }
 
         var left = Dfs2(root.left);

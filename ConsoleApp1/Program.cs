@@ -1,7 +1,6 @@
 ﻿global using ConsoleApp1.Heap;
 global using ConsoleApp1.LinkedList;
 global using ConsoleApp1.UnionFind;
-using ConsoleApp1.Stack;
 
 namespace ConsoleApp1;
 
@@ -9,62 +8,31 @@ class Program
 {
     static void Main(string[] args)
     {
-        var a = new _227().Calculate("3+2*2");
+        var a = CanVisitAllRooms(new List<IList<int>>
+        {
+            new List<int>{1},
+            new List<int>{2},
+            new List<int>{3},
+            new List<int>()
+        });
     }
 
-    public static int Calculate(string s)
+    public static bool CanVisitAllRooms(IList<IList<int>> rooms)
     {
-        s += "+";
-        var dict = new Dictionary<char, Func<int, int, int>>{
-            {'+', (a, b) => a+b},
-            {'-', (a, b) => a-b},
-            {'*', (a, b) => a*b},
-            {'/', (a, b) => a/b}
-        };
-        var numStack = new Stack<int>();
-        var oprStack = new Stack<char>();
-        var currentNumber = 0;
+        var visited = new HashSet<int> { 0 };
+        Dfs(0, visited, rooms);
+        return visited.Count == rooms.Count;
+    }
 
-        foreach (var chr in s)
+    private static void Dfs(int roomNumber, HashSet<int> visited, IList<IList<int>> rooms)
+    {
+        foreach (var key in rooms[roomNumber])
         {
-            if (chr == ' ')
+            if (!visited.Add(key))
             {
-                continue;
-            }
-            if (dict.ContainsKey(chr))
-            {
-                if (oprStack.TryPeek(out var previousOpr) && (previousOpr == '*' || previousOpr == '/'))
-                {
-                    previousOpr = oprStack.Pop();
-                    var firstNum = numStack.Pop();
-                    var result = dict[previousOpr](firstNum, currentNumber);
-                    numStack.Push(result);
-                }
-                else
-                {
-                    numStack.Push(currentNumber);
-                }
-                if (chr == '+' || chr == '-')
-                {
-                    if (numStack.Count > 1)
-                    {
-                        var secondNum = numStack.Pop();
-                        var opr = oprStack.Pop();
-                        var firstNum = numStack.Pop();
-                        var result = dict[opr](firstNum, secondNum);
-                        numStack.Push(result);
-                    }
-                }
-                oprStack.Push(chr);
-                currentNumber = 0;
-            }
-            else
-            {
-                currentNumber = (currentNumber * 10) + int.Parse(chr.ToString());
+                Dfs(key, visited, rooms);
             }
         }
-
-        return numStack.Pop();
     }
 
 

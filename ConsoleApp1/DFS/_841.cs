@@ -1,5 +1,6 @@
 ﻿namespace ConsoleApp1.DFS;
 
+[LastVisited(2022, 11, 22)]
 public class _841
 {
     public bool[] IsVisitedRooms { get; set; }

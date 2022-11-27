@@ -1,5 +1,6 @@
 ﻿namespace ConsoleApp1.Tree.DFS;
 
+[LastVisited(2022, 11, 28)]
 public class _589
 {
     public IList<int> PreorderNodeValues { get; set; } = new List<int>();

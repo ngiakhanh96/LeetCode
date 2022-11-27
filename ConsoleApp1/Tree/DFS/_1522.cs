@@ -1,9 +1,40 @@
 ﻿namespace ConsoleApp1.Tree.DFS;
 
+[LastVisited(2022, 11, 24)]
 public class _1522
 {
+    private int _diameter = 0;
+    public int Diameter(Node root, bool isRoot = true)
+    {
+        if (root == null)
+        {
+            return 0;
+        }
+
+        var longestDistanceFromChildToLeaf = 0;
+        var secondLongestDistanceFromChildToLeaf = 0;
+        foreach (var child in root.children)
+        {
+            var longestDistanceFromCurrentChildToLeaf = Diameter(child, false);
+            if (longestDistanceFromCurrentChildToLeaf >= longestDistanceFromChildToLeaf)
+            {
+                secondLongestDistanceFromChildToLeaf = longestDistanceFromChildToLeaf;
+                longestDistanceFromChildToLeaf = longestDistanceFromCurrentChildToLeaf;
+            }
+            else if (longestDistanceFromCurrentChildToLeaf < longestDistanceFromChildToLeaf &&
+                     longestDistanceFromCurrentChildToLeaf >= secondLongestDistanceFromChildToLeaf)
+            {
+                secondLongestDistanceFromChildToLeaf = longestDistanceFromCurrentChildToLeaf;
+            }
+        }
+
+        _diameter = Math.Max(_diameter, longestDistanceFromChildToLeaf + secondLongestDistanceFromChildToLeaf);
+
+        return isRoot ? _diameter : longestDistanceFromChildToLeaf + 1;
+    }
+
     public int LongestPath { get; set; }
-    public int Diameter(Node root)
+    public int Diameter2(Node root)
     {
         Dfs(root);
         return LongestPath;

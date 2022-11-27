@@ -1,7 +1,6 @@
-﻿
+﻿namespace ConsoleApp1.DFS;
 
-namespace ConsoleApp1.DFS;
-
+[LastVisited(2022, 11, 22)]
 public class _200
 {
     public bool[,] IsVisited { get; set; }

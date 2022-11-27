@@ -1,5 +1,6 @@
 ﻿namespace ConsoleApp1.Tree.DFS;
 
+[LastVisited(2022, 11, 24)]
 public class _111
 {
     public int MinDepth(TreeNode root)

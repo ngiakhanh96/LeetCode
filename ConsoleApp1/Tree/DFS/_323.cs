@@ -1,5 +1,6 @@
 ﻿namespace ConsoleApp1.Tree.DFS;
 
+[LastVisited(2022, 11, 22)]
 public class _323
 {
     public List<int>[] AdjacentList { get; set; }
