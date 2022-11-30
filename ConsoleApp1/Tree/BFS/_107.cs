@@ -1,12 +1,53 @@
 ﻿namespace ConsoleApp1.Tree.BFS;
 
+[LastVisited(2022, 11, 30)]
 public class _107
 {
+    public IList<IList<int>> LevelOrderBottom(TreeNode root)
+    {
+        var queue = new Queue<TreeNode>();
+        var result = new List<IList<int>>();
+        if (root == null)
+        {
+            return result;
+        }
+        queue.Enqueue(root);
+        var numOfNodesInCurrentLevel = 1;
+        var nodeValuesInCurrentLevel = new List<int>();
+
+        while (queue.Any())
+        {
+            var currentNode = queue.Dequeue();
+            if (currentNode.left != null)
+            {
+                queue.Enqueue(currentNode.left);
+            }
+
+            if (currentNode.right != null)
+            {
+                queue.Enqueue(currentNode.right);
+            }
+
+            numOfNodesInCurrentLevel--;
+            nodeValuesInCurrentLevel.Add(currentNode.val);
+            if (numOfNodesInCurrentLevel == 0)
+            {
+                numOfNodesInCurrentLevel = queue.Count;
+                result.Add(nodeValuesInCurrentLevel);
+                nodeValuesInCurrentLevel = new List<int>();
+            }
+        }
+
+        result.Reverse();
+
+        return result;
+    }
+
     public IList<int>[] LevelOrderNodeValues { get; set; } = new IList<int>[1000];
 
     public Queue<TreeNode> BfsQueue { get; set; } = new Queue<TreeNode>();
 
-    public IList<IList<int>> LevelOrderBottom(TreeNode root)
+    public IList<IList<int>> LevelOrderBottom2(TreeNode root)
     {
         Dfs(root, 0);
         return LevelOrderNodeValues.Where(x => x != null).Reverse().ToList();
@@ -32,7 +73,7 @@ public class _107
         Dfs(root.right, level + 1);
     }
 
-    public IList<IList<int>> LevelOrderBottom2(TreeNode root)
+    public IList<IList<int>> LevelOrderBottom3(TreeNode root)
     {
         Bfs(root, 0);
         return LevelOrderNodeValues.Where(x => x != null).Reverse().ToList();
