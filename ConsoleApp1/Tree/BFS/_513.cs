@@ -1,12 +1,47 @@
 ﻿namespace ConsoleApp1.Tree.BFS;
 
+[LastVisited(2022, 12, 05)]
 public class _513
 {
+    public int FindBottomLeftValue(TreeNode root)
+    {
+        var queue = new Queue<TreeNode>();
+        queue.Enqueue(root);
+        var numOfNodesInCurrentLevel = 1;
+        var result = root.val;
+
+        while (queue.Any())
+        {
+            var currentNode = queue.Dequeue();
+            if (currentNode.left != null)
+            {
+                queue.Enqueue(currentNode.left);
+            }
+
+            if (currentNode.right != null)
+            {
+                queue.Enqueue(currentNode.right);
+            }
+
+            numOfNodesInCurrentLevel--;
+            if (numOfNodesInCurrentLevel == 0)
+            {
+                numOfNodesInCurrentLevel = queue.Count;
+                if (numOfNodesInCurrentLevel > 0)
+                {
+                    result = queue.Peek().val;
+                }
+            }
+        }
+
+        return result;
+    }
+
     public Queue<TreeNode> BfsQueue { get; set; } = new Queue<TreeNode>();
 
     public int BottomLeftMostValue { get; set; }
 
-    public int FindBottomLeftValue(TreeNode root)
+    public int FindBottomLeftValue2(TreeNode root)
     {
         Bfs(root);
         return BottomLeftMostValue;

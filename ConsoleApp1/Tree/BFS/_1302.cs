@@ -1,12 +1,51 @@
 ﻿namespace ConsoleApp1.Tree.BFS;
 
+[LastVisited(2022, 12, 05)]
 public class _1302
 {
+    public int DeepestLeavesSum(TreeNode root)
+    {
+        var queue = new Queue<TreeNode>();
+        queue.Enqueue(root);
+        var numberOfNodesInCurrentLevel = 1;
+        var sumOfNodeValuesInCurrentLevel = 0;
+
+        while (queue.Any())
+        {
+            var currentNode = queue.Dequeue();
+            if (currentNode.left != null)
+            {
+                queue.Enqueue(currentNode.left);
+            }
+
+            if (currentNode.right != null)
+            {
+                queue.Enqueue(currentNode.right);
+            }
+
+            sumOfNodeValuesInCurrentLevel += currentNode.val;
+            numberOfNodesInCurrentLevel--;
+
+            if (numberOfNodesInCurrentLevel == 0)
+            {
+                numberOfNodesInCurrentLevel = queue.Count;
+                if (numberOfNodesInCurrentLevel == 0)
+                {
+                    return sumOfNodeValuesInCurrentLevel;
+                }
+                sumOfNodeValuesInCurrentLevel = 0;
+            }
+
+        }
+
+        return sumOfNodeValuesInCurrentLevel;
+    }
+
     public Queue<TreeNode> BfsQueue { get; set; } = new Queue<TreeNode>();
 
     public int SumOfNodeValuesInLowestLevel { get; set; }
 
-    public int DeepestLeavesSum(TreeNode root)
+    public int DeepestLeavesSum2(TreeNode root)
     {
         Bfs(root);
         return SumOfNodeValuesInLowestLevel;

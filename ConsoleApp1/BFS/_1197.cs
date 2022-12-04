@@ -1,9 +1,58 @@
 ﻿namespace ConsoleApp1.BFS;
 
 // Use hashSet slower than Dictionary ?
+[LastVisited(2022, 12, 05)]
 public class _1197
 {
-    public Dictionary<int, Dictionary<int, bool>> IsVisitedDict = new Dictionary<int, Dictionary<int, bool>>();
+    public int MinKnightMoves(int x, int y)
+    {
+        var queue = new Queue<int[]>();
+        queue.Enqueue(new int[] { 0, 0 });
+        var numOfCellsInCurrentLevel = 1;
+        var currentLevel = 0;
+        var visitedCells = new HashSet<(int x, int y)> { (0, 0) };
+
+        while (queue.Any())
+        {
+            var currentCell = queue.Dequeue();
+            var currentCellX = currentCell[0];
+            var currentCellY = currentCell[1];
+
+            if (currentCellX == x && currentCellY == y)
+            {
+                return currentLevel;
+            }
+
+            var nextCells = new int[][] {
+                new int[] {currentCellX - 2, currentCellY - 1},
+                new int[] {currentCellX + 2, currentCellY - 1},
+                new int[] {currentCellX - 1, currentCellY - 2},
+                new int[] {currentCellX + 1, currentCellY - 2},
+                new int[] {currentCellX - 2, currentCellY + 1},
+                new int[] {currentCellX + 2, currentCellY + 1},
+                new int[] {currentCellX - 1, currentCellY + 2},
+                new int[] {currentCellX + 1, currentCellY + 2},
+            };
+
+            foreach (var nextCell in nextCells)
+            {
+                if (visitedCells.Add((nextCell[0], nextCell[1])))
+                {
+                    queue.Enqueue(nextCell);
+                }
+            }
+
+            numOfCellsInCurrentLevel--;
+            if (numOfCellsInCurrentLevel == 0)
+            {
+                numOfCellsInCurrentLevel = queue.Count;
+                currentLevel++;
+            }
+        }
+
+        return currentLevel;
+
+    }
 
     public HashSet<(int x, int y)> IsVisitedHashSet { get; set; } = new HashSet<(int x, int y)>();
 
@@ -13,7 +62,7 @@ public class _1197
 
     public int[] EndCell { get; set; }
 
-    public int MinKnightMoves(int x, int y)
+    public int MinKnightMoves2(int x, int y)
     {
         EndCell = new[] { x, y };
         Bfs(0, 0);
@@ -23,14 +72,6 @@ public class _1197
     private void Bfs(int rowStartIndex, int colStartIndex)
     {
         BfsQueue.Enqueue(new[] { rowStartIndex, colStartIndex });
-        //if (!IsVisitedDict.ContainsKey(rowStartIndex))
-        //{
-        //    IsVisitedDict[rowStartIndex] = new Dictionary<int, bool>();
-        //}
-        //if (!IsVisitedDict[rowStartIndex].ContainsKey(colStartIndex))
-        //{
-        //    IsVisitedDict[rowStartIndex][colStartIndex] = true;
-        //}
         IsVisitedHashSet.Add((rowStartIndex, colStartIndex));
         var currentLevel = -1;
 
@@ -64,15 +105,6 @@ public class _1197
 
                 foreach (var possibleKnightMove in possibleKnightMoves)
                 {
-                    //if (!IsVisitedDict.ContainsKey(possibleKnightMove[0]))
-                    //{
-                    //    IsVisitedDict[possibleKnightMove[0]] = new Dictionary<int, bool>();
-                    //}
-                    //if (!IsVisitedDict[possibleKnightMove[0]].ContainsKey(possibleKnightMove[1]))
-                    //{
-                    //    BfsQueue.Enqueue(possibleKnightMove);
-                    //    IsVisitedDict[possibleKnightMove[0]][possibleKnightMove[1]] = true;
-                    //}
                     if (IsVisitedHashSet.Add((possibleKnightMove[0], possibleKnightMove[1])))
                     {
                         BfsQueue.Enqueue(possibleKnightMove);
