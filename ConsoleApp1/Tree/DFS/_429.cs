@@ -37,7 +37,7 @@ public class _429
 
     public IList<int>[] LevelOrderNodeValues { get; set; } = new IList<int>[1000];
 
-    public Queue<Node> BfsQueue { get; set; } = new Queue<Node>();
+    public Queue<Node> BfsQueue { get; set; } = new();
 
     public IList<IList<int>> LevelOrder2(Node root)
     {

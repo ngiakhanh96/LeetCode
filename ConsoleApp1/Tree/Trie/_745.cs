@@ -4,7 +4,7 @@ public class _745
 {
     public class WordFilter
     {
-        public TrieNode2<string> Trie { get; set; } = new TrieNode2<string>();
+        public TrieNode2<string> Trie { get; set; } = new();
         public WordFilter(string[] words)
         {
             for (var index = 0; index < words.Length; index++)

@@ -4,7 +4,7 @@ public class _542
 {
     public int[][] DistanceToNearest0s { get; set; }
 
-    public Queue<int[]> BfsQueue { get; set; } = new Queue<int[]>();
+    public Queue<int[]> BfsQueue { get; set; } = new();
 
     public bool[][] Visited { get; set; }
 

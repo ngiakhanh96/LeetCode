@@ -2,8 +2,8 @@
 
 public class _934
 {
-    public Queue<(int x, int y)> BfsQueue { get; set; } = new Queue<(int x, int y)>();
-    public HashSet<(int x, int y)> VisitedCell { get; set; } = new HashSet<(int x, int y)>();
+    public Queue<(int x, int y)> BfsQueue { get; set; } = new();
+    public HashSet<(int x, int y)> VisitedCell { get; set; } = new();
     public int Distance { get; set; }
     public int[][] Grid { get; set; }
     public int ShortestBridge(int[][] grid)

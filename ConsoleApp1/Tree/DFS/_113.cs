@@ -2,7 +2,7 @@
 
 public class _113
 {
-    public List<IList<int>> Paths { get; set; } = new List<IList<int>>();
+    public List<IList<int>> Paths { get; set; } = new();
     public IList<IList<int>> PathSum(TreeNode root, int targetSum)
     {
         Dfs(root, 0, targetSum, new List<int>());

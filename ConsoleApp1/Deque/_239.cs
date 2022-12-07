@@ -20,7 +20,7 @@ public class _239
             {
                 deque.RemoveLast();
             }
-            deque.AddLast(new int[] { nums[count], count });
+            deque.AddLast(new[] { nums[count], count });
             if (count >= k - 1)
             {
                 result[resultCount++] = deque.First.Value[0];

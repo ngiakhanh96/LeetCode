@@ -7,7 +7,7 @@ public class _1197
     public int MinKnightMoves(int x, int y)
     {
         var queue = new Queue<int[]>();
-        queue.Enqueue(new int[] { 0, 0 });
+        queue.Enqueue(new[] { 0, 0 });
         var numOfCellsInCurrentLevel = 1;
         var currentLevel = 0;
         var visitedCells = new HashSet<(int x, int y)> { (0, 0) };
@@ -23,15 +23,16 @@ public class _1197
                 return currentLevel;
             }
 
-            var nextCells = new int[][] {
-                new int[] {currentCellX - 2, currentCellY - 1},
-                new int[] {currentCellX + 2, currentCellY - 1},
-                new int[] {currentCellX - 1, currentCellY - 2},
-                new int[] {currentCellX + 1, currentCellY - 2},
-                new int[] {currentCellX - 2, currentCellY + 1},
-                new int[] {currentCellX + 2, currentCellY + 1},
-                new int[] {currentCellX - 1, currentCellY + 2},
-                new int[] {currentCellX + 1, currentCellY + 2},
+            var nextCells = new[]
+            {
+                new[] {currentCellX - 2, currentCellY - 1},
+                new[] {currentCellX + 2, currentCellY - 1},
+                new[] {currentCellX - 1, currentCellY - 2},
+                new[] {currentCellX + 1, currentCellY - 2},
+                new[] {currentCellX - 2, currentCellY + 1},
+                new[] {currentCellX + 2, currentCellY + 1},
+                new[] {currentCellX - 1, currentCellY + 2},
+                new[] {currentCellX + 1, currentCellY + 2},
             };
 
             foreach (var nextCell in nextCells)
@@ -54,9 +55,9 @@ public class _1197
 
     }
 
-    public HashSet<(int x, int y)> IsVisitedHashSet { get; set; } = new HashSet<(int x, int y)>();
+    public HashSet<(int x, int y)> IsVisitedHashSet { get; set; } = new();
 
-    public Queue<int[]> BfsQueue { get; set; } = new Queue<int[]>();
+    public Queue<int[]> BfsQueue { get; set; } = new();
 
     public int MinMoves { get; set; }
 

@@ -42,7 +42,7 @@ public class _515
         return result;
     }
 
-    public Queue<TreeNode> BfsQueue { get; set; } = new Queue<TreeNode>();
+    public Queue<TreeNode> BfsQueue { get; set; } = new();
 
     public IList<int> LargestValuesInEachLevel { get; set; } = new List<int>();
 

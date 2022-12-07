@@ -37,7 +37,7 @@ public class _513
         return result;
     }
 
-    public Queue<TreeNode> BfsQueue { get; set; } = new Queue<TreeNode>();
+    public Queue<TreeNode> BfsQueue { get; set; } = new();
 
     public int BottomLeftMostValue { get; set; }
 

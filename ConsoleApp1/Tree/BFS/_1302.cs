@@ -41,7 +41,7 @@ public class _1302
         return sumOfNodeValuesInCurrentLevel;
     }
 
-    public Queue<TreeNode> BfsQueue { get; set; } = new Queue<TreeNode>();
+    public Queue<TreeNode> BfsQueue { get; set; } = new();
 
     public int SumOfNodeValuesInLowestLevel { get; set; }
 

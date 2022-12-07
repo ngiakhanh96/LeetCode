@@ -25,7 +25,7 @@ public class _1268
     {
         public T Val { get; set; }
 
-        public List<string> Words { get; set; } = new List<string>();
+        public List<string> Words { get; set; } = new();
 
         public bool IsWord { get; set; }
 

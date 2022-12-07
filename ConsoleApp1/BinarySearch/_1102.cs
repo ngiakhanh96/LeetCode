@@ -2,7 +2,7 @@
 
 public class _1102
 {
-    public Queue<int[]> BfsQueue { get; set; } = new Queue<int[]>();
+    public Queue<int[]> BfsQueue { get; set; } = new();
 
     public bool[,] IsVisited { get; set; }
 
@@ -94,7 +94,7 @@ public class _1102
     }
 
     // Dfs version
-    private HashSet<(int x, int y)> VisitedCells = new HashSet<(int x, int y)>();
+    private HashSet<(int x, int y)> VisitedCells = new();
     public int MaximumMinimumPath2(int[][] grid)
     {
         var low = int.MaxValue;

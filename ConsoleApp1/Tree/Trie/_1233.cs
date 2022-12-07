@@ -25,7 +25,7 @@ public class _1233
 
         public bool IsWord { get; set; }
 
-        public Dictionary<string, TrieNode2<T>> Children { get; } = new Dictionary<string, TrieNode2<T>>();
+        public Dictionary<string, TrieNode2<T>> Children { get; } = new();
 
         public TrieNode2()
         {

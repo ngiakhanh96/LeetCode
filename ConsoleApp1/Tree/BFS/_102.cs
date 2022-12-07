@@ -43,7 +43,7 @@ public class _102
         return result;
     }
 
-    public Queue<TreeNode> BfsQueue { get; set; } = new Queue<TreeNode>();
+    public Queue<TreeNode> BfsQueue { get; set; } = new();
 
     public IList<IList<int>> NodesInLevel { get; set; } = new List<IList<int>>();
 

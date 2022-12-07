@@ -41,7 +41,7 @@ public class _772
 
                     else if (c.ToString() == "-")
                     {
-                        if (previousOperator == null || previousOperator == "(")
+                        if (previousOperator is null or "(")
                         {
                             deque.AddLast("0");
                         }

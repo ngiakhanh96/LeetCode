@@ -46,7 +46,7 @@ public class _642
     {
         public T Val { get; set; }
 
-        public Dictionary<string, int> Words { get; set; } = new Dictionary<string, int>();
+        public Dictionary<string, int> Words { get; set; } = new();
 
         public bool IsWord { get; set; }
 

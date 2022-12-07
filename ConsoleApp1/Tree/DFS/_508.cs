@@ -3,9 +3,9 @@
 [LastVisited(2022, 11, 24)]
 public class _508
 {
-    public Dictionary<int, int> SubTreeSumFrequencyDict { get; set; } = new Dictionary<int, int>();
+    public Dictionary<int, int> SubTreeSumFrequencyDict { get; set; } = new();
 
-    public HashSet<int> MostFrequentSubtreeSumHashSet { get; set; } = new HashSet<int>();
+    public HashSet<int> MostFrequentSubtreeSumHashSet { get; set; } = new();
 
     public int MostFrequency { get; set; }
     public int[] FindFrequentTreeSum(TreeNode root)

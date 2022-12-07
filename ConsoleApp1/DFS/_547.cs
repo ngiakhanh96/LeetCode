@@ -7,7 +7,7 @@ public class _547
 
     public int[][] IsConnected { get; set; }
 
-    public Queue<int> BfsQueue { get; set; } = new Queue<int>();
+    public Queue<int> BfsQueue { get; set; } = new();
 
     public int FindCircleNum(int[][] isConnected)
     {

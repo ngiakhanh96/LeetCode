@@ -45,7 +45,7 @@ public class _1161
         return smallestLevelX;
     }
 
-    public Queue<TreeNode> BfsQueue { get; set; } = new Queue<TreeNode>();
+    public Queue<TreeNode> BfsQueue { get; set; } = new();
 
     public int SmallestLevelWithMaxSum { get; set; }
 

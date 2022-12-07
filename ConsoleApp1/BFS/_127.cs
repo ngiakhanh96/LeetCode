@@ -1,9 +1,57 @@
-﻿namespace ConsoleApp1.BFS;
+﻿using System.Text;
 
+namespace ConsoleApp1.BFS;
+
+[LastVisited(2022, 12, 08)]
 public class _127
 {
-
     public int LadderLength(string beginWord, string endWord, IList<string> wordList)
+    {
+        var queue = new Queue<string>();
+        queue.Enqueue(beginWord);
+        var numOfNodesInCurrentLevel = 1;
+        var currentLevel = 1;
+        var visited = new HashSet<string> { beginWord };
+        var bankHashSet = new HashSet<string>(wordList)
+        {
+            beginWord
+        };
+        var validCharacters = new List<string> { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z" };
+        while (queue.Any())
+        {
+            var currentWord = queue.Dequeue();
+            if (currentWord == endWord)
+            {
+                return currentLevel;
+            }
+
+            var prefix = new StringBuilder();
+            var postfix = currentWord;
+            for (var i = 0; i < currentWord.Length; i++)
+            {
+                postfix = postfix.Substring(1);
+                foreach (var validChar in validCharacters)
+                {
+                    var nextGene = prefix + validChar + postfix;
+                    if (bankHashSet.Contains(nextGene) && visited.Add(nextGene))
+                    {
+                        queue.Enqueue(nextGene);
+                    }
+                }
+                prefix.Append(currentWord[i]);
+            }
+
+            if (--numOfNodesInCurrentLevel == 0)
+            {
+                numOfNodesInCurrentLevel = queue.Count;
+                currentLevel++;
+            }
+        }
+
+        return 0;
+    }
+
+    public int LadderLength2(string beginWord, string endWord, IList<string> wordList)
     {
         var adjacentWordsDict = new Dictionary<string, List<string>>();
         var adjacentWildCardWordsDict = new Dictionary<string, List<string>>();
@@ -67,18 +115,17 @@ public class _127
 
         return 0;
     }
-    public Queue<string> BfsQueue { get; set; } = new Queue<string>();
+    public Queue<string> BfsQueue { get; set; } = new();
 
-    public HashSet<string> VisitedHashSet { get; set; } = new HashSet<string>();
+    public HashSet<string> VisitedHashSet { get; set; } = new();
 
     public string EndWord { get; set; }
 
     public int NumberOfWordsInShortestTransformationSequence { get; set; }
 
-    public Dictionary<string, List<string>> AdjacentWordsDict { get; set; } =
-        new Dictionary<string, List<string>>();
+    public Dictionary<string, List<string>> AdjacentWordsDict { get; set; } = new();
 
-    public int LadderLength2(string beginWord, string endWord, IList<string> wordList)
+    public int LadderLength3(string beginWord, string endWord, IList<string> wordList)
     {
         EndWord = endWord;
         wordList.Add(beginWord);

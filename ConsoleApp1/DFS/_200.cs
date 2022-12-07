@@ -7,7 +7,7 @@ public class _200
 
     public char[][] Grid { get; set; }
 
-    public Queue<int[]> BfsQueue { get; set; } = new Queue<int[]>();
+    public Queue<int[]> BfsQueue { get; set; } = new();
 
     public int NumIslands(char[][] grid)
     {

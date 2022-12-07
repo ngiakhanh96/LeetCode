@@ -4,7 +4,7 @@ public class _1032
 {
     public class StreamChecker
     {
-        public TrieNode2<int> TrieNode { get; set; } = new TrieNode2<int>();
+        public TrieNode2<int> TrieNode { get; set; } = new();
 
         public string CurrentWord { get; set; } = "";
 
@@ -27,7 +27,7 @@ public class _1032
     {
         public T Val { get; set; }
 
-        public List<string> Words { get; set; } = new List<string>();
+        public List<string> Words { get; set; } = new();
 
         public bool IsWord { get; set; }
 

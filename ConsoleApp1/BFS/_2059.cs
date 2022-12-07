@@ -2,9 +2,9 @@
 
 public class _2059
 {
-    public Queue<int> BfsQueue { get; set; } = new Queue<int>();
+    public Queue<int> BfsQueue { get; set; } = new();
 
-    public HashSet<int> IsVisited { get; set; } = new HashSet<int>();
+    public HashSet<int> IsVisited { get; set; } = new();
 
     public int[] Nums { get; set; }
 

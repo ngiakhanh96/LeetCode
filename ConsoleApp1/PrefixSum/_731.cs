@@ -4,7 +4,7 @@ public class _731
 {
     public class MyCalendarTwo
     {
-        private readonly Dictionary<int, int> _dictionary = new Dictionary<int, int>();
+        private readonly Dictionary<int, int> _dictionary = new();
         private int[] _sortedArr;
 
         public bool Book(int start, int end)

@@ -5,7 +5,7 @@ public class _732
     public class MyCalendarThree
     {
 
-        private readonly Dictionary<int, int> _dictionary = new Dictionary<int, int>();
+        private readonly Dictionary<int, int> _dictionary = new();
         private int[] _sortedArr;
 
         public int Book(int start, int end)

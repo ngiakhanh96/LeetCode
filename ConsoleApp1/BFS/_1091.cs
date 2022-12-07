@@ -11,7 +11,7 @@ public class _1091
         }
 
         var queue = new Queue<int[]>();
-        queue.Enqueue(new int[] { 0, 0 });
+        queue.Enqueue(new[] { 0, 0 });
         var numOfNodesInCurrentLevel = 1;
         var currentLevel = 1;
         var visitedCells = new bool[grid.Length, grid[0].Length];
@@ -27,15 +27,16 @@ public class _1091
                 return currentLevel;
             }
 
-            var adjacentCells = new int[][]{
-                new int[]{x - 1, y},
-                new int[]{x, y - 1},
-                new int[]{x + 1, y},
-                new int[]{x, y + 1},
-                new int[]{x + 1, y + 1},
-                new int[]{x - 1, y - 1},
-                new int[]{x + 1, y - 1},
-                new int[]{x - 1, y + 1},
+            var adjacentCells = new[]
+            {
+                new[]{x - 1, y},
+                new[]{x, y - 1},
+                new[]{x + 1, y},
+                new[]{x, y + 1},
+                new[]{x + 1, y + 1},
+                new[]{x - 1, y - 1},
+                new[]{x + 1, y - 1},
+                new[]{x - 1, y + 1},
             };
             foreach (var adjCell in adjacentCells)
             {
@@ -66,7 +67,7 @@ public class _1091
 
     public int[][] Grid { get; set; }
 
-    public Queue<int[]> BfsQueue { get; set; } = new Queue<int[]>();
+    public Queue<int[]> BfsQueue { get; set; } = new();
 
     public int ShortestClearPath { get; set; } = -1;
 

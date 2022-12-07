@@ -5,7 +5,7 @@ public class _509
     // Bottom-up
     public int Fib(int n)
     {
-        if (n == 0 || n == 1)
+        if (n is 0 or 1)
         {
             return n;
         }
@@ -27,7 +27,7 @@ public class _509
     public int[] Cache { get; set; }
     public int Fib2(int n)
     {
-        if (n == 0 || n == 1)
+        if (n is 0 or 1)
         {
             return n;
         }

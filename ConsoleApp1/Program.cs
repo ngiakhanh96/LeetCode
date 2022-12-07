@@ -1,127 +1,198 @@
 ﻿global using ConsoleApp1.Heap;
 global using ConsoleApp1.LinkedList;
 global using ConsoleApp1.UnionFind;
+using System.Text;
 
-namespace ConsoleApp1;
-
-class Program
+var a = SlidingPuzzle(new[]
 {
-    static void Main(string[] args)
+    new[] {1,2,3},
+    new[] {4,0,5}
+});
+static int SlidingPuzzle(int[][] board)
+{
+    var queue = new Queue<string>();
+    var numOfNodesInCurrentLevel = 1;
+    var currentLevel = 0;
+    var initialState = new StringBuilder();
+    for (var i = 0; i < board.Length; i++)
     {
-        var a = CanVisitAllRooms(new List<IList<int>>
+        for (var j = 0; j < board[0].Length; j++)
         {
-            new List<int>{1},
-            new List<int>{2},
-            new List<int>{3},
-            new List<int>()
-        });
-    }
-
-    public static bool CanVisitAllRooms(IList<IList<int>> rooms)
-    {
-        var visited = new HashSet<int> { 0 };
-        Dfs(0, visited, rooms);
-        return visited.Count == rooms.Count;
-    }
-
-    private static void Dfs(int roomNumber, HashSet<int> visited, IList<IList<int>> rooms)
-    {
-        foreach (var key in rooms[roomNumber])
-        {
-            if (!visited.Add(key))
-            {
-                Dfs(key, visited, rooms);
-            }
+            initialState.Append(board[i][j].ToString());
         }
     }
+    queue.Enqueue(initialState.ToString());
+    var visited = new HashSet<string> { initialState.ToString() };
+    var endState = "123450";
 
-
-
-    public class NumMatrix
+    while (queue.Any())
     {
-        private HashSet<(int x, int y, int z)> VisitedCells = new HashSet<(int x, int y, int z)>();
-        public int MaximumMinimumPath(int[][] grid)
+        var currentState = queue.Dequeue();
+        if (currentState == endState)
         {
+            return currentLevel;
+        }
 
-            var low = int.MaxValue;
-            var high = int.MinValue;
-
-            for (var i = 0; i < grid.Length; i++)
+        var nextStates = new List<string>();
+        for (var i = 0; i < currentState.Length; i++)
+        {
+            if (currentState[i] == '0')
             {
-                for (var j = 0; j < grid[0].Length; j++)
+                if (i > 2)
                 {
-                    low = Math.Min(low, grid[i][j]);
-                    high = Math.Max(high, grid[i][j]);
-                }
-            }
-
-            while (low < high)
-            {
-                var middle = low + (high - low) / 2;
-
-                var canDfs = CanDfs(grid, middle, high);
-                Console.WriteLine(low);
-                Console.WriteLine(high);
-                Console.WriteLine("-----------------");
-                if (canDfs)
-                {
-                    low = middle + 1;
+                    var nextState = currentState.ToCharArray();
+                    var temp = nextState[i];
+                    nextState[i - 3] = temp;
+                    nextState[i] = nextState[i - 3];
+                    nextStates.Add(new string(nextState));
                 }
                 else
                 {
-                    high = middle;
+                    var nextState = currentState.ToCharArray();
+                    var temp = nextState[i];
+                    nextState[i + 3] = temp;
+                    nextState[i] = nextState[i + 3];
+                    nextStates.Add(new string(nextState));
                 }
-            }
 
-            return low;
-        }
-
-        private bool CanDfs(int[][] grid, int middle, int high)
-        {
-            VisitedCells.Clear();
-            VisitedCells.Add((0, 0, grid[0][0]));
-            return Dfs(grid, 0, 0, middle, grid[0][0]);
-
-        }
-
-        private bool Dfs(int[][] grid, int row, int col, int middle, int currentScore)
-        {
-            var adjacentCells = new[]
-            {
-                new[] {row - 1, col},
-                new[] {row + 1, col},
-                new[] {row, col - 1},
-                new[] {row, col + 1}
-        };
-
-            foreach (var cell in adjacentCells)
-            {
-                var adjacentCellRow = cell[0];
-                var adjacentCellCol = cell[1];
-
-                if (adjacentCellRow >= 0 && adjacentCellRow < grid.Length &&
-                    adjacentCellCol >= 0 && adjacentCellCol < grid[0].Length)
+                if (i is 1 or 4)
                 {
-                    var newCurrentScore = Math.Min(currentScore, grid[adjacentCellRow][adjacentCellCol]);
-                    if (!VisitedCells.Contains((adjacentCellRow, adjacentCellCol, newCurrentScore)))
-                    {
-                        VisitedCells.Add((adjacentCellRow, adjacentCellCol, newCurrentScore));
-                        if (adjacentCellRow == grid.Length - 1 &&
-                            adjacentCellCol == grid[0].Length - 1 &&
-                            newCurrentScore > middle)
-                        {
-                            return true;
-                        }
+                    var nextState = currentState.ToCharArray();
+                    var temp = nextState[i];
+                    nextState[i - 1] = temp;
+                    nextState[i] = nextState[i - 1];
+                    nextStates.Add(new string(nextState));
 
-                        if (Dfs(grid, adjacentCellRow, adjacentCellCol, middle, newCurrentScore))
-                        {
-                            return true;
-                        }
-                    }
+                    nextState = currentState.ToCharArray();
+                    temp = nextState[i];
+                    nextState[i + 1] = temp;
+                    nextState[i] = nextState[i + 1];
+                    nextStates.Add(new string(nextState));
                 }
+                else if (i is 0 or 3)
+                {
+                    var nextState = currentState.ToCharArray();
+                    var temp = nextState[i];
+                    nextState[i + 1] = temp;
+                    nextState[i] = nextState[i + 1];
+                    nextStates.Add(new string(nextState));
+                }
+                else
+                {
+                    var nextState = currentState.ToCharArray();
+                    var temp = nextState[i];
+                    nextState[i - 1] = temp;
+                    nextState[i] = nextState[i - 1];
+                    nextStates.Add(new string(nextState));
+                }
+                break;
             }
+        }
 
-            return false;
+        foreach (var nextState in nextStates)
+        {
+            if (visited.Add(nextState))
+            {
+                queue.Enqueue(nextState);
+            }
+        }
+
+
+        if (--numOfNodesInCurrentLevel == 0)
+        {
+            numOfNodesInCurrentLevel = queue.Count;
+            currentLevel++;
         }
     }
+    return -1;
 }
+
+
+
+//public class NumMatrix
+//{
+//    private HashSet<(int x, int y, int z)> VisitedCells = new HashSet<(int x, int y, int z)>();
+//    public int MaximumMinimumPath(int[][] grid)
+//    {
+
+//        var low = int.MaxValue;
+//        var high = int.MinValue;
+
+//        for (var i = 0; i < grid.Length; i++)
+//        {
+//            for (var j = 0; j < grid[0].Length; j++)
+//            {
+//                low = Math.Min(low, grid[i][j]);
+//                high = Math.Max(high, grid[i][j]);
+//            }
+//        }
+
+//        while (low < high)
+//        {
+//            var middle = low + (high - low) / 2;
+
+//            var canDfs = CanDfs(grid, middle, high);
+//            Console.WriteLine(low);
+//            Console.WriteLine(high);
+//            Console.WriteLine("-----------------");
+//            if (canDfs)
+//            {
+//                low = middle + 1;
+//            }
+//            else
+//            {
+//                high = middle;
+//            }
+//        }
+
+//        return low;
+//    }
+
+//    private bool CanDfs(int[][] grid, int middle, int high)
+//    {
+//        VisitedCells.Clear();
+//        VisitedCells.Add((0, 0, grid[0][0]));
+//        return Dfs(grid, 0, 0, middle, grid[0][0]);
+
+//    }
+
+//    private bool Dfs(int[][] grid, int row, int col, int middle, int currentScore)
+//    {
+//        var adjacentCells = new[]
+//        {
+//            new[] {row - 1, col},
+//            new[] {row + 1, col},
+//            new[] {row, col - 1},
+//            new[] {row, col + 1}
+//    };
+
+//        foreach (var cell in adjacentCells)
+//        {
+//            var adjacentCellRow = cell[0];
+//            var adjacentCellCol = cell[1];
+
+//            if (adjacentCellRow >= 0 && adjacentCellRow < grid.Length &&
+//                adjacentCellCol >= 0 && adjacentCellCol < grid[0].Length)
+//            {
+//                var newCurrentScore = Math.Min(currentScore, grid[adjacentCellRow][adjacentCellCol]);
+//                if (!VisitedCells.Contains((adjacentCellRow, adjacentCellCol, newCurrentScore)))
+//                {
+//                    VisitedCells.Add((adjacentCellRow, adjacentCellCol, newCurrentScore));
+//                    if (adjacentCellRow == grid.Length - 1 &&
+//                        adjacentCellCol == grid[0].Length - 1 &&
+//                        newCurrentScore > middle)
+//                    {
+//                        return true;
+//                    }
+
+//                    if (Dfs(grid, adjacentCellRow, adjacentCellCol, middle, newCurrentScore))
+//                    {
+//                        return true;
+//                    }
+//                }
+//            }
+//        }
+
+//        return false;
+//    }
+//}

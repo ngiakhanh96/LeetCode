@@ -7,7 +7,7 @@ public class _1631
 
     public bool[,] IsVisitedCells { get; set; }
 
-    public Queue<int[]> BfsQueue { get; set; } = new Queue<int[]>();
+    public Queue<int[]> BfsQueue { get; set; } = new();
 
     public int NumCellsInCurrentLevel { get; set; }
 

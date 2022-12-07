@@ -30,7 +30,7 @@ public class _227
 
             if (operatorDict.ContainsKey(c.ToString()))
             {
-                if (stack.TryPeek(out var previousOperator) && (previousOperator == "*" || previousOperator == "/"))
+                if (stack.TryPeek(out var previousOperator) && previousOperator is "*" or "/")
                 {
                     stack.Pop();
                     var firstNum = stack.Pop();
@@ -42,7 +42,7 @@ public class _227
                     stack.Push(currentNumber.ToString());
                 }
 
-                if (c == '+' || c == '-')
+                if (c is '+' or '-')
                 {
                     if (stack.Count > 1)
                     {
@@ -91,7 +91,7 @@ public class _227
             }
             if (dict.ContainsKey(chr))
             {
-                if (oprStack.TryPeek(out var previousOpr) && (previousOpr == '*' || previousOpr == '/'))
+                if (oprStack.TryPeek(out var previousOpr) && previousOpr is '*' or '/')
                 {
                     previousOpr = oprStack.Pop();
                     var firstNum = numStack.Pop();
@@ -102,7 +102,7 @@ public class _227
                 {
                     numStack.Push(currentNumber);
                 }
-                if (chr == '+' || chr == '-')
+                if (chr is '+' or '-')
                 {
                     if (numStack.Count > 1)
                     {

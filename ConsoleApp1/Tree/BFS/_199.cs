@@ -39,7 +39,7 @@ public class _199
         return result;
     }
 
-    public Queue<TreeNode> BfsQueue { get; set; } = new Queue<TreeNode>();
+    public Queue<TreeNode> BfsQueue { get; set; } = new();
 
     public IList<int> RightSideValues { get; set; } = new List<int>();
 

@@ -2,7 +2,7 @@
 
 public class _973
 {
-    private Random Random { get; } = new Random();
+    private Random Random { get; } = new();
 
     public int[][] KClosest(int[][] points, int k)
     {

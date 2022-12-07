@@ -1,8 +1,54 @@
-﻿namespace ConsoleApp1.BFS;
+﻿using System.Text;
 
+namespace ConsoleApp1.BFS;
+
+[LastVisited(2022, 12, 08)]
 public class _433
 {
-    public int MinMutation(string start, string end, string[] bank)
+    public int MinMutation(string startGene, string endGene, string[] bank)
+    {
+        var queue = new Queue<string>();
+        queue.Enqueue(startGene);
+        var numOfNodesInCurrentLevel = 1;
+        var currentLevel = 0;
+        var visited = new HashSet<string> { startGene };
+        var bankHashSet = new HashSet<string>(bank) { startGene };
+        var validCharacters = new List<string> { "A", "C", "G", "T" };
+        while (queue.Any())
+        {
+            var currentGene = queue.Dequeue();
+            if (currentGene == endGene)
+            {
+                return currentLevel;
+            }
+
+            var prefix = new StringBuilder(); ;
+            var postfix = currentGene;
+            for (var i = 0; i < currentGene.Length; i++)
+            {
+                postfix = postfix.Substring(1);
+                foreach (var validChar in validCharacters)
+                {
+                    var nextGene = prefix + validChar + postfix;
+                    if (bankHashSet.Contains(nextGene) && visited.Add(nextGene))
+                    {
+                        queue.Enqueue(nextGene);
+                    }
+                }
+                prefix.Append(currentGene[i]);
+            }
+
+            if (--numOfNodesInCurrentLevel == 0)
+            {
+                numOfNodesInCurrentLevel = queue.Count;
+                currentLevel++;
+            }
+        }
+
+        return -1;
+    }
+
+    public int MinMutation2(string start, string end, string[] bank)
     {
         var adjacentGenesDict = new Dictionary<string, List<string>>();
         var adjacentWildCardGenesDict = new Dictionary<string, List<string>>();
@@ -67,18 +113,17 @@ public class _433
         return -1;
     }
 
-    public Queue<string> BfsQueue { get; set; } = new Queue<string>();
+    public Queue<string> BfsQueue { get; set; } = new();
 
-    public HashSet<string> VisitedHashSet { get; set; } = new HashSet<string>();
+    public HashSet<string> VisitedHashSet { get; set; } = new();
 
     public string EndGene { get; set; }
 
     public int NumberOfMutationsInShortestTransformationSequence { get; set; } = -1;
 
-    public Dictionary<string, List<string>> AdjacentGenesDict { get; set; } =
-        new Dictionary<string, List<string>>();
+    public Dictionary<string, List<string>> AdjacentGenesDict { get; set; } = new();
 
-    public int MinMutation2(string start, string end, string[] bank)
+    public int MinMutation3(string start, string end, string[] bank)
     {
         EndGene = end;
         var bankList = bank.ToList();

@@ -45,7 +45,7 @@ public class _703
 
     public class KthLargest2
     {
-        public PriorityQueue<int, int> MinHeap { get; set; } = new PriorityQueue<int, int>();
+        public PriorityQueue<int, int> MinHeap { get; set; } = new();
         public KthLargest2(int k, int[] nums)
         {
             foreach (var num in nums)

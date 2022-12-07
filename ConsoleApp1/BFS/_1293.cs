@@ -1,8 +1,70 @@
 ﻿namespace ConsoleApp1.BFS;
 
+[LastVisited(2022, 12, 08)]
 public class _1293
 {
-    public Queue<int[]> BfsQueue { get; set; } = new Queue<int[]>();
+    public int ShortestPath(int[][] grid, int k)
+    {
+        if (k == 0 && grid[0][0] == 1)
+        {
+            return -1;
+        }
+        var queue = new Queue<int[]>();
+        queue.Enqueue(new[] { 0, 0, k });
+        var numOfNodesInCurrentLevel = 1;
+        var currentLevel = 0;
+        var visited = new bool[grid.Length, grid[0].Length, k + 1];
+        visited[0, 0, k] = true;
+
+        while (queue.Any())
+        {
+            var currentCell = queue.Dequeue();
+            var currentCellX = currentCell[0];
+            var currentCellY = currentCell[1];
+            if (currentCellX == grid.Length - 1 && currentCellY == grid[0].Length - 1)
+            {
+                return currentLevel;
+            }
+
+            var adjCells = new[] {
+                new[]{currentCellX - 1, currentCellY},
+                new[]{currentCellX + 1, currentCellY},
+                new[]{currentCellX, currentCellY - 1},
+                new[]{currentCellX, currentCellY + 1},
+            };
+
+            foreach (var adjCell in adjCells)
+            {
+                var adjCellX = adjCell[0];
+                var adjCellY = adjCell[1];
+                if (adjCellX >= 0 && adjCellX < grid.Length &&
+                    adjCellY >= 0 && adjCellY < grid[0].Length)
+                {
+                    var bombs = currentCell[2];
+                    if (grid[adjCellX][adjCellY] == 1)
+                    {
+                        bombs--;
+                    }
+
+                    if (bombs >= 0 && !visited[adjCellX, adjCellY, bombs])
+                    {
+                        visited[adjCellX, adjCellY, bombs] = true;
+                        queue.Enqueue(new[] { adjCellX, adjCellY, bombs });
+                    }
+                }
+            }
+
+            if (--numOfNodesInCurrentLevel == 0)
+            {
+                numOfNodesInCurrentLevel = queue.Count;
+                currentLevel++;
+            }
+        }
+
+        return -1;
+    }
+
+    public Queue<int[]> BfsQueue { get; set; } = new();
 
     public bool[,,] Visited { get; set; }
 
@@ -10,7 +72,7 @@ public class _1293
 
     public int[][] Grid { get; set; }
 
-    public int ShortestPath(int[][] grid, int k)
+    public int ShortestPath2(int[][] grid, int k)
     {
         Grid = grid;
         Visited = new bool[grid.Length, grid[0].Length, k + 1];

@@ -2,9 +2,9 @@
 
 public class _207
 {
-    public HashSet<int> VisitedCourses { get; set; } = new HashSet<int>();
+    public HashSet<int> VisitedCourses { get; set; } = new();
 
-    public Dictionary<int, List<int>> Graph { get; set; } = new Dictionary<int, List<int>>();
+    public Dictionary<int, List<int>> Graph { get; set; } = new();
 
     public bool CanFinish(int numCourses, int[][] prerequisites)
     {
