@@ -1,5 +1,6 @@
 ﻿namespace ConsoleApp1.BFS;
 
+[LastVisited(2022, 12, 13)]
 public class _852
 {
     public int PeakIndexInMountainArray(int[] arr)

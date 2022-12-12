@@ -1,5 +1,6 @@
 ﻿namespace ConsoleApp1.BinarySearch;
 
+[LastVisited(2022, 12, 13)]
 public class _33
 {
     public int Search(int[] nums, int target)
