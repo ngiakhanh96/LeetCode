@@ -1,5 +1,7 @@
 ﻿namespace ConsoleApp1.BinarySearch;
 
+[LastVisited(2022, 12, 20)]
+
 // See https://leetcode.com/problems/divide-chocolate/discuss/411661/Python-binary-search-with-inline-explanation
 // and the comments
 public class _1231
@@ -16,14 +18,11 @@ public class _1231
             var currentSumSingleSweetness = 0;
             foreach (var singleSweetness in sweetness)
             {
-                if (currentSumSingleSweetness + singleSweetness >= midMinSweetness)
+                currentSumSingleSweetness += singleSweetness;
+                if (currentSumSingleSweetness >= midMinSweetness)
                 {
                     pieces++;
                     currentSumSingleSweetness = 0;
-                }
-                else
-                {
-                    currentSumSingleSweetness += singleSweetness;
                 }
             }
             // the last piece if it is smaller than midMinSweetness, then we can combine it with the previous one, therefore no need to count it

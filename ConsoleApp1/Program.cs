@@ -1,113 +1,52 @@
 ﻿global using ConsoleApp1.Heap;
 global using ConsoleApp1.LinkedList;
 global using ConsoleApp1.UnionFind;
-using System.Text;
 
-var a = SlidingPuzzle(new[]
+var a = MaximizeSweetness(new[] { 93138, 60229, 11179, 91723, 85722, 58195, 95146, 85049, 33816 }, 5);
+int _currentMaxScore = int.MinValue;
+int MaximizeSweetness(int[] v, int k)
 {
-    new[] {1,2,3},
-    new[] {4,0,5}
-});
-static int SlidingPuzzle(int[][] board)
-{
-    var queue = new Queue<string>();
-    var numOfNodesInCurrentLevel = 1;
-    var currentLevel = 0;
-    var initialState = new StringBuilder();
-    for (var i = 0; i < board.Length; i++)
+    var averageSweetness = (double)v.Sum() / (k + 1);
+    var currentSweetness = 0;
+    var minSweetness = int.MaxValue;
+    var maxChunksPerPerson = v.Length - (k + 1) + 1;
+    var currentChunk = 0;
+    foreach (var sweetness in v)
     {
-        for (var j = 0; j < board[0].Length; j++)
+        if (currentChunk + 1 > maxChunksPerPerson)
         {
-            initialState.Append(board[i][j].ToString());
+            minSweetness = Math.Min(minSweetness, currentSweetness);
+            currentSweetness = sweetness;
+            currentChunk = 1;
         }
-    }
-    queue.Enqueue(initialState.ToString());
-    var visited = new HashSet<string> { initialState.ToString() };
-    var endState = "123450";
-
-    while (queue.Any())
-    {
-        var currentState = queue.Dequeue();
-        if (currentState == endState)
+        else
         {
-            return currentLevel;
-        }
-
-        var nextStates = new List<string>();
-        for (var i = 0; i < currentState.Length; i++)
-        {
-            if (currentState[i] == '0')
+            if (currentSweetness + sweetness >= averageSweetness)
             {
-                if (i > 2)
+                if (Math.Abs(currentSweetness - averageSweetness) < Math.Abs(currentSweetness + sweetness - averageSweetness))
                 {
-                    var nextState = currentState.ToCharArray();
-                    var temp = nextState[i];
-                    nextState[i - 3] = temp;
-                    nextState[i] = nextState[i - 3];
-                    nextStates.Add(new string(nextState));
+                    minSweetness = Math.Min(minSweetness, currentSweetness);
+                    currentSweetness = sweetness;
+                    currentChunk = 1;
                 }
                 else
                 {
-                    var nextState = currentState.ToCharArray();
-                    var temp = nextState[i];
-                    nextState[i + 3] = temp;
-                    nextState[i] = nextState[i + 3];
-                    nextStates.Add(new string(nextState));
+                    minSweetness = Math.Min(minSweetness, currentSweetness + sweetness);
+                    currentSweetness = 0;
+                    currentChunk = 0;
                 }
-
-                if (i is 1 or 4)
-                {
-                    var nextState = currentState.ToCharArray();
-                    var temp = nextState[i];
-                    nextState[i - 1] = temp;
-                    nextState[i] = nextState[i - 1];
-                    nextStates.Add(new string(nextState));
-
-                    nextState = currentState.ToCharArray();
-                    temp = nextState[i];
-                    nextState[i + 1] = temp;
-                    nextState[i] = nextState[i + 1];
-                    nextStates.Add(new string(nextState));
-                }
-                else if (i is 0 or 3)
-                {
-                    var nextState = currentState.ToCharArray();
-                    var temp = nextState[i];
-                    nextState[i + 1] = temp;
-                    nextState[i] = nextState[i + 1];
-                    nextStates.Add(new string(nextState));
-                }
-                else
-                {
-                    var nextState = currentState.ToCharArray();
-                    var temp = nextState[i];
-                    nextState[i - 1] = temp;
-                    nextState[i] = nextState[i - 1];
-                    nextStates.Add(new string(nextState));
-                }
-                break;
             }
-        }
-
-        foreach (var nextState in nextStates)
-        {
-            if (visited.Add(nextState))
+            else
             {
-                queue.Enqueue(nextState);
+                currentSweetness += sweetness;
+                currentChunk++;
             }
         }
 
-
-        if (--numOfNodesInCurrentLevel == 0)
-        {
-            numOfNodesInCurrentLevel = queue.Count;
-            currentLevel++;
-        }
     }
-    return -1;
+    minSweetness = currentSweetness > 0 ? Math.Min(currentSweetness, minSweetness) : minSweetness;
+    return minSweetness;
 }
-
-
 
 //public class NumMatrix
 //{

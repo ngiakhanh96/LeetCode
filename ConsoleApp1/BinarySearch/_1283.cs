@@ -1,5 +1,6 @@
 ﻿namespace ConsoleApp1.BinarySearch;
 
+[LastVisited(2022, 12, 20)]
 public class _1283
 {
     public int SmallestDivisor(int[] nums, int threshold)
