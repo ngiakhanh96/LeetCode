@@ -7,27 +7,23 @@ public class _153
     {
         var low = 0;
         var high = nums.Length - 1;
-
         while (low < high)
         {
             var middle = low + (high - low) / 2;
-            if (nums[high] > nums[low])
+            if (nums[low] > nums[high])
             {
-                high = low;
-            }
-            else
-            {
-                // Right branch
-                if (nums[middle] < nums[high])
-                {
-                    high = middle;
-                }
-
-                // Left branch
-                else
+                if (nums[middle] >= nums[low])
                 {
                     low = middle + 1;
                 }
+                else
+                {
+                    high = middle;
+                }
+            }
+            else
+            {
+                high = middle;
             }
         }
 

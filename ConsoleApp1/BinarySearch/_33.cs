@@ -5,50 +5,36 @@ public class _33
 {
     public int Search(int[] nums, int target)
     {
-        var leftMostIndex = 0;
-        var rightMostIndex = nums.Length - 1;
-
-        while (leftMostIndex <= rightMostIndex)
+        var low = 0;
+        var high = nums.Length - 1;
+        while (low <= high)
         {
-            var middlePivotIndex = leftMostIndex + (rightMostIndex - leftMostIndex) / 2;
-            var rightMost = nums[rightMostIndex];
-            var leftMost = nums[leftMostIndex];
-            var middlePivot = nums[middlePivotIndex];
-            if (rightMost == target)
+            var middle = low + (high - low + 1) / 2;
+            if (nums[middle] == target)
             {
-                return rightMostIndex;
+                return middle;
             }
 
-            if (leftMost == target)
+            if (nums[middle] < target)
             {
-                return leftMostIndex;
-            }
-
-            if (middlePivot == target)
-            {
-                return middlePivotIndex;
-            }
-
-            if (rightMost > middlePivot)
-            {
-                if (target > middlePivot && target < rightMost)
+                if (nums[middle] <= nums[high] && target >= nums[low] && nums[low] > nums[high])
                 {
-                    leftMostIndex = middlePivotIndex + 1;
+                    high = middle - 1;
                 }
                 else
                 {
-                    rightMostIndex = middlePivotIndex - 1;
+                    low = middle + 1;
                 }
             }
             else
             {
-                if (target > rightMost && target < middlePivot)
+                if (nums[middle] >= nums[low] && target <= nums[high] && nums[low] > nums[high])
                 {
-                    rightMostIndex = middlePivotIndex - 1;
+                    low = middle + 1;
                 }
                 else
                 {
-                    leftMostIndex = middlePivotIndex + 1;
+                    high = middle - 1;
                 }
             }
         }

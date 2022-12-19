@@ -7,7 +7,7 @@
 * [Bucket sort](#bucket-sort)
 * [Two pointers](#two-pointers)
 * [1 or -1 First occurence](#one-or-minus-one-first-occurence)
-* ...
+* [Bit Manipulation](#bit-manipulation)
 * [Binary Search](#binary-search)
 ## Techniques:
 

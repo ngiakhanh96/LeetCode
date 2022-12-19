@@ -5,50 +5,50 @@ public class _81
 {
     public bool Search(int[] nums, int target)
     {
-        var startIndex = 0;
-        var endIndex = nums.Length - 1;
-        while (startIndex <= endIndex)
+        var low = 0;
+        var high = nums.Length - 1;
+        while (low <= high)
         {
-            var middleIndex = startIndex + (endIndex - startIndex) / 2;
-            var leftMost = nums[startIndex];
-            var rightMost = nums[endIndex];
-            var middlePivot = nums[middleIndex];
+            if (nums[low] == nums[high])
+            {
+                if (nums[low] == target)
+                {
+                    return true;
+                }
+                low++;
+                high--;
+                continue;
+            }
 
-            if (leftMost == target || rightMost == target || middlePivot == target)
+            var middle = low + (high - low) / 2;
+            if (nums[middle] == target || nums[low] == target || nums[high] == target)
             {
                 return true;
             }
 
-            if (leftMost == rightMost)
+            if (nums[middle] < target)
             {
-                startIndex++;
-                endIndex--;
-            }
-            else
-            {
-                if (rightMost >= middlePivot)
+                if (nums[middle] <= nums[high] && target >= nums[low] && nums[low] > nums[high])
                 {
-                    if (target > middlePivot && target < rightMost)
-                    {
-                        startIndex = middleIndex + 1;
-                    }
-                    else
-                    {
-                        endIndex = middleIndex - 1;
-                    }
+                    high = middle - 1;
                 }
                 else
                 {
-                    if (target < middlePivot && target > rightMost)
-                    {
-                        endIndex = middleIndex - 1;
-                    }
-                    else
-                    {
-                        startIndex = middleIndex + 1;
-                    }
+                    low = middle + 1;
                 }
             }
+            else
+            {
+                if (nums[middle] >= nums[low] && target <= nums[high] && nums[low] > nums[high])
+                {
+                    low = middle + 1;
+                }
+                else
+                {
+                    high = middle - 1;
+                }
+            }
+
         }
 
         return false;

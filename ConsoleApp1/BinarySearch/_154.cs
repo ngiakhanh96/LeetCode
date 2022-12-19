@@ -1,38 +1,39 @@
 ﻿namespace ConsoleApp1.BinarySearch;
 
+[LastVisited(2022, 12, 20)]
 public class _154
 {
     public int FindMin(int[] nums)
     {
-        var lowIndex = 0;
-        var highIndex = nums.Length - 1;
-        var minValue = int.MaxValue;
-        while (lowIndex < highIndex)
+        var low = 0;
+        var high = nums.Length - 1;
+        while (low < high)
         {
-            var middleIndex = lowIndex + (highIndex - lowIndex) / 2;
-            var middleValue = nums[middleIndex];
-            var lowValue = nums[lowIndex];
-            var highValue = nums[highIndex];
-            if (lowValue == highValue)
+            if (nums[low] == nums[high])
             {
-                lowIndex++;
-                highIndex--;
-                minValue = Math.Min(lowValue, minValue);
+                low++;
+                continue;
             }
-            else
+
+            var middle = low + (high - low) / 2;
+            if (nums[low] > nums[high])
             {
-                if (highValue >= middleValue)
+                if (nums[middle] >= nums[low])
                 {
-                    highIndex = middleIndex;
+                    low = middle + 1;
                 }
                 else
                 {
-                    lowIndex = middleIndex + 1;
+                    high = middle;
                 }
+            }
+            else
+            {
+                high = middle;
             }
         }
 
-        return Math.Min(nums[lowIndex], minValue);
+        return nums[low];
     }
 
     public int FindMin2(int[] nums)
