@@ -1,27 +1,27 @@
 ﻿namespace ConsoleApp1.Tree.BinarySearchTree;
 
+[LastVisited(2022, 12, 28)]
 public class _230
 {
-    public int Count { get; set; }
-
-    public int CurrentSmallest { get; set; }
-
+    private int _currentKSmallest = 1;
     public int KthSmallest(TreeNode root, int k)
     {
-        if (root is null)
+        if (root == null)
         {
-            return CurrentSmallest;
+            return -1;
+        }
+        var result = KthSmallest(root.left, k);
+        if (result > -1)
+        {
+            return result;
         }
 
-        KthSmallest(root.left, k);
-        if (Count == k)
+        if (_currentKSmallest == k)
         {
-            return CurrentSmallest;
+            return root.val;
         }
-        CurrentSmallest = root.val;
-        Count++;
-        KthSmallest(root.right, k);
+        _currentKSmallest++;
 
-        return CurrentSmallest;
+        return KthSmallest(root.right, k);
     }
 }

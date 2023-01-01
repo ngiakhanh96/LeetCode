@@ -1,5 +1,6 @@
 ﻿namespace ConsoleApp1.Tree.BinarySearchTree;
 
+[LastVisited(2022, 12, 28)]
 public class _701
 {
     public TreeNode InsertIntoBST(TreeNode root, int val)

@@ -1,5 +1,6 @@
 ﻿namespace ConsoleApp1.TwoPointers.SlidingWindow;
 
+[LastVisited(2023, 01, 02)]
 public class _485
 {
     public int FindMaxConsecutiveOnes(int[] nums)

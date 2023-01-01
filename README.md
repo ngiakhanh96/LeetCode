@@ -166,7 +166,7 @@
 				temp = 0;
 				foreach (var item in givenArray) {
 				//do something which increases total (temp also) using item and middle
-				//if [3] is provided, then apply the operation on all elements in the array (see _1102)
+				//if [3] is not provided, then apply the operation on all elements in the array (see _1283)
 				//otherwise, need to perform if check for temp variable (see _1011 and _1231), like this
 				//for min[3]
 				//if (temp >= middle)

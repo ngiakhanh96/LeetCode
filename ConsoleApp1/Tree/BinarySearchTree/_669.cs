@@ -1,79 +1,51 @@
 ﻿namespace ConsoleApp1.Tree.BinarySearchTree;
 
+[LastVisited(2022, 12, 28)]
 public class _669
 {
-    public TreeNode Root { get; set; }
-
-    private int Low { get; set; }
-    private int High { get; set; }
-
     public TreeNode TrimBST(TreeNode root, int low, int high)
     {
-        Low = low;
-        High = high;
-        Root = root;
-
-        // Find the right Root
-        while (Root != null && (Root.val < Low || Root.val > High))
+        var newRoot = root;
+        while (newRoot != null && (newRoot.val > high || newRoot.val < low))
         {
-            Root = Root.val < Low
-                ? Root.right
-                : Root.left;
+            newRoot = newRoot.val > high ? newRoot.left : newRoot.right;
         }
 
-        if (Root == null)
+        if (newRoot == null)
         {
             return null;
         }
 
-
-        // Trim both sides of Root
-        TrimBSTImpl(Root, null, false);
-        TrimBSTImpl(Root, null, true);
-
-        return Root;
-
+        TrimHigh(newRoot, high);
+        TrimLow(newRoot, low);
+        return newRoot;
     }
 
-    private void TrimBSTImpl(TreeNode root, TreeNode parent, bool lookLeft)
+    private void TrimHigh(TreeNode currentNode, int high)
     {
-        var currentNode = root;
-        if (!lookLeft)
+        while (currentNode != null)
         {
-            while (currentNode != null && currentNode.val <= High)
+            var nextNode = currentNode.right;
+            while (nextNode != null && nextNode.val > high)
             {
-                parent = currentNode;
-                currentNode = currentNode.right;
+                nextNode = nextNode.left;
             }
-
-            while (currentNode != null && currentNode.val > High)
-            {
-                currentNode = currentNode.left;
-            }
-            parent.right = currentNode;
-            if (currentNode != null)
-            {
-                TrimBSTImpl(currentNode, parent, false);
-            }
+            currentNode.right = nextNode;
+            currentNode = nextNode;
         }
+    }
 
-        else
+    private void TrimLow(TreeNode currentNode, int low)
+    {
+        while (currentNode != null)
         {
-            while (currentNode != null && currentNode.val >= Low)
+            var nextNode = currentNode.left;
+            while (nextNode != null && nextNode.val < low)
             {
-                parent = currentNode;
-                currentNode = currentNode.left;
+                nextNode = nextNode.right;
             }
-
-            while (currentNode != null && currentNode.val < Low)
-            {
-                currentNode = currentNode.right;
-            }
-            parent.left = currentNode;
-            if (currentNode != null)
-            {
-                TrimBSTImpl(currentNode, parent, true);
-            }
+            currentNode.left = nextNode;
+            currentNode = nextNode;
         }
     }
 

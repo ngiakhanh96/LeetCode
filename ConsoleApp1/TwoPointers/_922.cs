@@ -1,6 +1,6 @@
 ﻿namespace ConsoleApp1.TwoPointers;
 
-// Last visit 21/5/2022
+[LastVisited(2022, 10, 12)]
 public class _922
 {
     public int[] SortArrayByParityII(int[] nums)

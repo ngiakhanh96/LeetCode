@@ -1,54 +1,52 @@
 ﻿namespace ConsoleApp1.TwoPointers.Opposite;
 
+[LastVisited(2023, 01, 02)]
 public class _15
 {
     public IList<IList<int>> ThreeSum(int[] nums)
     {
-        var res = new List<IList<int>>();
-        if (nums.Length < 3)
-        {
-            return res;
-        }
         System.Array.Sort(nums);
-        for (var i = 0; i < nums.Length - 2; i++)
+        var result = new List<IList<int>>();
+        var i = 0;
+        while (i < nums.Length - 2)
         {
-            if (i > 0 && nums[i - 1] == nums[i])
+            if (i > 0 && nums[i] == nums[i - 1])
             {
+                i++;
                 continue;
             }
+            var firstPointer = i + 1;
+            var secondPointer = nums.Length - 1;
             var target = -nums[i];
-            var j = i + 1;
-            var k = nums.Length - 1;
-            while (j < k)
+            while (firstPointer < secondPointer)
             {
-                if (j > i + 1 && nums[j - 1] == nums[j])
+                if (firstPointer > i + 1 && nums[firstPointer] == nums[firstPointer - 1])
                 {
-                    j++;
+                    firstPointer++;
                     continue;
                 }
-
-                if (k < nums.Length - 1 && nums[k] == nums[k + 1])
+                if (secondPointer < nums.Length - 1 && nums[secondPointer] == nums[secondPointer + 1])
                 {
-                    k--;
+                    secondPointer--;
                     continue;
                 }
-
-                if (nums[j] + nums[k] == target)
+                if (nums[firstPointer] + nums[secondPointer] == target)
                 {
-                    res.Add(new List<int> { nums[i], nums[j], nums[k] });
-                    j++;
-                    k--;
+                    result.Add(new List<int> { nums[i], nums[firstPointer], nums[secondPointer] });
+                    secondPointer--;
+                    firstPointer++;
                 }
-                else if (nums[j] + nums[k] < target)
+                else if (nums[firstPointer] + nums[secondPointer] > target)
                 {
-                    j++;
+                    secondPointer--;
                 }
                 else
                 {
-                    k--;
+                    firstPointer++;
                 }
             }
+            i++;
         }
-        return res;
+        return result;
     }
 }

@@ -1,8 +1,25 @@
 ﻿namespace ConsoleApp1.TwoPointers.SlidingWindow;
 
+[LastVisited(2023, 01, 02)]
 public class _26
 {
     public int RemoveDuplicates(int[] nums)
+    {
+        var firstPointer = 0;
+        for (var i = 0; i < nums.Length; i++)
+        {
+            if (firstPointer == 0 || nums[i] != nums[firstPointer - 1])
+            {
+                nums[firstPointer] = nums[i];
+                firstPointer++;
+            }
+        }
+
+        return firstPointer;
+
+    }
+
+    public int RemoveDuplicates2(int[] nums)
     {
         if (nums.Length == 0)
         {

@@ -1,8 +1,36 @@
 ﻿namespace ConsoleApp1.Tree.BinarySearchTree;
 
+[LastVisited(2022, 12, 28)]
 public class _285
 {
+    private bool _nextNodeWillBeInOrderSuccessor;
     public TreeNode InorderSuccessor(TreeNode root, TreeNode p)
+    {
+        if (root == null)
+        {
+            return null;
+        }
+
+        var result = InorderSuccessor(root.left, p);
+        if (result != null)
+        {
+            return result;
+        }
+
+        if (_nextNodeWillBeInOrderSuccessor)
+        {
+            return root;
+        }
+
+        if (root.val == p.val)
+        {
+            _nextNodeWillBeInOrderSuccessor = true;
+        }
+
+        return InorderSuccessor(root.right, p);
+    }
+
+    public TreeNode InorderSuccessor2(TreeNode root, TreeNode p)
     {
         if (root == null)
         {
@@ -48,7 +76,7 @@ public class _285
         return currentNode;
     }
 
-    public TreeNode InorderSuccessor2(TreeNode root, TreeNode p)
+    public TreeNode InorderSuccessor3(TreeNode root, TreeNode p)
     {
         var (node, maxRangeNode) = SearchBST(root, p.val, null);
         return node.right is null ? maxRangeNode : FindInOrderSuccessor(node.right);

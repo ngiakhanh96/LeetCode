@@ -1,73 +1,69 @@
 ﻿namespace ConsoleApp1.Tree.BinarySearchTree;
 
+[LastVisited(2022, 12, 28)]
 public class _450
 {
     public TreeNode DeleteNode(TreeNode root, int key)
     {
-        var (node, parentNode) = SearchBST(root, key);
-        if (node is null)
+        var (node, parentNode, isLeft) = SearchNode(root, key);
+        if (node == null)
         {
             return root;
         }
 
-        if (node.left is not null && node.right is not null)
+        if (node.left != null && node.right != null)
         {
-            var (inOrderSuccessor, parentInOrderSuccessor) = FindInOrderSuccessor(node.right, node);
-            var temp = node.val;
-            node.val = inOrderSuccessor.val;
-            inOrderSuccessor.val = temp;
-            node = inOrderSuccessor;
-            parentNode = parentInOrderSuccessor;
-        }
-
-        if (node.left is null && node.right is null)
-        {
-            if (parentNode is null)
+            var parentOfLeftMostOnRightSubTree = node;
+            var leftMostOnRightSubTree = node.right;
+            var isRight = true;
+            while (leftMostOnRightSubTree.left != null)
             {
-                return null;
+                isRight = false;
+                parentOfLeftMostOnRightSubTree = leftMostOnRightSubTree;
+                leftMostOnRightSubTree = leftMostOnRightSubTree.left;
             }
 
-            if (parentNode.left == node)
+            node.val = leftMostOnRightSubTree.val;
+            if (isRight)
             {
-                parentNode.left = null;
+                parentOfLeftMostOnRightSubTree.right = leftMostOnRightSubTree.right;
             }
             else
             {
-                parentNode.right = null;
+                parentOfLeftMostOnRightSubTree.left = leftMostOnRightSubTree.right;
             }
         }
         else
         {
-            var childNode = node.left ?? node.right;
-            if (parentNode is null)
+            if (parentNode == null)
             {
-                return childNode;
-            }
-
-            if (parentNode.left == node)
-            {
-                parentNode.left = childNode;
+                root = node.left ?? node.right;
             }
             else
             {
-                parentNode.right = childNode;
+                if (isLeft)
+                {
+                    parentNode.left = node.left ?? node.right;
+                }
+                else
+                {
+                    parentNode.right = node.left ?? node.right;
+                }
             }
+
         }
+
         return root;
+
     }
 
-    private (TreeNode node, TreeNode parentNode) SearchBST(TreeNode root, int val, TreeNode parentNode = null)
+    private (TreeNode searchedNode, TreeNode parentNode, bool isLeft) SearchNode(TreeNode root, int key, TreeNode parentNode = null, bool isLeft = true)
     {
-        if (root is null || val == root.val)
+        if (root == null || root.val == key)
         {
-            return (root, parentNode);
+            return (root, parentNode, isLeft);
         }
 
-        return SearchBST(val > root.val ? root.right : root.left, val, root);
-    }
-
-    private (TreeNode node, TreeNode parentNode) FindInOrderSuccessor(TreeNode node, TreeNode parentNode)
-    {
-        return node.left is null ? (node, parentNode) : FindInOrderSuccessor(node.left, node);
+        return key < root.val ? SearchNode(root.left, key, root, true) : SearchNode(root.right, key, root, false);
     }
 }
