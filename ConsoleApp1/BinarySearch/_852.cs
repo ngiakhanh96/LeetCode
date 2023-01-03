@@ -1,4 +1,4 @@
-﻿namespace ConsoleApp1.BFS;
+﻿namespace ConsoleApp1.BinarySearch;
 
 [LastVisited(2022, 12, 13)]
 public class _852

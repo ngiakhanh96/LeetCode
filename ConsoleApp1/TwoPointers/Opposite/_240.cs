@@ -1,26 +1,29 @@
 ﻿namespace ConsoleApp1.TwoPointers.Opposite;
 
+[LastVisited(2023, 01, 03)]
 public class _240
 {
     public bool SearchMatrix(int[][] matrix, int target)
     {
-        var (x, y) = (0, matrix[0].Length - 1);
-        while (x < matrix.Length && y >= 0)
+        var row = matrix.Length - 1;
+        var col = 0;
+        while (row >= 0 && col < matrix[0].Length)
         {
-            if (matrix[x][y] == target)
+            if (matrix[row][col] == target)
             {
                 return true;
             }
 
-            if (matrix[x][y] < target)
+            if (matrix[row][col] < target)
             {
-                x++;
+                col++;
             }
             else
             {
-                y--;
+                row--;
             }
         }
+
         return false;
     }
 }

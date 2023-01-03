@@ -22,7 +22,7 @@ public class _433
                 return currentLevel;
             }
 
-            var prefix = new StringBuilder(); ;
+            var prefix = new StringBuilder();
             var postfix = currentGene;
             for (var i = 0; i < currentGene.Length; i++)
             {

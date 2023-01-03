@@ -51,8 +51,7 @@ public class _1091
                 }
             }
 
-            numOfNodesInCurrentLevel--;
-            if (numOfNodesInCurrentLevel == 0)
+            if (--numOfNodesInCurrentLevel == 0)
             {
                 numOfNodesInCurrentLevel = queue.Count;
                 currentLevel++;

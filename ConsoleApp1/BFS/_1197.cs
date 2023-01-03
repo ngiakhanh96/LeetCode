@@ -43,8 +43,7 @@ public class _1197
                 }
             }
 
-            numOfCellsInCurrentLevel--;
-            if (numOfCellsInCurrentLevel == 0)
+            if (--numOfCellsInCurrentLevel == 0)
             {
                 numOfCellsInCurrentLevel = queue.Count;
                 currentLevel++;

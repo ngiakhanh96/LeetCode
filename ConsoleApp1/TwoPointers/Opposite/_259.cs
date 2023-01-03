@@ -1,32 +1,31 @@
 ﻿namespace ConsoleApp1.TwoPointers.Opposite;
 
+[LastVisited(2023, 01, 03)]
 public class _259
 {
     public int ThreeSumSmaller(int[] nums, int target)
     {
-        var res = 0;
-        if (nums.Length < 3)
-        {
-            return res;
-        }
         System.Array.Sort(nums);
-        for (var i = 0; i < nums.Length - 2; i++)
+        var result = 0;
+        for (var i = 0; i < nums.Length; i++)
         {
+            var pointer1 = i + 1;
+            var pointer2 = nums.Length - 1;
             var newTarget = target - nums[i];
-            var (j, k) = (i + 1, nums.Length - 1);
-            while (j < k)
+            while (pointer1 < pointer2)
             {
-                if (nums[j] + nums[k] < newTarget)
+                if (nums[pointer1] + nums[pointer2] < newTarget)
                 {
-                    res += k - j;
-                    j++;
+                    result += pointer2 - pointer1;
+                    pointer1++;
                 }
                 else
                 {
-                    k--;
+                    pointer2--;
                 }
             }
         }
-        return res;
+
+        return result;
     }
 }

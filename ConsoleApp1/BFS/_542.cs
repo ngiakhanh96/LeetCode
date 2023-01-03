@@ -1,79 +1,64 @@
 ﻿namespace ConsoleApp1.BFS;
 
+[LastVisited(2022, 12, 08)]
 public class _542
 {
-    public int[][] DistanceToNearest0s { get; set; }
-
-    public Queue<int[]> BfsQueue { get; set; } = new();
-
-    public bool[][] Visited { get; set; }
-
-    public int[][] InputMatrix { get; set; }
-
     public int[][] UpdateMatrix(int[][] mat)
     {
-        DistanceToNearest0s = new int[mat.Length][];
-        Visited = new bool[mat.Length][];
-        InputMatrix = mat;
+        var queue = new Queue<int[]>();
+        var numberOfNodesInCurrentLevel = 0;
+        var currentLevel = 0;
+        var visited = new bool[mat.Length, mat[0].Length];
+        var result = new int[mat.Length][];
 
-        Bfs(mat);
-        return DistanceToNearest0s;
-    }
-
-    private void Bfs(int[][] mat)
-    {
-        for (var rowIndex = 0; rowIndex < mat.Length; rowIndex++)
+        for (var i = 0; i < mat.Length; i++)
         {
-            DistanceToNearest0s[rowIndex] ??= new int[mat[rowIndex].Length];
-
-            Visited[rowIndex] ??= new bool[mat[rowIndex].Length];
-
-            for (var colIndex = 0; colIndex < mat[rowIndex].Length; colIndex++)
+            result[i] = new int[mat[0].Length];
+            for (var j = 0; j < mat[0].Length; j++)
             {
-                if (mat[rowIndex][colIndex] == 0)
+                if (mat[i][j] == 0)
                 {
-                    BfsQueue.Enqueue(new[] { rowIndex, colIndex });
+                    queue.Enqueue(new int[] { i, j });
+                    visited[i, j] = true;
+                    numberOfNodesInCurrentLevel++;
                 }
             }
         }
 
-        var currentLevel = -1;
-        while (BfsQueue.Count > 0)
+        while (queue.Any())
         {
-            var numOfCellsInCurrentLevel = BfsQueue.Count;
-            currentLevel++;
-            for (var i = 0; i < numOfCellsInCurrentLevel; i++)
+            var currentCell = queue.Dequeue();
+            var x = currentCell[0];
+            var y = currentCell[1];
+
+            result[x][y] = currentLevel;
+            var adjCells = new[] {
+                new[] {x - 1, y},
+                new[] {x, y - 1},
+                new[] {x + 1, y},
+                new[] {x, y + 1}
+            };
+
+            foreach (var adjCell in adjCells)
             {
-                var cell = BfsQueue.Dequeue();
-                var rowIndex = cell[0];
-                var colIndex = cell[1];
-
-                if (InputMatrix[rowIndex][colIndex] == 1)
+                var nextCellX = adjCell[0];
+                var nextCellY = adjCell[1];
+                if (nextCellX >= 0 && nextCellX < mat.Length &&
+                    nextCellY >= 0 && nextCellY < mat[0].Length &&
+                    !visited[nextCellX, nextCellY])
                 {
-                    DistanceToNearest0s[rowIndex][colIndex] = currentLevel;
-                }
-
-                var adjacentCells = new[]
-                {
-                    new[] { rowIndex - 1, colIndex },
-                    new[] { rowIndex, colIndex - 1 },
-                    new[] { rowIndex + 1, colIndex },
-                    new[] { rowIndex, colIndex + 1 }
-                };
-                foreach (var adjacentCell in adjacentCells)
-                {
-                    if (adjacentCell[0] >= 0 &&
-                        adjacentCell[0] <= InputMatrix.Length - 1 &&
-                        adjacentCell[1] >= 0 &&
-                        adjacentCell[1] <= InputMatrix[0].Length - 1 &&
-                        InputMatrix[adjacentCell[0]][adjacentCell[1]] == 1 &&
-                        !Visited[adjacentCell[0]][adjacentCell[1]])
-                    {
-                        BfsQueue.Enqueue(adjacentCell);
-                        Visited[adjacentCell[0]][adjacentCell[1]] = true;
-                    }
+                    visited[nextCellX, nextCellY] = true;
+                    queue.Enqueue(new int[] { nextCellX, nextCellY });
                 }
             }
+
+            if (--numberOfNodesInCurrentLevel == 0)
+            {
+                numberOfNodesInCurrentLevel = queue.Count;
+                currentLevel++;
+            }
         }
+
+        return result;
     }
 }

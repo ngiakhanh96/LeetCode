@@ -1,18 +1,16 @@
 ﻿namespace ConsoleApp1.TwoPointers.Opposite;
 
-[LastVisited(2023, 01, 02)]
+[LastVisited(2023, 01, 03)]
 public class _15
 {
     public IList<IList<int>> ThreeSum(int[] nums)
     {
         System.Array.Sort(nums);
         var result = new List<IList<int>>();
-        var i = 0;
-        while (i < nums.Length - 2)
+        for (var i = 0; i < nums.Length - 2; i++)
         {
             if (i > 0 && nums[i] == nums[i - 1])
             {
-                i++;
                 continue;
             }
             var firstPointer = i + 1;
@@ -45,7 +43,6 @@ public class _15
                     firstPointer++;
                 }
             }
-            i++;
         }
         return result;
     }

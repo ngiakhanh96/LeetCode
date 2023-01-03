@@ -1,5 +1,6 @@
 ﻿namespace ConsoleApp1.TwoPointers.Opposite;
 
+[LastVisited(2023, 01, 03)]
 public class _1099
 {
     public int TwoSumLessThanK(int[] nums, int k)

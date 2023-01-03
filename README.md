@@ -14,22 +14,29 @@
 ### Array:
 * Prefix Sum, Range Addition (Prefix Sum with input (0,0,0,0)), Prefix XOR, Boundary Swap (Dutch Flag), Sliding Window as special case of Two Pointers, Partition, Merge 2 sorted arrays, 
 * Use temp for swapping results in significant better performance compared to swap in-place
+
 ### Partition:
 * Lomuto (Boundary Swap) maintains original order, Hoare not maintain original order.
 * Used for find Kth or K largest/smallest - can also make use of binary heap(priority queue)
+
 ### Counting sort:
 * Used when valueRange <= n:
 * Sort or find the value with max frequency in array,
 * Find how many Numbers Are Smaller Than the Current Number (see _1365)
 * Use element as index in the second array, value as the frequency
+
 ### Merge or Heap sort:
 * Used to find any number a[i], a[r] (i < r) when a[i], a[r] statisfy a condition
 * Merge sort and heap sort can be used on LinkedList while quicksort can't
+
 ### Bucket sort:
 * Use frequency(or array.size() * val) as index in the second array, value as the dynamic list (or linked-list) of elements
+
 ### Two pointers:
 * Same direction template: see _485, _674, _845
-* Opposite direction template: see _15
+* Opposite direction template: see _15, _259
+* Matrix: see _240
+
 ### One or minus one First occurence:
 * See _525, _1124
 
@@ -68,7 +75,7 @@
 ### Stack: 
 * Deal with invalid ({) or remove duplicated characters, Evaluate Reverse Polish Notation (2,3,+)
 
-### Binary Heap(Priority Queue): 
+### Binary Heap (Priority Queue): 
 * Used to get 2 smallest(largest) values, update or combine them then add back to the heap
 * Used to find K smallest(largest) in a stream
 * Use 2 heaps (max and min) to track the median value (see _295)
@@ -91,7 +98,7 @@
 * Try to calculate on the dequeuing node/value rather than its children
 
 
-### [Binary Search](https://www.evernote.com/shard/s601/sh/51bb4614-ef6b-b3b4-3eac-14e357413141/08dc2a9e498e3e4276edae0866ee01a7)
+### [Binary Search](https://www.evernote.com/shard/s601/sh/51bb4614-ef6b-b3b4-3eac-14e357413141/08dc2a9e498e3e4276edae0866ee01a7):
 * Can use with sorted list, rotated sorted list, binary search tree
 * Can use for problems which have the only way to solve is to bruteforce
 * Can use for finding max of min, min of max
@@ -200,7 +207,7 @@
 			```
 
 
-### Dijkstra algorithm: 
+### Dijkstra: 
 * Used to find shortest path in a non negative weight map. See reverse Dijkstra in _1514
 
 ### Binary Search Tree: 
