@@ -1,41 +1,30 @@
 ﻿namespace ConsoleApp1.TwoPointers.SlidingWindow;
 
+[LastVisited(2023, 02, 27)]
 public class _713
 {
     public int NumSubarrayProductLessThanK(int[] nums, int k)
     {
-        var product = 1;
-        var currentJ = 0;
-        var count = 0;
-        for (var i = 0; i < nums.Length; i++)
+        var res = 0;
+        var currProduct = nums[0];
+        var (l, r) = (0, 0);
+        while (r < nums.Length && l < nums.Length)
         {
-            if (i > 0)
+            if (currProduct < k)
             {
-                if (product > 1)
+                res += r - l + 1;
+                r++;
+                if (r < nums.Length)
                 {
-                    product /= nums[i - 1];
+                    currProduct *= nums[r];
                 }
-                currentJ = i > currentJ ? i : currentJ;
-                count += currentJ - i;
             }
-
-            for (var j = currentJ; j < nums.Length; j++)
+            else
             {
-                product *= nums[j];
-                if (product >= k)
-                {
-                    product /= nums[j];
-                    currentJ = j;
-                    break;
-                }
-                count++;
-                if (j + 1 >= nums.Length)
-                {
-                    currentJ = j + 1;
-                }
+                currProduct /= nums[l];
+                l++;
             }
         }
-
-        return count;
+        return res;
     }
 }

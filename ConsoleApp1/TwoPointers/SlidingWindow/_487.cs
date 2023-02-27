@@ -1,46 +1,36 @@
 ﻿namespace ConsoleApp1.TwoPointers.SlidingWindow;
 
+[LastVisited(2023, 02, 27)]
 public class _487
 {
     public int FindMaxConsecutiveOnes(int[] nums)
     {
-        var currentJ = 0;
-        var currentNum0S = 0;
-        var maxLength = 0;
-        var shouldContinue = true;
-        for (var i = 0; i < nums.Length; i++)
+        var res = 1;
+        if (nums.Length == 0)
         {
-            if (i > 0)
-            {
-                if (currentNum0S > 0)
-                {
-                    currentNum0S -= nums[i - 1] == 0 ? 1 : 0;
-                }
-                currentJ = i > currentJ ? i : currentJ;
-            }
+            return res;
+        }
 
-            for (var j = currentJ; j < nums.Length; j++)
+        var remaining0sToFlip = nums[0] == 1 ? 1 : 0;
+        var (l, r) = (0, 0);
+        while (r < nums.Length && l < nums.Length)
+        {
+            if (remaining0sToFlip >= 0)
             {
-                currentNum0S += nums[j] == 0 ? 1 : 0;
-                if (currentNum0S > 1)
+                res = Math.Max(res, r - l + 1);
+                r++;
+                if (r < nums.Length)
                 {
-                    currentJ = j;
-                    currentNum0S--;
-                    break;
-                }
-                maxLength = j - i + 1 > maxLength ? j - i + 1 : maxLength;
-                if (j + 1 >= nums.Length)
-                {
-                    shouldContinue = false;
+                    remaining0sToFlip -= nums[r] == 1 ? 0 : 1;
                 }
             }
-
-            if (!shouldContinue)
+            else
             {
-                break;
+                remaining0sToFlip += nums[l] == 0 ? 1 : 0;
+                l++;
             }
         }
 
-        return maxLength;
+        return res;
     }
 }

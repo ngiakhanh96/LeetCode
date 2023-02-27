@@ -9,6 +9,14 @@
 * [1 or -1 First occurence](#one-or-minus-one-first-occurence)
 * [Bit Manipulation](#bit-manipulation)
 * [Binary Search](#binary-search)
+* [Dijkstra](#dijkstra)
+* [Binary Search Tree](#binary-search-tree)
+* [Union Find](#binary-search-tree)
+* [Minimum Spanning Tree](#left-to-right-minima-tree)
+* [Left To Right Minima Tree](#left-to-right-minima-tree)
+* [Trie](#trie)
+* [Dynamic Programming](#dynamic-programming)
+* [Database](#database)
 ## Techniques:
 
 ### Array:
@@ -36,6 +44,38 @@
 * Same direction template: see _485, _674, _845
 * Opposite direction template: see _15, _259
 * Matrix: see _240
+* Sliding window: When given an array to find longest (count number) of something with at most K something
+	```csharp
+	var res = 0;
+	if (fruits.Length == 0)
+	{
+		return res;
+	}
+	var (l, r) = (0, 0);
+	// Initialize tracker
+	var charDict = new Dictionary<int, int>();
+	UpdateTracker(fruits, r);
+	while (r < fruits.Length && l < fruits.Length)
+	{
+		if (charDict.Count <= k)
+		{
+			res = Math.Max(res, r - l + 1);
+			// or res += r - l + 1;
+			r++;
+			if (r < fruits.Length)
+			{
+				UpdateTracker(fruits, r);
+			}
+		}
+		else
+		{
+			UpdateTracker2(fruits, l);
+			l++;
+		}
+	}
+	return res;
+	```
+
 
 ### One or minus one First occurence:
 * See _525, _1124
@@ -216,16 +256,16 @@
 ### Union Find: 
 * Used to combine things which share common patterns into one group with runtime nearly O(1). For more info https://docs.google.com/presentation/d/1_j8xIydyYzjB_M9J4qGC-YYYvzRrRDW2UUMhTy8Rl6g/edit#slide=id.gfc60fc96f0_0_310
 
-### MinimumSpanningTree: 
+### Minimum Spanning Tree: 
 * A sorted version of UnionFind. Used to find the minimum cost to connect all the vertices in the graph
 
-### LeftToRightMinimaTree: 
+### Left To Right Minima Tree: 
 * Used to find (left/right) nearest position that contains a smaller/bigger value in an array. Runtime O(n). Proof: https://hoangdinhquang.me/on-lrm-trees-lemma-application/
 
 ### Trie: 
 * Used to find the prefix words from the set of given words. May combine with Dfs, Dictionary, Min/Max Heap
 
-### Dynamic Programming (DP): 
+### Dynamic Programming: 
 * Can be realized by 2 approaches: Bottom-up and Top-down with memoization (cache)
 * If f[i] only relies on f[i - 1], then maybe don't need cache for both bottom-up and top-down approach
 More general case: see _650. f[i] only relies on f[i - j] (j < i and j satisfies a given condition), then don't need cache for top-down but need stack for bottom-up to calculate up

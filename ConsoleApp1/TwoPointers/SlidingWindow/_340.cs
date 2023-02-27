@@ -1,57 +1,47 @@
 ﻿namespace ConsoleApp1.TwoPointers.SlidingWindow;
 
+[LastVisited(2023, 02, 27)]
 public class _340
 {
     public int LengthOfLongestSubstringKDistinct(string s, int k)
     {
-        var currentJ = 0;
-        var dict = new Dictionary<int, int>();
-        var maxLength = 0;
-        var shouldContinue = true;
-        for (var i = 0; i < s.Length; i++)
+        var res = 0;
+        if (s.Length == 0)
         {
-            if (i > 0)
+            return res;
+        }
+        var (l, r) = (0, 0);
+        var charDict = new Dictionary<char, int>
+        {
+            { s[l], 1 }
+        };
+        while (r < s.Length)
+        {
+            if (charDict.Count <= k)
             {
-                if (dict.ContainsKey(s[i - 1]))
+                res = Math.Max(res, r - l + 1);
+                r++;
+                if (r < s.Length)
                 {
-                    if (dict[s[i - 1]] == 1)
+                    if (!charDict.TryAdd(s[r], 1))
                     {
-                        dict.Remove(s[i - 1]);
+                        charDict[s[r]]++;
                     }
-                    else
-                    {
-                        dict[s[i - 1]]--;
-                    }
-                }
-                currentJ = i > currentJ ? i : currentJ;
-            }
-
-            for (var j = currentJ; j < s.Length; j++)
-            {
-                if (!dict.TryAdd(s[j], 1))
-                {
-                    dict[s[j]]++;
-                }
-
-                else if (dict.Count > k)
-                {
-                    currentJ = j;
-                    dict.Remove(s[j]);
-                    break;
-                }
-                maxLength = j - i + 1 > maxLength ? j - i + 1 : maxLength;
-                if (j + 1 >= s.Length)
-                {
-                    shouldContinue = false;
                 }
             }
-
-            if (!shouldContinue)
+            else
             {
-                break;
+                if (charDict[s[l]] == 1)
+                {
+                    charDict.Remove(s[l]);
+                }
+                else
+                {
+                    charDict[s[l]]--;
+                }
+                l++;
             }
         }
-
-        return maxLength;
+        return res;
     }
 }

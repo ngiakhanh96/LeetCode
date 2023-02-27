@@ -1,57 +1,44 @@
 ﻿namespace ConsoleApp1.TwoPointers.SlidingWindow;
 
+[LastVisited(2023, 02, 27)]
 public class _904
 {
     public int TotalFruit(int[] fruits)
     {
-        var dict = new Dictionary<int, int>();
-        var max = 0;
-        var currentJ = 0;
-        var shouldContinue = true;
-        for (var i = 0; i < fruits.Length; i++)
+        var res = 0;
+        if (fruits.Length == 0)
         {
-            if (i > 0)
+            return res;
+        }
+        var (l, r) = (0, 0);
+        var charDict = new Dictionary<int, int> { { fruits[l], 1 } };
+        while (r < fruits.Length)
+        {
+            if (charDict.Count <= 2)
             {
-                if (dict.ContainsKey(fruits[i - 1]))
+                res = Math.Max(res, r - l + 1);
+                r++;
+                if (r < fruits.Length)
                 {
-                    dict[fruits[i - 1]]--;
-                    if (dict[fruits[i - 1]] == 0)
+                    if (!charDict.TryAdd(fruits[r], 1))
                     {
-                        dict.Remove(fruits[i - 1]);
+                        charDict[fruits[r]]++;
                     }
                 }
-
-                currentJ = i > currentJ ? i : currentJ;
             }
-
-            for (var j = currentJ; j < fruits.Length; j++)
+            else
             {
-                if (dict.TryAdd(fruits[j], 1))
+                if (charDict[fruits[l]] == 1)
                 {
-                    if (dict.Count > 2)
-                    {
-                        currentJ = j;
-                        dict.Remove(fruits[j]);
-                        break;
-                    }
+                    charDict.Remove(fruits[l]);
                 }
                 else
                 {
-                    dict[fruits[j]]++;
+                    charDict[fruits[l]]--;
                 }
-                max = j - i + 1 > max ? j - i + 1 : max;
-                if (j + 1 >= fruits.Length)
-                {
-                    shouldContinue = false;
-                }
-            }
-
-            if (!shouldContinue)
-            {
-                break;
+                l++;
             }
         }
-
-        return max;
+        return res;
     }
 }

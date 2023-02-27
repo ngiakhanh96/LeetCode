@@ -1,76 +1,86 @@
-﻿namespace ConsoleApp1.TwoPointers.SlidingWindow;
+﻿using System.Text;
 
-// Super hard sliding window. See Youtube for explanation
+namespace ConsoleApp1.TwoPointers.SlidingWindow;
+
+[LastVisited(2023, 02, 27)]
 public class _76
 {
     public string MinWindow(string s, string t)
     {
-        var tCharDict = new Dictionary<char, int>();
-        foreach (var tChar in t)
+        if (s.Length == 0)
         {
-            if (!tCharDict.TryAdd(tChar, 1))
+            return "";
+        }
+        var (l, r) = (0, 0);
+        var targetCharToFrequencyDict = new Dictionary<char, int>();
+        var currentCharToFrequencyDict = new Dictionary<char, int>();
+        foreach (var c in t)
+        {
+            if (!targetCharToFrequencyDict.TryAdd(c, 1))
             {
-                tCharDict[tChar]++;
+                targetCharToFrequencyDict[c]++;
+            }
+            currentCharToFrequencyDict.TryAdd(c, 0);
+        }
+        var minCount = int.MaxValue;
+        var numOfMissingChars = targetCharToFrequencyDict.Count;
+        var (minL, minR) = (-1, -1);
+        if (currentCharToFrequencyDict.ContainsKey(s[r]))
+        {
+            currentCharToFrequencyDict[s[r]]++;
+            if (currentCharToFrequencyDict[s[r]] == targetCharToFrequencyDict[s[r]])
+            {
+                numOfMissingChars--;
             }
         }
 
-        var numMissingChar = t.Length;
-        var start = 0;
-        var end = s.Length + 2;
-
-        var slowPointer = 0;
-        var fastPointer = 0;
-        while (fastPointer < s.Length)
+        while (r < s.Length && l < s.Length)
         {
-            while (numMissingChar > 0 && fastPointer < s.Length)
+            if (numOfMissingChars == 0)
             {
-                if (tCharDict.ContainsKey(s[fastPointer]))
+                var count = r - l + 1;
+                if (count < minCount)
                 {
-                    tCharDict[s[fastPointer]]--;
-                    if (tCharDict[s[fastPointer]] >= 0)
+                    minL = l;
+                    minR = r;
+                    minCount = count;
+                }
+                if (currentCharToFrequencyDict.ContainsKey(s[l]))
+                {
+                    currentCharToFrequencyDict[s[l]]--;
+                    if (currentCharToFrequencyDict[s[l]] == targetCharToFrequencyDict[s[l]] - 1)
                     {
-                        numMissingChar--;
+                        numOfMissingChars++;
                     }
                 }
-
-                fastPointer++;
+                l++;
             }
-
-            if (numMissingChar < 1)
+            else
             {
-                while (numMissingChar < 1)
+                r++;
+                if (r < s.Length)
                 {
-                    if (tCharDict.ContainsKey(s[slowPointer]))
+                    if (currentCharToFrequencyDict.ContainsKey(s[r]))
                     {
-                        tCharDict[s[slowPointer]]++;
-                        if (tCharDict[s[slowPointer]] > 0)
+                        currentCharToFrequencyDict[s[r]]++;
+                        if (currentCharToFrequencyDict[s[r]] == targetCharToFrequencyDict[s[r]])
                         {
-                            numMissingChar++;
+                            numOfMissingChars--;
                         }
                     }
-
-                    slowPointer++;
-                }
-
-                if (fastPointer - slowPointer < end - start)
-                {
-                    start = slowPointer;
-                    end = fastPointer;
                 }
             }
         }
 
-        var res = "";
-        if (end == s.Length + 2)
+        if (minL == -1)
         {
-            return res;
+            return "";
         }
-        for (var i = start - 1; i < end; i++)
+        var stringBuilder = new StringBuilder();
+        for (var i = minL; i <= minR; i++)
         {
-            res += s[i];
+            stringBuilder.Append(s[i]);
         }
-
-        return res;
-
+        return stringBuilder.ToString();
     }
 }

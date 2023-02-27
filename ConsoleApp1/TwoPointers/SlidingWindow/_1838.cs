@@ -1,48 +1,36 @@
 ﻿namespace ConsoleApp1.TwoPointers.SlidingWindow;
 
+[LastVisited(2023, 02, 27)]
 public class _1838
 {
     public int MaxFrequency(int[] nums, int k)
     {
-        System.Array.Sort(nums);
-        long sum = 0;
-        var currentJ = 0;
-        var maxFrequency = 0;
-        var shouldContinue = true;
-        for (var i = 0; i < nums.Length; i++)
+        var res = 0;
+        if (nums.Length == 0)
         {
-            if (i > 0)
+            return res;
+        }
+        System.Array.Sort(nums);
+        var (l, r) = (0, 0);
+        long sum = nums[r];
+        while (l < nums.Length && r < nums.Length)
+        {
+            if (sum + k >= nums[r] * (r - l + 1))
             {
-                if (sum > 0)
+                res = Math.Max(res, r - l + 1);
+                r++;
+                if (r < nums.Length)
                 {
-                    sum -= nums[i - 1];
-                }
-                currentJ = i > currentJ ? i : currentJ;
-            }
-
-            for (var j = currentJ; j < nums.Length; j++)
-            {
-                sum += nums[j];
-                if (k < (long)nums[j] * (j - i + 1) - sum)
-                {
-                    sum -= nums[j];
-                    currentJ = j;
-                    break;
-                }
-
-                maxFrequency = Math.Max(maxFrequency, j - i + 1);
-                if (j + 1 >= nums.Length)
-                {
-                    shouldContinue = false;
+                    sum += nums[r];
                 }
             }
-
-            if (!shouldContinue)
+            else
             {
-                break;
+                sum -= nums[l];
+                l++;
             }
         }
 
-        return maxFrequency;
+        return res;
     }
 }

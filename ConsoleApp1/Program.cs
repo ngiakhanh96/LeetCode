@@ -1,6 +1,9 @@
 ﻿global using ConsoleApp1.Heap;
 global using ConsoleApp1.LinkedList;
 global using ConsoleApp1.UnionFind;
+using ConsoleApp1.TwoPointers.SlidingWindow;
+
+var t = new _76().MinWindow("ADOBECODEBANC", "ABC");
 
 var a = MaximizeSweetness(new[] { 93138, 60229, 11179, 91723, 85722, 58195, 95146, 85049, 33816 }, 5);
 int _currentMaxScore = int.MinValue;

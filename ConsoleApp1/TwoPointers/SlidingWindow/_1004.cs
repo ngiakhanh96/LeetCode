@@ -1,8 +1,38 @@
 ﻿namespace ConsoleApp1.TwoPointers.SlidingWindow;
 
+[LastVisited(2023, 02, 27)]
 public class _1004
 {
     public int LongestOnes(int[] nums, int k)
+    {
+        var (l, r) = (0, 0);
+        var zero = nums[0] == 0 ? 1 : 0;
+        var res = 0;
+        while (r < nums.Length)
+        {
+            if (zero <= k)
+            {
+                res = Math.Max(res, r - l + 1);
+                r++;
+                if (r < nums.Length)
+                {
+                    zero += nums[r] == 0 ? 1 : 0;
+                }
+            }
+            else
+            {
+                if (nums[l] == 0)
+                {
+                    zero--;
+                }
+                l++;
+            }
+        }
+        return res;
+
+    }
+
+    public int LongestOnes2(int[] nums, int k)
     {
         var currentJ = 0;
         var currentNum0S = 0;

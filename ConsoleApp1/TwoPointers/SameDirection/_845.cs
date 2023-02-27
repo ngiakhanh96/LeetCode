@@ -1,4 +1,4 @@
-﻿namespace ConsoleApp1.TwoPointers.SlidingWindow;
+﻿namespace ConsoleApp1.TwoPointers.SameDirection;
 
 [LastVisited(2022, 12, 28)]
 public class _845

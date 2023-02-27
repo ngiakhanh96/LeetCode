@@ -1,57 +1,37 @@
 ﻿namespace ConsoleApp1.TwoPointers.SlidingWindow;
 
+[LastVisited(2023, 02, 27)]
 public class _159
 {
     public int LengthOfLongestSubstringTwoDistinct(string s)
     {
-        var currentJ = 0;
-        var dict = new Dictionary<int, int>();
-        var maxLength = 0;
-        var shouldContinue = true;
-        for (var i = 0; i < s.Length; i++)
+        var (l, r) = (0, 0);
+        var distinctCharsDict = new Dictionary<char, int> { { s[0], 1 } };
+        var res = 0;
+        while (r < s.Length)
         {
-            if (i > 0)
+            if (distinctCharsDict.Count <= 2)
             {
-                if (dict.ContainsKey(s[i - 1]))
+                res = Math.Max(res, r - l + 1);
+                r++;
+                if (r < s.Length)
                 {
-                    if (dict[s[i - 1]] == 1)
+                    if (!distinctCharsDict.TryAdd(s[r], 1))
                     {
-                        dict.Remove(s[i - 1]);
-                    }
-                    else
-                    {
-                        dict[s[i - 1]]--;
+                        distinctCharsDict[s[r]]++;
                     }
                 }
-                currentJ = i > currentJ ? i : currentJ;
             }
-
-            for (var j = currentJ; j < s.Length; j++)
+            else
             {
-                if (!dict.TryAdd(s[j], 1))
+                distinctCharsDict[s[l]]--;
+                if (distinctCharsDict[s[l]] <= 0)
                 {
-                    dict[s[j]]++;
+                    distinctCharsDict.Remove(s[l]);
                 }
-
-                else if (dict.Count > 2)
-                {
-                    currentJ = j;
-                    dict.Remove(s[j]);
-                    break;
-                }
-                maxLength = j - i + 1 > maxLength ? j - i + 1 : maxLength;
-                if (j + 1 >= s.Length)
-                {
-                    shouldContinue = false;
-                }
-            }
-
-            if (!shouldContinue)
-            {
-                break;
+                l++;
             }
         }
-
-        return maxLength;
+        return res;
     }
 }

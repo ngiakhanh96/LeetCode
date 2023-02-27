@@ -1,4 +1,4 @@
-﻿namespace ConsoleApp1.TwoPointers.SlidingWindow;
+﻿namespace ConsoleApp1.QuickSelect;
 
 public class _973
 {
