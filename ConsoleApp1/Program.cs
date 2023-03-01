@@ -51,6 +51,74 @@ int MaximizeSweetness(int[] v, int k)
     return minSweetness;
 }
 
+var tFourSum = FourSum(new int[] { 2, 2, 2, 2 }, 8);
+IList<IList<int>> FourSum(int[] nums, int target)
+{
+    Array.Sort(nums);
+    var k = 4;
+    return kSum(nums, target, 4, 0);
+}
+
+IList<IList<int>> kSum(int[] nums, int target, int k, int start)
+{
+    var result = new List<IList<int>>();
+    if (k == 2)
+    {
+        return TwoSum(nums, target, start);
+    }
+    else
+    {
+        /*if (start > 0 && nums[start] == nums[start - 1]) {
+            return kSum(nums, target - nums[start], k, start + 1);
+        }*/
+        for (var i = start; i < nums.Length - (k - 1); i++)
+        {
+            var lists = kSum(nums, target - nums[i], k - 1, i + 1);
+            foreach (var list in lists)
+            {
+                list.Add(nums[i]);
+                result.Add(list);
+            }
+        }
+    }
+    return result;
+}
+
+List<IList<int>> TwoSum(int[] nums, int target, int start)
+{
+    var result = new List<IList<int>>();
+    var pointer1 = start;
+    var pointer2 = nums.Length - 1;
+    while (pointer1 < pointer2)
+    {
+        if (pointer1 > start && nums[pointer1] == nums[pointer1 - 1])
+        {
+            pointer1++;
+            continue;
+        }
+        if (pointer2 < nums.Length - 1 && nums[pointer2] == nums[pointer2 + 1])
+        {
+            pointer2--;
+            continue;
+        }
+        if ((long)nums[pointer1] + nums[pointer2] == target)
+        {
+            result.Add(new List<int> { nums[pointer1], nums[pointer2] });
+            pointer1++;
+            pointer2--;
+        }
+        else if ((long)nums[pointer1] + nums[pointer2] < target)
+        {
+            pointer1++;
+        }
+        else
+        {
+            pointer2--;
+        }
+    }
+    return result;
+}
+
 //public class NumMatrix
 //{
 //    private HashSet<(int x, int y, int z)> VisitedCells = new HashSet<(int x, int y, int z)>();
