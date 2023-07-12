@@ -1,4 +1,4 @@
-﻿namespace ConsoleApp1.LockExamples.Semaphore;
+﻿namespace ConsoleApp1.LockExamples.OS.Semaphore;
 
 public class SemaphoreExample
 {

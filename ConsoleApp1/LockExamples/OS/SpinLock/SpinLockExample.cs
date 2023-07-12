@@ -1,4 +1,4 @@
-﻿namespace ConsoleApp1.LockExamples.SpinLock;
+﻿namespace ConsoleApp1.LockExamples.OS.SpinLock;
 
 internal class SpinLockExample
 {

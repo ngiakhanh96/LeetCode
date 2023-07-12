@@ -1,4 +1,4 @@
-﻿namespace ConsoleApp1.LockExamples.Mutex;
+﻿namespace ConsoleApp1.LockExamples.OS.Mutex;
 
 internal class MutexExample
 {
