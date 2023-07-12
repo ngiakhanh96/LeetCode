@@ -1,22 +1,9 @@
 ﻿global using ConsoleApp1.Heap;
 global using ConsoleApp1.LinkedList;
 global using ConsoleApp1.UnionFind;
-using ConsoleApp1.DivideAndConquer;
-using ConsoleApp1.TwoPointers.SlidingWindow;
+using ConsoleApp1.LockExamples.Monitor;
 
-var t = new _76().MinWindow("ADOBECODEBANC", "ABC");
-
-var a = MaximizeSweetness(new[] { 93138, 60229, 11179, 91723, 85722, 58195, 95146, 85049, 33816 }, 5);
-int _currentMaxScore = int.MinValue;
-
-var res = new _218().GetSkyline(new[]
-{
-    new[] {2, 9, 10},
-    new[] {3, 7, 15},
-    new[] {5, 12, 12},
-    new[] {15, 20, 10},
-    new[] {19, 24, 8}
-});
+MonitorExample.ExampleWithMonitor();
 
 int MaximizeSweetness(int[] v, int k)
 {
