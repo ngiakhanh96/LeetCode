@@ -1,4 +1,5 @@
 ﻿namespace ConsoleApp1.LockExamples.Program.Monitor;
+using System.Threading;
 internal class MonitorExample
 {
     // Create a new lock. The creating thread does not own the lock.
