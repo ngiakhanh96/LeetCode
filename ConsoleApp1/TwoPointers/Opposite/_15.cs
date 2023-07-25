@@ -1,6 +1,6 @@
 ﻿namespace ConsoleApp1.TwoPointers.Opposite;
 
-[LastVisited(2023, 01, 03)]
+[LastVisited(2023, 07, 25)]
 public class _15
 {
     public IList<IList<int>> ThreeSum(int[] nums)

@@ -1,6 +1,6 @@
 ﻿namespace ConsoleApp1.TwoPointers.Opposite;
 
-[LastVisited(2023, 01, 02)]
+[LastVisited(2023, 07, 25)]
 public class _167
 {
     public int[] TwoSum(int[] numbers, int target)
@@ -13,7 +13,8 @@ public class _167
             {
                 return new int[] { firstPointer + 1, secondPointer + 1 };
             }
-            else if (numbers[firstPointer] + numbers[secondPointer] > target)
+
+            if (numbers[firstPointer] + numbers[secondPointer] > target)
             {
                 secondPointer--;
             }

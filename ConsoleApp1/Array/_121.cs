@@ -1,5 +1,6 @@
 ﻿namespace ConsoleApp1.Array;
 
+[LastVisited(2023, 07, 25)]
 public class _121
 {
     public int MaxProfit(int[] prices)

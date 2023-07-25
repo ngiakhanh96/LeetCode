@@ -1,5 +1,6 @@
 ﻿namespace ConsoleApp1.PrefixSum;
 
+[LastVisited(2023, 07, 25)]
 public class _53
 {
     public int MaxSubArray(int[] array)

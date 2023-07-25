@@ -1,6 +1,6 @@
 ﻿namespace ConsoleApp1.BinarySearch;
 
-[LastVisited(2022, 12, 13)]
+[LastVisited(2023, 07, 25)]
 public class _33
 {
     public int Search(int[] nums, int target)
@@ -9,6 +9,15 @@ public class _33
         var high = nums.Length - 1;
         while (low <= high)
         {
+            if (nums[high] == target)
+            {
+                return high;
+            }
+            if (nums[low] == target)
+            {
+                return low;
+            }
+
             var middle = low + (high - low + 1) / 2;
             if (nums[middle] == target)
             {
@@ -17,7 +26,7 @@ public class _33
 
             if (nums[middle] < target)
             {
-                if (nums[middle] <= nums[high] && target >= nums[low] && nums[low] > nums[high])
+                if (nums[middle] < nums[low] && nums[low] < target)
                 {
                     high = middle - 1;
                 }
@@ -28,7 +37,7 @@ public class _33
             }
             else
             {
-                if (nums[middle] >= nums[low] && target <= nums[high] && nums[low] > nums[high])
+                if (nums[middle] > nums[high] && nums[high] > target)
                 {
                     low = middle + 1;
                 }

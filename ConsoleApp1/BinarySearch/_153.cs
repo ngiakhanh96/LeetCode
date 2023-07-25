@@ -1,6 +1,6 @@
 ﻿namespace ConsoleApp1.BinarySearch;
 
-[LastVisited(2022, 12, 20)]
+[LastVisited(2023, 07, 25)]
 public class _153
 {
     public int FindMin(int[] nums)
