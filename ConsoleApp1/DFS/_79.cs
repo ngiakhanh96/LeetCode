@@ -1,5 +1,6 @@
 ﻿namespace ConsoleApp1.DFS;
 
+[LastVisited(2023, 07, 27)]
 public class _79
 {
     public bool Exist(char[][] board, string word)

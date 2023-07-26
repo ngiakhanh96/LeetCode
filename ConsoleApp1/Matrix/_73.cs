@@ -1,5 +1,6 @@
 ﻿namespace ConsoleApp1.Matrix;
 
+[LastVisited(2023, 07, 27)]
 public class _73
 {
     public void SetZeroes(int[][] matrix)
