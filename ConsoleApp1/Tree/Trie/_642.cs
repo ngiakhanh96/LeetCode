@@ -109,17 +109,17 @@ public class _642
                 currentNode = currentNode.Children[index];
             }
 
-            var maxHeap = new CustomPriorityQueue<string, int>(currentNode.Words.Select(item => (item.Key, item.Value)), new MaxHeapIntComparer());
+            var maxHeap = new MaxPriorityQueue<string, int>(currentNode.Words.Select(item => (item.Key, item.Value)));
             var lastPriority = 0;
             var tempList = new List<string>();
-            CustomPriorityQueue<string, string> tempMinHeap;
+            PriorityQueue<string, string> tempMinHeap;
             while (maxHeap.Count > 0 && resultList.Count < quantity)
             {
                 var dequeuedWord = maxHeap.Dequeue();
                 var hotDegree = currentNode.Words[dequeuedWord];
                 if (hotDegree < lastPriority)
                 {
-                    tempMinHeap = new CustomPriorityQueue<string, string>(tempList.Select(a => (a, a)), new MinHeapStringLexicalComparer());
+                    tempMinHeap = new PriorityQueue<string, string>(tempList.Select(a => (a, a)), new MinHeapStringLexicalComparer());
                     while (tempMinHeap.Count > 0 && resultList.Count < quantity)
                     {
                         resultList.Add(tempMinHeap.Dequeue());
@@ -133,7 +133,7 @@ public class _642
 
             if (resultList.Count < quantity)
             {
-                tempMinHeap = new CustomPriorityQueue<string, string>(tempList.Select(a => (a, a)), new MinHeapStringLexicalComparer());
+                tempMinHeap = new PriorityQueue<string, string>(tempList.Select(a => (a, a)), new MinHeapStringLexicalComparer());
                 while (tempMinHeap.Count > 0 && resultList.Count < quantity)
                 {
                     resultList.Add(tempMinHeap.Dequeue());

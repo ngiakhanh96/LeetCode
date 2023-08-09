@@ -4,8 +4,7 @@ public class _1738
 {
     public int KthLargestValue(int[][] matrix, int k)
     {
-        var minHeap = new MinHeap();
-        //var priorityQueue = new PriorityQueue<int, int>();
+        var minHeap = new PriorityQueue<int, int>();
         var count = 0;
         var temp = new int[matrix.Length * matrix[0].Length];
         for (var i = 0; i < matrix.Length; i++)
@@ -16,27 +15,15 @@ public class _1738
                     (i > 0 ? matrix[i - 1][j] : 0) ^
                     (j > 0 ? matrix[i][j - 1] : 0) ^
                     (i > 0 && j > 0 ? matrix[i - 1][j - 1] : 0);
-                //if (priorityQueue.Count < k)
-                //{
-                //    priorityQueue.Enqueue(matrix[i][j]);
-                //}
-                //else
-                //{
-                //    if (matrix[i][j] > priorityQueue.Peek())
-                //    {
-                //        priorityQueue.DequeueEnqueue(matrix[i][j]);
-                //    }
-                //}
                 if (minHeap.Count < k)
                 {
-                    minHeap.Add(matrix[i][j]);
+                    minHeap.Enqueue(matrix[i][j]);
                 }
                 else
                 {
                     if (matrix[i][j] > minHeap.Peek())
                     {
-                        minHeap.Pop();
-                        minHeap.Add(matrix[i][j]);
+                        minHeap.DequeueEnqueue(matrix[i][j]);
                     }
                 }
                 temp[count++] = matrix[i][j];
@@ -44,7 +31,6 @@ public class _1738
         }
         //Time: O(MNlogk)
         //Space: O(k)
-        //return priorityQueue.Peek();
         return minHeap.Peek();
 
         //Time: O(MNlog(MN))

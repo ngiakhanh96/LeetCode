@@ -4,14 +4,14 @@ public class _703
 {
     public class KthLargest
     {
-        public MinHeap MinHeap { get; set; }
+        public PriorityQueue<int, int> MinHeap { get; set; }
 
         public int Size { get; set; }
 
         public KthLargest(int k, int[] nums)
         {
             Size = k;
-            MinHeap = new MinHeap();
+            MinHeap = new();
             foreach (var num in nums)
             {
                 AddToHeap(num);
@@ -23,15 +23,14 @@ public class _703
         {
             if (MinHeap.Count < Size)
             {
-                MinHeap.Add(num);
+                MinHeap.Enqueue(num);
             }
             else
             {
                 var currentSmallest = MinHeap.Peek();
                 if (num > currentSmallest)
                 {
-                    MinHeap.Pop();
-                    MinHeap.Add(num);
+                    MinHeap.DequeueEnqueue(num);
                 }
             }
         }

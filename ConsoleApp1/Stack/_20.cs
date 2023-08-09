@@ -4,23 +4,24 @@ public class _20
 {
     public bool IsValid(string s)
     {
-        var dict = new Dictionary<char, char>
-        {
+        var stack = new Stack<char>();
+        var dict = new Dictionary<char, char>{
             {')', '('},
             {'}', '{'},
-            {']' ,'['}
+            {']', '['}
         };
-        var stack = new Stack<char>();
         foreach (var chr in s)
         {
-            if (stack.Count == 0)
+            if (dict.TryGetValue(chr, out var openChr))
             {
-                stack.Push(chr);
-                continue;
-            }
-            if (dict.ContainsKey(chr) && stack.Peek() == dict[chr])
-            {
-                stack.Pop();
+                if (stack.Count > 0 && stack.Peek() == openChr)
+                {
+                    stack.Pop();
+                }
+                else
+                {
+                    return false;
+                }
             }
             else
             {

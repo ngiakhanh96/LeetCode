@@ -20,32 +20,24 @@ public class _1514
 
         var d = new double[n];
         d[start] = 1;
-        var maxHeap = new MaxHeap<DijkstraNode>();
-        maxHeap.Add(new DijkstraNode
-        {
-            Num = (float)d[start],
-            NodeIndex = start
-        });
+        var maxHeap = new MaxPriorityQueue<int, double>();
+        maxHeap.Enqueue(start, d[start]);
 
-        while (!maxHeap.IsEmpty())
+        while (maxHeap.Count > 0)
         {
-            var currentNode = maxHeap.Pop();
-            if (currentNode.NodeIndex == end)
+            var currentNode = maxHeap.Dequeue();
+            if (currentNode == end)
             {
                 break;
             }
-            foreach (var adjacentNode in adjacentNodes[currentNode.NodeIndex])
+            foreach (var adjacentNode in adjacentNodes[currentNode])
             {
                 var adjacentNodeIndex = (int)adjacentNode[0];
                 var weight = adjacentNode[1];
-                if (d[currentNode.NodeIndex] * weight > d[adjacentNodeIndex])
+                if (d[currentNode] * weight > d[adjacentNodeIndex])
                 {
-                    d[adjacentNodeIndex] = d[currentNode.NodeIndex] * weight;
-                    maxHeap.Add(new DijkstraNode
-                    {
-                        Num = (float)d[adjacentNodeIndex],
-                        NodeIndex = adjacentNodeIndex
-                    });
+                    d[adjacentNodeIndex] = d[currentNode] * weight;
+                    maxHeap.Enqueue(adjacentNodeIndex, d[adjacentNodeIndex]);
                 }
             }
         }
@@ -71,36 +63,24 @@ public class _1514
 
         var d = new double[n];
         d[start] = 1;
-        var maxHeap = new PriorityQueue<DijkstraNode, float>(new MaxHeapFloatComparer());
-        maxHeap.Enqueue(
-            new DijkstraNode
-            {
-                Num = (float)d[start],
-                NodeIndex = start
-            },
-            (float)d[start]);
+        var maxHeap = new MaxPriorityQueue<int, double>();
+        maxHeap.Enqueue(start, d[start]);
 
         while (maxHeap.Count > 0)
         {
             var currentNode = maxHeap.Dequeue();
-            if (currentNode.NodeIndex == end)
+            if (currentNode == end)
             {
                 break;
             }
-            foreach (var adjacentNode in adjacentNodes[currentNode.NodeIndex])
+            foreach (var adjacentNode in adjacentNodes[currentNode])
             {
                 var adjacentNodeIndex = (int)adjacentNode[0];
                 var weight = adjacentNode[1];
-                if (d[currentNode.NodeIndex] * weight > d[adjacentNodeIndex])
+                if (d[currentNode] * weight > d[adjacentNodeIndex])
                 {
-                    d[adjacentNodeIndex] = d[currentNode.NodeIndex] * weight;
-                    maxHeap.Enqueue(
-                        new DijkstraNode
-                        {
-                            Num = (float)d[adjacentNodeIndex],
-                            NodeIndex = adjacentNodeIndex
-                        },
-                        (float)d[adjacentNodeIndex]);
+                    d[adjacentNodeIndex] = d[currentNode] * weight;
+                    maxHeap.Enqueue(adjacentNodeIndex, d[adjacentNodeIndex]);
                 }
             }
         }

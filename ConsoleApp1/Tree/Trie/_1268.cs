@@ -68,7 +68,7 @@ public class _1268
                 currentNode = currentNode.Children[chr - 'a'];
             }
 
-            var minHeap = new CustomPriorityQueue<string, string>(
+            var minHeap = new PriorityQueue<string, string>(
                 currentNode.Words.Select(word => (word, word)),
                 new MinHeapStringLexicalComparer());
             while (minHeap.Count > 0 && resultList.Count < quantity)

@@ -27,20 +27,22 @@ public class _787
             }
         }
         d[src, k] = 0;
-        var minHeap = new MinHeap<DijkstraNodeWithK>();
-        minHeap.Add(new DijkstraNodeWithK
-        {
-            Num = d[src, k],
-            NodeIndex = src,
-            RemainingStops = k
-        });
+        var minHeap = new PriorityQueue<DijkstraNodeWithK, int>();
+        minHeap.Enqueue(
+            new DijkstraNodeWithK
+            {
+                Priority = d[src, k],
+                NodeIndex = src,
+                RemainingStops = k
+            },
+            d[src, k]);
         var minFlightPrice = int.MaxValue;
-        while (!minHeap.IsEmpty())
+        while (minHeap.Count > 0)
         {
-            var currentNode = minHeap.Pop();
+            var currentNode = minHeap.Dequeue();
             if (currentNode.NodeIndex == dst)
             {
-                minFlightPrice = (int)currentNode.Num;
+                minFlightPrice = currentNode.Priority;
                 break;
             }
 
@@ -55,12 +57,14 @@ public class _787
                 if (newRemainingStops >= 0 && d[currentNode.NodeIndex, currentNode.RemainingStops] + weight < d[targetNodeIndex, newRemainingStops])
                 {
                     d[targetNodeIndex, newRemainingStops] = d[currentNode.NodeIndex, currentNode.RemainingStops] + weight;
-                    minHeap.Add(new DijkstraNodeWithK
-                    {
-                        Num = d[targetNodeIndex, newRemainingStops],
-                        NodeIndex = targetNodeIndex,
-                        RemainingStops = newRemainingStops
-                    });
+                    minHeap.Enqueue(
+                        new DijkstraNodeWithK
+                        {
+                            Priority = d[targetNodeIndex, newRemainingStops],
+                            NodeIndex = targetNodeIndex,
+                            RemainingStops = newRemainingStops
+                        },
+                        d[targetNodeIndex, newRemainingStops]);
                 }
             }
         }
@@ -97,7 +101,7 @@ public class _787
         minHeap.Enqueue(
             new DijkstraNodeWithK
             {
-                Num = d[src, k],
+                Priority = d[src, k],
                 NodeIndex = src,
                 RemainingStops = k
             },
@@ -108,7 +112,7 @@ public class _787
             var currentNode = minHeap.Dequeue();
             if (currentNode.NodeIndex == dst)
             {
-                minFlightPrice = (int)currentNode.Num;
+                minFlightPrice = currentNode.Priority;
                 break;
             }
 
@@ -126,7 +130,7 @@ public class _787
                     minHeap.Enqueue(
                         new DijkstraNodeWithK
                         {
-                            Num = d[targetNodeIndex, newRemainingStops],
+                            Priority = d[targetNodeIndex, newRemainingStops],
                             NodeIndex = targetNodeIndex,
                             RemainingStops = newRemainingStops
                         },

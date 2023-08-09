@@ -18,28 +18,20 @@ public class _743
         var d = Enumerable.Repeat(int.MaxValue, n).ToArray();
         k--;
         d[k] = 0;
-        var minHeap = new MinHeap<DijkstraNode>();
-        minHeap.Add(new DijkstraNode
-        {
-            Num = d[k],
-            NodeIndex = k
-        });
+        var minHeap = new PriorityQueue<int, int>();
+        minHeap.Enqueue(k, d[k]);
 
-        while (!minHeap.IsEmpty())
+        while (minHeap.Count > 0)
         {
-            var currentNode = minHeap.Pop();
-            foreach (var adjacentNode in adjacentNodes[currentNode.NodeIndex])
+            var currentNode = minHeap.Dequeue();
+            foreach (var adjacentNode in adjacentNodes[currentNode])
             {
                 var targetNodeIndex = adjacentNode[0];
                 var weight = adjacentNode[1];
-                if (d[currentNode.NodeIndex] + weight < d[targetNodeIndex])
+                if (d[currentNode] + weight < d[targetNodeIndex])
                 {
-                    d[targetNodeIndex] = d[currentNode.NodeIndex] + weight;
-                    minHeap.Add(new DijkstraNode
-                    {
-                        Num = d[targetNodeIndex],
-                        NodeIndex = targetNodeIndex
-                    });
+                    d[targetNodeIndex] = d[currentNode] + weight;
+                    minHeap.Enqueue(targetNodeIndex, d[targetNodeIndex]);
                 }
             }
         }
@@ -64,32 +56,20 @@ public class _743
         var d = Enumerable.Repeat(int.MaxValue, n).ToArray();
         k--;
         d[k] = 0;
-        var minHeap = new PriorityQueue<DijkstraNode, int>();
-        minHeap.Enqueue(
-            new DijkstraNode
-            {
-                Num = d[k],
-                NodeIndex = k
-            },
-            d[k]);
+        var minHeap = new PriorityQueue<int, int>();
+        minHeap.Enqueue(k, d[k]);
 
         while (minHeap.Count > 0)
         {
             var currentNode = minHeap.Dequeue();
-            foreach (var adjacentNode in adjacentNodes[currentNode.NodeIndex])
+            foreach (var adjacentNode in adjacentNodes[currentNode])
             {
                 var targetNodeIndex = adjacentNode[0];
                 var weight = adjacentNode[1];
-                if (d[currentNode.NodeIndex] + weight < d[targetNodeIndex])
+                if (d[currentNode] + weight < d[targetNodeIndex])
                 {
-                    d[targetNodeIndex] = d[currentNode.NodeIndex] + weight;
-                    minHeap.Enqueue(
-                        new DijkstraNode
-                        {
-                            Num = d[targetNodeIndex],
-                            NodeIndex = targetNodeIndex
-                        },
-                        d[targetNodeIndex]);
+                    d[targetNodeIndex] = d[currentNode] + weight;
+                    minHeap.Enqueue(targetNodeIndex, d[targetNodeIndex]);
                 }
             }
         }

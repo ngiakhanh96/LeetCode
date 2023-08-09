@@ -138,14 +138,14 @@ public class _215
         return boundary;
     }
 
-    public MinHeap MinHeap { get; set; }
+    public PriorityQueue<int, int> MinHeap { get; set; }
 
     public int Size { get; set; }
 
     public int FindKthLargest3(int[] nums, int k)
     {
         Size = k;
-        MinHeap = new MinHeap();
+        MinHeap = new();
         foreach (var num in nums)
         {
             AddToHeap(num);
@@ -158,15 +158,14 @@ public class _215
     {
         if (MinHeap.Count < Size)
         {
-            MinHeap.Add(num);
+            MinHeap.Enqueue(num);
         }
         else
         {
             var currentSmallest = MinHeap.Peek();
             if (num > currentSmallest)
             {
-                MinHeap.Pop();
-                MinHeap.Add(num);
+                MinHeap.DequeueEnqueue(num);
             }
         }
     }

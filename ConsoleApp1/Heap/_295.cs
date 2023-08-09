@@ -1,39 +1,38 @@
 ﻿namespace ConsoleApp1.Heap;
 
-//Cannot solve because Leetcode not use .net 6
 public class _295
 {
     public class MedianFinder
     {
-        public MaxHeap MaxHeap { get; set; } = new(50000);
+        public MaxPriorityQueue<int, int> MaxHeap { get; set; } = new(50000);
 
-        public MinHeap MinHeap { get; set; } = new(50000);
+        public PriorityQueue<int, int> MinHeap { get; set; } = new(50000);
 
         public void AddNum(int num)
         {
             if (MaxHeap.Count == MinHeap.Count)
             {
-                if (MaxHeap.IsEmpty() || num <= MaxHeap.Peek())
+                if (MaxHeap.Count == 0 || num <= MaxHeap.Peek())
                 {
-                    MaxHeap.Add(num);
+                    MaxHeap.Enqueue(num);
                 }
                 else
                 {
-                    MinHeap.Add(num);
-                    MaxHeap.Add(MinHeap.Pop());
+                    MinHeap.Enqueue(num);
+                    MaxHeap.Enqueue(MinHeap.Dequeue());
 
                 }
             }
             else
             {
-                if (!MinHeap.IsEmpty() && num >= MinHeap.Peek())
+                if (MinHeap.Count > 0 && num >= MinHeap.Peek())
                 {
-                    MinHeap.Add(num);
+                    MinHeap.Enqueue(num);
                 }
                 else
                 {
-                    MaxHeap.Add(num);
-                    MinHeap.Add(MaxHeap.Pop());
+                    MaxHeap.Enqueue(num);
+                    MinHeap.Enqueue(MaxHeap.Dequeue());
                 }
             }
         }
@@ -53,7 +52,7 @@ public class _295
     {
         public PriorityQueue<int, int> MinHeap { get; set; } = new();
 
-        public PriorityQueue<int, int> MaxHeap { get; set; } = new(new MaxHeapIntComparer());
+        public MaxPriorityQueue<int, int> MaxHeap { get; set; } = new();
 
         public void AddNum(int num)
         {

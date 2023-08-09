@@ -50,7 +50,6 @@ public class _347
         return res;
     }
 
-    public MaxHeap MaxHeap { get; set; }
     public int[] TopKFrequent2(int[] nums, int k)
     {
 
@@ -63,7 +62,7 @@ public class _347
                 numToFreqDict[num]++;
             }
         }
-        MaxHeap = new MaxHeap(numToFreqDict.Count);
+        var maxHeap = new MaxPriorityQueue<int, int>(numToFreqDict.Count);
         var freqToNumsDict = new Dictionary<int, List<int>>();
         foreach (var (key, value) in numToFreqDict)
         {
@@ -77,14 +76,14 @@ public class _347
 
         foreach (var freq in freqToNumsDict.Keys)
         {
-            MaxHeap.Add(freq);
+            maxHeap.Enqueue(freq);
         }
 
         var count = 0;
         var res = new int[k];
         while (count < k)
         {
-            var freq = MaxHeap.Pop();
+            var freq = maxHeap.Dequeue();
             var numList = freqToNumsDict[freq];
             var j = 0;
             while (count < k && j < numList.Count)
@@ -97,10 +96,9 @@ public class _347
         return res;
     }
 
-    public PriorityQueue<int, int> Maxheap { get; set; } = new(new MaxHeapIntComparer());
     public int[] TopKFrequent3(int[] nums, int k)
     {
-
+        var maxHeap = new MaxPriorityQueue<int, int>();
         var numToFreqDict = new Dictionary<int, int>();
 
         foreach (var num in nums)
@@ -124,14 +122,14 @@ public class _347
 
         foreach (var freq in freqToNumsDict.Keys)
         {
-            Maxheap.Enqueue(freq);
+            maxHeap.Enqueue(freq);
         }
 
         var count = 0;
         var res = new int[k];
         while (count < k)
         {
-            var freq = Maxheap.Dequeue();
+            var freq = maxHeap.Dequeue();
             var numList = freqToNumsDict[freq];
             var j = 0;
             while (count < k && j < numList.Count)

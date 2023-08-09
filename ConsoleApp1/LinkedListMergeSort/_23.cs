@@ -59,24 +59,18 @@ public class _23
     }
 
     //Heapsort
-    public class HeapNodeItem : HeapItem
-    {
-        public ListNode ListNode { get; set; }
-    }
 
     public ListNode MergeKLists2(ListNode[] lists)
     {
-        var minHeap = new MinHeap<HeapNodeItem>();
+        var minHeap = new PriorityQueue<ListNode, int>();
 
         foreach (var listNode in lists)
         {
             if (listNode != null)
             {
-                minHeap.Add(new HeapNodeItem
-                {
-                    Num = listNode.val,
-                    ListNode = listNode
-                });
+                minHeap.Enqueue(
+                    listNode,
+                    listNode.val);
             }
         }
 
@@ -84,16 +78,14 @@ public class _23
         var tail = head;
         while (minHeap.Count > 0)
         {
-            var newMinNode = minHeap.Pop();
-            tail.next = newMinNode.ListNode;
+            var newMinNode = minHeap.Dequeue();
+            tail.next = newMinNode;
             tail = tail.next;
-            if (newMinNode.ListNode.next != null)
+            if (newMinNode.next != null)
             {
-                minHeap.Add(new HeapNodeItem
-                {
-                    Num = newMinNode.ListNode.next.val,
-                    ListNode = newMinNode.ListNode.next
-                });
+                minHeap.Enqueue(
+                newMinNode.next,
+                newMinNode.next.val);
             }
         }
 

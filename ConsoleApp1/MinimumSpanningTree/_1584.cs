@@ -4,7 +4,7 @@ public class _1584
 {
     public int MinCostConnectPoints(int[][] points)
     {
-        var minHeap = new MinHeap<PointIndicesWithDistance>();
+        var minHeap = new PriorityQueue<PointIndicesWithDistance, int>();
         for (var i = 0; i < points.Length; i++)
         {
             for (var j = i + 1; j < points.Length; j++)
@@ -12,7 +12,7 @@ public class _1584
                 var currentPoint = points[i];
                 var nextPoint = points[j];
                 var distance = Math.Abs(currentPoint[0] - nextPoint[0]) + Math.Abs(currentPoint[1] - nextPoint[1]);
-                minHeap.Add(new PointIndicesWithDistance { Num = distance, Point1 = i, Point2 = j });
+                minHeap.Enqueue(new PointIndicesWithDistance { Priority = distance, Point1 = i, Point2 = j }, distance);
             }
         }
 
@@ -21,10 +21,10 @@ public class _1584
         var count = 0;
         while (count < points.Length - 1 && minHeap.Count > 0)
         {
-            var edge = minHeap.Pop();
+            var edge = minHeap.Dequeue();
             if (unionFind.TryUnion(edge.Point1, edge.Point2))
             {
-                cost += (int)edge.Num;
+                cost += edge.Priority;
                 count++;
             }
         }
@@ -32,8 +32,9 @@ public class _1584
         return cost;
     }
 
-    public class PointIndicesWithDistance : HeapItem
+    public class PointIndicesWithDistance
     {
+        public int Priority { get; set; }
         public int Point1 { get; set; }
 
         public int Point2 { get; set; }
