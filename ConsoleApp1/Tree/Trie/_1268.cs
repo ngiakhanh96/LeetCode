@@ -70,7 +70,7 @@ public class _1268
 
             var minHeap = new PriorityQueue<string, string>(
                 currentNode.Words.Select(word => (word, word)),
-                new MinHeapStringLexicalComparer());
+                new MinPriorityQueueStringLexicalComparer());
             while (minHeap.Count > 0 && resultList.Count < quantity)
             {
                 resultList.Add(minHeap.Dequeue());

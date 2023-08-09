@@ -119,7 +119,7 @@ public class _642
                 var hotDegree = currentNode.Words[dequeuedWord];
                 if (hotDegree < lastPriority)
                 {
-                    tempMinHeap = new PriorityQueue<string, string>(tempList.Select(a => (a, a)), new MinHeapStringLexicalComparer());
+                    tempMinHeap = new PriorityQueue<string, string>(tempList.Select(a => (a, a)), new MinPriorityQueueStringLexicalComparer());
                     while (tempMinHeap.Count > 0 && resultList.Count < quantity)
                     {
                         resultList.Add(tempMinHeap.Dequeue());
@@ -133,7 +133,7 @@ public class _642
 
             if (resultList.Count < quantity)
             {
-                tempMinHeap = new PriorityQueue<string, string>(tempList.Select(a => (a, a)), new MinHeapStringLexicalComparer());
+                tempMinHeap = new PriorityQueue<string, string>(tempList.Select(a => (a, a)), new MinPriorityQueueStringLexicalComparer());
                 while (tempMinHeap.Count > 0 && resultList.Count < quantity)
                 {
                     resultList.Add(tempMinHeap.Dequeue());
