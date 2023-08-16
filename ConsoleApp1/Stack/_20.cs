@@ -1,5 +1,6 @@
 ﻿namespace ConsoleApp1.Stack;
 
+[LastVisited(2023, 08, 16)]
 public class _20
 {
     public bool IsValid(string s)

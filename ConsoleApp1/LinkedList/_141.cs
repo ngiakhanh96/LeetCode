@@ -1,6 +1,6 @@
 ﻿namespace ConsoleApp1.LinkedList;
 
-//Last visit 4/6/2022
+[LastVisited(2023, 08, 17)]
 public class _141
 {
     public bool HasCycle(ListNode head)

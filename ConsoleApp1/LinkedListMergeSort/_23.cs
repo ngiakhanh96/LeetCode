@@ -62,17 +62,7 @@ public class _23
 
     public ListNode MergeKLists2(ListNode[] lists)
     {
-        var minHeap = new PriorityQueue<ListNode, int>();
-
-        foreach (var listNode in lists)
-        {
-            if (listNode != null)
-            {
-                minHeap.Enqueue(
-                    listNode,
-                    listNode.val);
-            }
-        }
+        var minHeap = new PriorityQueue<ListNode, int>(lists.Where(node => node != null).Select(node => (node, node.val)));
 
         var head = new ListNode();
         var tail = head;
@@ -86,34 +76,6 @@ public class _23
                 minHeap.Enqueue(
                 newMinNode.next,
                 newMinNode.next.val);
-            }
-        }
-
-        return head.next;
-    }
-
-    public ListNode MergeKLists3(ListNode[] lists)
-    {
-        var minHeap = new PriorityQueue<ListNode, int>();
-
-        foreach (var listNode in lists)
-        {
-            if (listNode != null)
-            {
-                minHeap.Enqueue(listNode, listNode.val);
-            }
-        }
-
-        var head = new ListNode();
-        var tail = head;
-        while (minHeap.Count > 0)
-        {
-            var newMinNode = minHeap.Dequeue();
-            tail.next = newMinNode;
-            tail = tail.next;
-            if (newMinNode.next != null)
-            {
-                minHeap.Enqueue(newMinNode.next, newMinNode.next.val);
             }
         }
 
