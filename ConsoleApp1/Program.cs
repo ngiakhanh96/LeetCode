@@ -1,9 +1,10 @@
 ﻿global using ConsoleApp1.Heap;
 global using ConsoleApp1.LinkedList;
 global using ConsoleApp1.UnionFind;
-using ConsoleApp1.LockExamples.Program.Monitor;
+using ConsoleApp1.Tree;
+using ConsoleApp1.Tree.DFS;
 
-MonitorExample.ExampleWithMonitor();
+var t = new _145().PostorderTraversal2(new TreeNode(1, null, new TreeNode(2, new TreeNode(3))));
 
 int MaximizeSweetness(int[] v, int k)
 {
