@@ -21,10 +21,6 @@ public class _26
 
     public int RemoveDuplicates2(int[] nums)
     {
-        if (nums.Length == 0)
-        {
-            return 0;
-        }
         var firstPointer = 0;
         var secondPointer = 0;
         var k = 1;

@@ -4,6 +4,20 @@ global using ConsoleApp1.UnionFind;
 using ConsoleApp1.Tree;
 using ConsoleApp1.Tree.DFS;
 
+var a = (Action test, string te) => () =>
+{
+    Console.WriteLine(te + " Start");
+    test?.Invoke();
+    Console.WriteLine(te + " End");
+};
+
+var a1 = a(null, "c");
+var a2 = a(a1, "b");
+a(a2, "a")();
+
+a(a(a(null, "c"), "b"), "a")();
+
+
 var t = new _145().PostorderTraversal2(new TreeNode(1, null, new TreeNode(2, new TreeNode(3))));
 
 int MaximizeSweetness(int[] v, int k)
