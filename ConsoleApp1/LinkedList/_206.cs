@@ -25,6 +25,6 @@ public class _206
         var returnNode = initialNext == null ? head : ReverseList2(initialNext, head);
 
         return returnNode;
-
+        dc
     }
 }
