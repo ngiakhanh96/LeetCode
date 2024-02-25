@@ -46,7 +46,7 @@ int MaximizeSweetness(int[] v, int k)
     return minSweetness;
 }
 
-var tFourSum = FourSum(new int[] { 2, 2, 2, 2 }, 8);
+var tFourSum = FourSum(new[] { 2, 2, 2, 2 }, 8);
 IList<IList<int>> FourSum(int[] nums, int target)
 {
     Array.Sort(nums);
@@ -61,19 +61,17 @@ IList<IList<int>> kSum(int[] nums, int target, int k, int start)
     {
         return TwoSum(nums, target, start);
     }
-    else
-    {
-        /*if (start > 0 && nums[start] == nums[start - 1]) {
+
+    /*if (start > 0 && nums[start] == nums[start - 1]) {
             return kSum(nums, target - nums[start], k, start + 1);
         }*/
-        for (var i = start; i < nums.Length - (k - 1); i++)
+    for (var i = start; i < nums.Length - (k - 1); i++)
+    {
+        var lists = kSum(nums, target - nums[i], k - 1, i + 1);
+        foreach (var list in lists)
         {
-            var lists = kSum(nums, target - nums[i], k - 1, i + 1);
-            foreach (var list in lists)
-            {
-                list.Add(nums[i]);
-                result.Add(list);
-            }
+            list.Add(nums[i]);
+            result.Add(list);
         }
     }
     return result;

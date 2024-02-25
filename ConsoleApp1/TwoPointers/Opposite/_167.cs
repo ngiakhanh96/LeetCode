@@ -11,7 +11,7 @@ public class _167
         {
             if (numbers[firstPointer] + numbers[secondPointer] == target)
             {
-                return new int[] { firstPointer + 1, secondPointer + 1 };
+                return new[] { firstPointer + 1, secondPointer + 1 };
             }
 
             if (numbers[firstPointer] + numbers[secondPointer] > target)
@@ -24,7 +24,7 @@ public class _167
             }
         }
 
-        return new int[] { 0, 0 };
+        return new[] { 0, 0 };
     }
 
     public int[] TwoSum2(int[] numbers, int target)
