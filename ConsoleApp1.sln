@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31605.320
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34601.278
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleApp1", "ConsoleApp1\ConsoleApp1.csproj", "{2F1D820E-4F84-4120-A345-C3488E286EDB}"
 EndProject
@@ -9,6 +9,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		README.md = README.md
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignalPoc", "SignalPoc\SignalPoc.csproj", "{0285EB69-02DC-40A0-9497-C7E216C9C976}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -20,6 +22,10 @@ Global
 		{2F1D820E-4F84-4120-A345-C3488E286EDB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2F1D820E-4F84-4120-A345-C3488E286EDB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2F1D820E-4F84-4120-A345-C3488E286EDB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0285EB69-02DC-40A0-9497-C7E216C9C976}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0285EB69-02DC-40A0-9497-C7E216C9C976}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0285EB69-02DC-40A0-9497-C7E216C9C976}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0285EB69-02DC-40A0-9497-C7E216C9C976}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
