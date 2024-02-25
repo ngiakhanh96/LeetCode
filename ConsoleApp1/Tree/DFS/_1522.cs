@@ -3,7 +3,7 @@
 [LastVisited(2022, 11, 24)]
 public class _1522
 {
-    private int _diameter = 0;
+    private int _diameter;
     public int Diameter(Node root, bool isRoot = true)
     {
         if (root == null)

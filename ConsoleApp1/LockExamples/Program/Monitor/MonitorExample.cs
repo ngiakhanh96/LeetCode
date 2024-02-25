@@ -1,5 +1,5 @@
 ﻿namespace ConsoleApp1.LockExamples.Program.Monitor;
-using System.Threading;
+
 internal class MonitorExample
 {
     // Create a new lock. The creating thread does not own the lock.
@@ -32,7 +32,7 @@ internal class MonitorExample
         var lockWasTaken = false;
         try
         {
-            Monitor.Enter(lockObject, ref lockWasTaken);
+            System.Threading.Monitor.Enter(lockObject, ref lockWasTaken);
             Console.WriteLine("{0} has entered the protected area",
                 Thread.CurrentThread.Name);
 
@@ -52,7 +52,7 @@ internal class MonitorExample
         {
             if (lockWasTaken)
             {
-                Monitor.Exit(lockObject);
+                System.Threading.Monitor.Exit(lockObject);
             }
         }
     }

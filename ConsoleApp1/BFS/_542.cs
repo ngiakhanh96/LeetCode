@@ -18,7 +18,7 @@ public class _542
             {
                 if (mat[i][j] == 0)
                 {
-                    queue.Enqueue(new int[] { i, j });
+                    queue.Enqueue(new[] { i, j });
                     visited[i, j] = true;
                     numberOfNodesInCurrentLevel++;
                 }
@@ -48,7 +48,7 @@ public class _542
                     !visited[nextCellX, nextCellY])
                 {
                     visited[nextCellX, nextCellY] = true;
-                    queue.Enqueue(new int[] { nextCellX, nextCellY });
+                    queue.Enqueue(new[] { nextCellX, nextCellY });
                 }
             }
 

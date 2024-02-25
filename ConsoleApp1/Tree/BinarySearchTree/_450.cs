@@ -64,6 +64,6 @@ public class _450
             return (root, parentNode, isLeft);
         }
 
-        return key < root.val ? SearchNode(root.left, key, root, true) : SearchNode(root.right, key, root, false);
+        return key < root.val ? SearchNode(root.left, key, root) : SearchNode(root.right, key, root, false);
     }
 }

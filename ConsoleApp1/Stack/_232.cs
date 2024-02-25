@@ -8,10 +8,6 @@ public class _232
 
         private Stack<int> leftStack = new Stack<int>(100);
         private Stack<int> rightStack = new Stack<int>(100);
-        public MyQueue()
-        {
-
-        }
 
         public void Push(int x)
         {

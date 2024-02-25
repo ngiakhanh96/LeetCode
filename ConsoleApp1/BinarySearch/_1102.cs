@@ -42,11 +42,12 @@ public class _1102
             return true;
         }
         visited[row, col] = true;
-        var nextCells = new int[][] {
-            new int[] {row - 1, col},
-            new int[] {row, col - 1},
-            new int[] {row + 1, col},
-            new int[] {row, col + 1}
+        var nextCells = new[]
+        {
+            new[] {row - 1, col},
+            new[] {row, col - 1},
+            new[] {row + 1, col},
+            new[] {row, col + 1}
         };
         foreach (var nextCell in nextCells)
         {
@@ -114,11 +115,12 @@ public class _1102
                 return true;
             }
 
-            var nextCells = new int[][] {
-                new int[] {currentNodeX - 1, currentNodeY},
-                new int[] {currentNodeX, currentNodeY - 1},
-                new int[] {currentNodeX + 1, currentNodeY},
-                new int[] {currentNodeX, currentNodeY + 1}
+            var nextCells = new[]
+            {
+                new[] {currentNodeX - 1, currentNodeY},
+                new[] {currentNodeX, currentNodeY - 1},
+                new[] {currentNodeX + 1, currentNodeY},
+                new[] {currentNodeX, currentNodeY + 1}
             };
             foreach (var nextCell in nextCells)
             {

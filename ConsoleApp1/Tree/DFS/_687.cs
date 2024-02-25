@@ -24,7 +24,7 @@ public class _687
         return node.val == parentValue ? Math.Max(maxLeft, maxRight) + 1 : 0;
     }
 
-    private int _longestUnivaluePath = 0;
+    private int _longestUnivaluePath;
     public int LongestUnivaluePath2(TreeNode root, bool isRoot = true)
     {
         if (root == null)

@@ -14,7 +14,8 @@ public class _704
             {
                 return middle;
             }
-            else if (nums[middle] < target)
+
+            if (nums[middle] < target)
             {
                 low = middle + 1;
             }

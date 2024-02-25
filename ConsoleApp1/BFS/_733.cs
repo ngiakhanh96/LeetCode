@@ -15,7 +15,8 @@ public class _733
             var (currentCellX, currentCellY) = bfsQueue.Dequeue();
             image[currentCellX][currentCellY] = color;
 
-            var nextCells = new int[][] {
+            var nextCells = new[]
+            {
                 new[] {currentCellX + 1, currentCellY},
                 new[] {currentCellX - 1, currentCellY},
                 new[] {currentCellX, currentCellY + 1},

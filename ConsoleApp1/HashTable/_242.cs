@@ -20,13 +20,11 @@ public class _242
             {
                 return false;
             }
-            else
+
+            dict[chr]--;
+            if (dict[chr] == 0)
             {
-                dict[chr]--;
-                if (dict[chr] == 0)
-                {
-                    dict.Remove(chr);
-                }
+                dict.Remove(chr);
             }
         }
 
