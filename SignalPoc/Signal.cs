@@ -122,9 +122,7 @@ internal abstract class ComputedSignalBase : SignalBase
 internal class ComputedSignal<T> : ComputedSignalBase, IReadOnlySignal<T>
 {
     private readonly Func<T> _valueFn;
-
     private T _cacheResult;
-
 
     public ComputedSignal(Func<T> valueFn)
     {
