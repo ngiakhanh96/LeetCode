@@ -9,10 +9,10 @@ internal static class Signal
     {
         CurrentEffectSubscription = action;
         action();
-        var currentSignals = new SignalEffectSubscription(CurrentSignals, CurrentEffectSubscription);
+        var effectSubscription = new SignalEffectSubscription(CurrentSignals, CurrentEffectSubscription);
         CurrentEffectSubscription = null;
         CurrentSignals = [];
-        return currentSignals;
+        return effectSubscription;
     }
 
     public static ComputedSignal<T> ComputeSignal<T>(Func<T> action)
