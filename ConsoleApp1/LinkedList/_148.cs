@@ -1,88 +1,87 @@
 ﻿namespace ConsoleApp1.LinkedList;
 
-// Last visit 12/6/2022
+[LastVisited(2024, 3, 5)]
 public class _148
 {
     public ListNode SortList(ListNode head)
     {
-        if (head?.next == null)
+        if (head is null)
+        {
+            return null;
+        }
+        var middle = DetermineMiddleNode(head);
+        if (middle == head)
         {
             return head;
         }
-        var middleNode = FindMiddleNode(head);
-        var oldMiddleNode = middleNode.next;
-        middleNode.next = null;
-        var leftPointer = SortList(head);
-        var rightPointer = SortList(oldMiddleNode);
-        ListNode prevPointer = null;
+
+        var left = SortList(head);
+        var right = SortList(middle);
+        return Merge(left, right);
+    }
+
+    private ListNode DetermineMiddleNode(ListNode head)
+    {
+        var fastPointer = head?.next;
+        var slowPointer = head;
+        ListNode prevSlowPointer = null;
+        while (fastPointer is not null)
+        {
+            prevSlowPointer = slowPointer;
+            fastPointer = fastPointer?.next?.next;
+            slowPointer = slowPointer?.next;
+        }
+        if (prevSlowPointer is not null)
+        {
+            prevSlowPointer.next = null;
+        }
+        return slowPointer;
+    }
+
+    private ListNode Merge(ListNode left, ListNode right)
+    {
+        var leftPointer = left;
+        var rightPointer = right;
         ListNode newHead = null;
-        while (leftPointer != null && rightPointer != null)
+        ListNode pointer = null;
+        while (leftPointer is not null && rightPointer is not null)
         {
             if (leftPointer.val < rightPointer.val)
             {
-                if (prevPointer == null)
+                newHead ??= leftPointer;
+                if (pointer is not null)
                 {
-                    prevPointer = leftPointer;
-                    newHead = leftPointer;
+                    pointer.next = leftPointer;
                 }
-                else
-                {
-                    prevPointer.next = leftPointer;
-                    prevPointer = leftPointer;
-                }
-
+                pointer = leftPointer;
                 leftPointer = leftPointer.next;
-
             }
             else
             {
-                if (prevPointer == null)
+                newHead ??= rightPointer;
+                if (pointer is not null)
                 {
-                    prevPointer = rightPointer;
-                    newHead = rightPointer;
+                    pointer.next = rightPointer;
                 }
-                else
-                {
-                    prevPointer.next = rightPointer;
-                    prevPointer = rightPointer;
-                }
+                pointer = rightPointer;
                 rightPointer = rightPointer.next;
             }
         }
 
-        while (leftPointer != null)
+        while (leftPointer is not null)
         {
-            prevPointer.next = leftPointer;
-            prevPointer = leftPointer;
+            pointer.next = leftPointer;
+            pointer = leftPointer;
             leftPointer = leftPointer.next;
         }
 
-        while (rightPointer != null)
+        while (rightPointer is not null)
         {
-            prevPointer.next = rightPointer;
-            prevPointer = rightPointer;
+            pointer.next = rightPointer;
+            pointer = rightPointer;
             rightPointer = rightPointer.next;
         }
-        prevPointer.next = null;
+
         return newHead;
-    }
-
-    private ListNode FindMiddleNode(ListNode head)
-    {
-        var fastPointer = head;
-        var slowPointer = head;
-
-        if (fastPointer.next is { next: null })
-        {
-            return slowPointer;
-        }
-
-        while (fastPointer?.next != null)
-        {
-            slowPointer = slowPointer.next;
-            fastPointer = fastPointer.next?.next;
-        }
-
-        return slowPointer;
     }
 }

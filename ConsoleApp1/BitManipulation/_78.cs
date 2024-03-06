@@ -1,27 +1,25 @@
 ﻿namespace ConsoleApp1.BitManipulation;
 
-// Last visit 4/6/2022
+[LastVisited(2024, 3, 5)]
 public class _78
 {
     public IList<IList<int>> Subsets(int[] nums)
     {
-        var result = new List<IList<int>> { new List<int>() };
-        var start = 1;
-        var end = (int)Math.Pow(2, nums.Length);
-        for (var i = start; i < end; i++)
+        var result = new List<IList<int>>();
+        for (var i = 0; i < Math.Pow(2, nums.Length); i++)
         {
-            var subset = new List<int>();
-            var curr = i;
-            for (var a = nums.Length - 1; a >= 0; a--)
+            var mask = i;
+            var subResult = new List<int>();
+            for (var y = nums.Length - 1; y >= 0; y--)
             {
-                if ((curr & 1) == 1)
+                var bit = mask & 1;
+                if (bit == 1)
                 {
-                    subset.Add(nums[a]);
+                    subResult.Add(nums[y]);
                 }
-                curr >>= 1;
+                mask >>= 1;
             }
-
-            result.Add(subset);
+            result.Add(subResult);
         }
 
         return result;

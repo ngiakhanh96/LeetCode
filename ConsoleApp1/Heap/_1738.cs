@@ -188,7 +188,6 @@ public class _1738
     private int Partition(int[][] matrix, int start, int end)
     {
         var end2D = Convert1DPosTo2DPos(end, matrix[0].Length);
-        var start2D = Convert1DPosTo2DPos(start, matrix[0].Length);
         var pivot = matrix[end2D[0]][end2D[1]];
         var boundary = start;
 
