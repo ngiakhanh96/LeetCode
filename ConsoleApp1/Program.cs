@@ -112,31 +112,53 @@ List<IList<int>> TwoSum(int[] nums, int target, int start)
     return result;
 }
 
+var t = KthLargestValue([[5, 2], [1, 6]], 1);
 
-var a = new NumMatrix([[3, 0, 1, 4, 2], [5, 6, 3, 2, 1], [1, 2, 0, 1, 5], [4, 1, 0, 1, 7], [1, 0, 3, 0, 5]]);
-public class NumMatrix
+int KthLargestValue(int[][] matrix, int k)
 {
-    private int[,] _prefixMatrix;
-    public NumMatrix(int[][] matrix)
+    var coordinateValues = new int[matrix.Length * matrix[0].Length];
+    var index = 0;
+    for (var r = 0; r < matrix.Length; r++)
     {
-        _prefixMatrix = new int[matrix.Length, matrix[0].Length];
-        for (var i = 0; i < matrix.Length; i++)
+        for (var c = 0; c < matrix[0].Length; c++)
         {
-            for (var j = 0; j < matrix[0].Length; j++)
+            matrix[r][c] ^= (r > 0 ? matrix[r - 1][c] : 0) ^
+                            (c > 0 ? matrix[r][c - 1] : 0) ^
+                            (r > 0 && c > 0 ? matrix[r - 1][c - 1] : 0);
+            coordinateValues[index] = matrix[r][c];
+            index++;
+        }
+    }
+    var start = 0;
+    var end = coordinateValues.Length;
+    var pivotIndex = -1;
+
+    while (pivotIndex != k - 1)
+    {
+        if (pivotIndex > k - 1)
+        {
+            end = pivotIndex;
+        }
+        else
+        {
+            start = pivotIndex + 1;
+        }
+
+        pivotIndex = end - 1;
+        var pivot = coordinateValues[pivotIndex];
+        var boundary = start;
+        for (var i = start; i < end; i++)
+        {
+            if (coordinateValues[i] >= coordinateValues[boundary])
             {
-                _prefixMatrix[i, j] = (i >= 1 ? _prefixMatrix[i - 1, j] : 0) +
-                                      (j >= 1 ? _prefixMatrix[i, j - 1] : 0) -
-                                      (i >= 1 && j >= 1 ? _prefixMatrix[i - 1, j - 1] : 0) +
-                                      matrix[i][j];
+                if (i == pivotIndex)
+                {
+                    pivotIndex = boundary;
+                }
+                (coordinateValues[i], coordinateValues[boundary]) = (coordinateValues[boundary++], coordinateValues[i]);
             }
         }
     }
 
-    public int SumRegion(int row1, int col1, int row2, int col2)
-    {
-        return _prefixMatrix[row2, col2] -
-               (row1 >= 1 ? _prefixMatrix[row1 - 1, col2] : 0) -
-               (col1 >= 1 ? _prefixMatrix[row2, col1 - 1] : 0) +
-               (row1 >= 1 && col1 >= 1 ? _prefixMatrix[row1 - 1, col1 - 1] : 0);
-    }
+    return coordinateValues[pivotIndex];
 }

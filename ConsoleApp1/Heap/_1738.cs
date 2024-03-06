@@ -1,5 +1,6 @@
 ﻿namespace ConsoleApp1.Heap;
 
+[LastVisited(2024, 3, 7)]
 public class _1738
 {
     public int KthLargestValue(int[][] matrix, int k)
@@ -159,6 +160,29 @@ public class _1738
         }
         var boundary2D = Convert1DPosTo2DPos(boundary, matrix[0].Length);
         return matrix[boundary2D[0]][boundary2D[1]];
+    }
+
+    //Time: O(MNlog(MN))
+    //Space: O(MN)
+    public int KthLargestValue3(int[][] matrix, int k)
+    {
+        var coordinateValues = new int[matrix.Length * matrix[0].Length];
+        var index = 0;
+        for (var r = 0; r < matrix.Length; r++)
+        {
+            for (var c = 0; c < matrix[0].Length; c++)
+            {
+                matrix[r][c] ^= (r > 0 ? matrix[r - 1][c] : 0) ^
+                                (c > 0 ? matrix[r][c - 1] : 0) ^
+                                (r > 0 && c > 0 ? matrix[r - 1][c - 1] : 0);
+                coordinateValues[index] = matrix[r][c];
+                index++;
+            }
+        }
+
+        System.Array.Sort(coordinateValues);
+
+        return coordinateValues[^k];
     }
 
     private int Partition(int[][] matrix, int start, int end)
