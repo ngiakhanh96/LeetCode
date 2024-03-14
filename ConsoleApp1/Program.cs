@@ -2,6 +2,69 @@ global using ConsoleApp1.Heap;
 global using ConsoleApp1.LinkedList;
 global using ConsoleApp1.UnionFind;
 
+var c = Calculate("0-2147483647");
+int Calculate(string s)
+{
+    s += ".";
+    var stack = new Stack<string>();
+    var highPriorityDict = new Dictionary<char, Func<int, int, int>>{
+        {'*', (a, b) => a * b},
+        {'/', (a, b) => a / b}
+    };
+    var lowPriorityDict = new Dictionary<char, Func<int, int, int>>{
+        {'+', (a, b) => a + b},
+        {'-', (a, b) => a - b},
+    };
+    var currentNumber = 0;
+    foreach (var token in s)
+    {
+        if (token == ' ')
+        {
+            continue;
+        }
+        if (char.IsDigit(token))
+        {
+            currentNumber = currentNumber * 10 + token - '0';
+        }
+        else
+        {
+            if (stack.Count > 0 && highPriorityDict.TryGetValue(stack.Peek()[0], out var function))
+            {
+                stack.Pop();
+                var number1 = stack.Pop();
+                var result = function(int.Parse(number1), currentNumber);
+                stack.Push(result.ToString());
+            }
+            else
+            {
+                stack.Push(currentNumber.ToString());
+            }
+            if (token != '.')
+            {
+                stack.Push(token.ToString());
+            }
+
+            currentNumber = 0;
+        }
+    }
+    var reversedStack = new Stack<string>();
+    while (stack.Count > 0)
+    {
+        reversedStack.Push(stack.Pop());
+    }
+
+    while (reversedStack.Count > 1)
+    {
+        var number2 = reversedStack.Pop();
+        var opr = reversedStack.Pop()[0];
+        var number1 = reversedStack.Pop();
+        var result = lowPriorityDict[opr](int.Parse(number1), int.Parse(number2));
+        reversedStack.Push(result.ToString());
+    }
+
+    return int.Parse(reversedStack.Pop());
+}
+
 int MaximizeSweetness(int[] v, int k)
 {
     var averageSweetness = (double)v.Sum() / (k + 1);

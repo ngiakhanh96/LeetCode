@@ -2,7 +2,7 @@
 
 namespace ConsoleApp1.Stack;
 
-[LastVisited(2022, 11, 14)]
+[LastVisited(2024, 03, 14)]
 public class _227
 {
     // Time: O(n)
@@ -72,56 +72,54 @@ public class _227
     // Space: O(1)
     public int Calculate2(string s)
     {
-        s += "+";
-        var dict = new Dictionary<char, Func<int, int, int>>{
-            {'+', (a, b) => a+b},
-            {'-', (a, b) => a-b},
-            {'*', (a, b) => a*b},
-            {'/', (a, b) => a/b}
+        s += ".";
+        var stack = new Stack<string>();
+        var operatorDict = new Dictionary<char, Func<int, int, int>>{
+            {'*', (a, b) => a * b},
+            {'/', (a, b) => a / b},
+            {'+', (a, b) => a + b},
+            {'-', (a, b) => a - b},
         };
-        var numStack = new Stack<int>();
-        var oprStack = new Stack<char>();
-        var currentNumber = 0;
 
-        foreach (var chr in s)
+        var highOperatorSet = new HashSet<char> { '*', '/' };
+        var lowOperatorSet = new HashSet<char> { '+', '-' };
+        int currentNumber = 0;
+        foreach (var token in s)
         {
-            if (chr == ' ')
+            if (token == ' ')
             {
                 continue;
             }
-            if (dict.ContainsKey(chr))
+            if (char.IsDigit(token))
             {
-                if (oprStack.TryPeek(out var previousOpr) && previousOpr is '*' or '/')
-                {
-                    previousOpr = oprStack.Pop();
-                    var firstNum = numStack.Pop();
-                    var result = dict[previousOpr](firstNum, currentNumber);
-                    numStack.Push(result);
-                }
-                else
-                {
-                    numStack.Push(currentNumber);
-                }
-                if (chr is '+' or '-')
-                {
-                    if (numStack.Count > 1)
-                    {
-                        var secondNum = numStack.Pop();
-                        var opr = oprStack.Pop();
-                        var firstNum = numStack.Pop();
-                        var result = dict[opr](firstNum, secondNum);
-                        numStack.Push(result);
-                    }
-                }
-                oprStack.Push(chr);
-                currentNumber = 0;
+                currentNumber = currentNumber * 10 + token - '0';
             }
             else
             {
-                currentNumber = (currentNumber * 10) + int.Parse(chr.ToString());
+                if (stack.Count > 0 && (token == '.' || lowOperatorSet.Contains(token) || highOperatorSet.Contains(stack.Peek()[0])) && operatorDict.TryGetValue(stack.Pop()[0], out var function))
+                {
+                    var number1 = stack.Pop();
+                    var result = function(int.Parse(number1), currentNumber);
+                    if (stack.Count > 0 && (lowOperatorSet.Contains(token) || token == '.'))
+                    {
+                        var opr = stack.Pop()[0];
+                        number1 = stack.Pop();
+                        result = operatorDict[opr](int.Parse(number1), result);
+                    }
+                    stack.Push(result.ToString());
+                }
+                else
+                {
+                    stack.Push(currentNumber.ToString());
+                }
+                if (token != '.')
+                {
+                    stack.Push(token.ToString());
+                }
+                currentNumber = 0;
             }
         }
 
-        return numStack.Pop();
+        return int.Parse(stack.Pop());
     }
 }
