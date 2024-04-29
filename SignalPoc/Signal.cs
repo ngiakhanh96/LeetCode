@@ -45,7 +45,7 @@ internal interface IReadOnlySignal<out T>
 internal abstract class SignalBase
 {
     private readonly HashSet<Action> _effectSubscriptions = [];
-    private readonly HashSet<ComputedSignalBase> _computedChildSignals = [];
+    private readonly HashSet<WeakReference<ComputedSignalBase>> _computedChildSignals = [];
 
     public void RemoveEffectSubscription(Action action)
     {
@@ -54,7 +54,7 @@ internal abstract class SignalBase
 
     public void RemoveChildComputedSignal(ComputedSignalBase computedSignalBase)
     {
-        _computedChildSignals.Remove(computedSignalBase);
+        UpdateComputedChildSignals(orFilter: signal => signal == computedSignalBase);
     }
 
     protected void Notify()
@@ -64,10 +64,7 @@ internal abstract class SignalBase
             subscription();
         }
 
-        foreach (var signal in _computedChildSignals)
-        {
-            signal.MarkObsolete();
-        }
+        UpdateComputedChildSignals(action: signal => signal.MarkObsolete());
     }
 
     protected void UpdateSubscriptions()
@@ -80,9 +77,26 @@ internal abstract class SignalBase
 
         else if (Signal.CurrentComputedSignalSubscription is not null)
         {
-            _computedChildSignals.Add(Signal.CurrentComputedSignalSubscription);
+            _computedChildSignals.Add(new WeakReference<ComputedSignalBase>(Signal.CurrentComputedSignalSubscription));
             Signal.CurrentSignals.Add(this);
         }
+    }
+
+    private void UpdateComputedChildSignals(Action<ComputedSignalBase>? action = null, Predicate<ComputedSignalBase>? orFilter = null)
+    {
+        _computedChildSignals.RemoveWhere(ccs =>
+        {
+            if (ccs.TryGetTarget(out var signal))
+            {
+                if (orFilter is not null && orFilter(signal))
+                {
+                    return true;
+                }
+                action?.Invoke(signal);
+                return false;
+            }
+            return true;
+        });
     }
 }
 
