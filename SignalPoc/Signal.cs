@@ -37,34 +37,34 @@ internal record SignalEffectSubscription(List<SignalBase> Signals, Action Action
         }
     }
 }
-internal interface IReadOnlySignal<T>
+internal interface IReadOnlySignal<out T>
 {
     public T Get();
 }
 
 internal abstract class SignalBase
 {
-    protected readonly HashSet<Action> EffectSubscriptions = [];
-    protected readonly HashSet<ComputedSignalBase> ComputedSignals = [];
+    private readonly HashSet<Action> _effectSubscriptions = [];
+    private readonly HashSet<ComputedSignalBase> _computedSignals = [];
 
     public void RemoveEffectSubscription(Action action)
     {
-        EffectSubscriptions.Remove(action);
+        _effectSubscriptions.Remove(action);
     }
 
-    public void RemoveComputedSignalSubscription(ComputedSignalBase computedSignalBase)
+    public void RemoveComputedSignal(ComputedSignalBase computedSignalBase)
     {
-        ComputedSignals.Remove(computedSignalBase);
+        _computedSignals.Remove(computedSignalBase);
     }
 
     protected void Notify()
     {
-        foreach (var subscription in EffectSubscriptions)
+        foreach (var subscription in _effectSubscriptions)
         {
             subscription();
         }
 
-        foreach (var signal in ComputedSignals)
+        foreach (var signal in _computedSignals)
         {
             signal.MarkObsolete();
         }
@@ -74,13 +74,13 @@ internal abstract class SignalBase
     {
         if (Signal.CurrentEffectSubscription is not null)
         {
-            EffectSubscriptions.Add(Signal.CurrentEffectSubscription);
+            _effectSubscriptions.Add(Signal.CurrentEffectSubscription);
             Signal.CurrentSignals.Add(this);
         }
 
         else if (Signal.CurrentComputedSignalSubscription is not null)
         {
-            ComputedSignals.Add(Signal.CurrentComputedSignalSubscription);
+            _computedSignals.Add(Signal.CurrentComputedSignalSubscription);
             Signal.CurrentSignals.Add(this);
         }
     }
@@ -103,18 +103,18 @@ internal class Signal<T>(T value) : SignalBase, IReadOnlySignal<T>
 
 internal abstract class ComputedSignalBase : SignalBase
 {
-    protected bool _isObsolete = true;
-    public List<SignalBase> CurrentChildSignals = [];
+    protected bool IsObsolete = true;
+    protected List<SignalBase> CurrentChildSignals = [];
     public void MarkObsolete()
     {
-        _isObsolete = true;
+        IsObsolete = true;
     }
 
     public void Unsubscribe()
     {
         foreach (var signal in CurrentChildSignals)
         {
-            signal.RemoveComputedSignalSubscription(this);
+            signal.RemoveComputedSignal(this);
         }
     }
 }
@@ -134,7 +134,7 @@ internal class ComputedSignal<T> : ComputedSignalBase, IReadOnlySignal<T>
     public T Get()
     {
         UpdateSubscriptions();
-        if (_isObsolete)
+        if (IsObsolete)
         {
             Recalculate();
         }
@@ -153,7 +153,7 @@ internal class ComputedSignal<T> : ComputedSignalBase, IReadOnlySignal<T>
         CurrentChildSignals = Signal.CurrentSignals;
         Signal.CurrentSignals = [];
         Signal.CurrentComputedSignalSubscription = null;
-        _isObsolete = false;
+        IsObsolete = false;
 
         Notify();
     }

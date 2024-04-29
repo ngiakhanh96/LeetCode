@@ -1,5 +1,57 @@
 ﻿using SignalPoc;
 
+List<Tuple<int, int>> customerAccounts = new List<Tuple<int, int>>()
+{
+    Tuple.Create(1, 10),
+    Tuple.Create(1, 11),
+    Tuple.Create(2, 13),
+    Tuple.Create(3, 11),
+    Tuple.Create(4, 14),
+    Tuple.Create(3, 10),
+    Tuple.Create(4, 13)
+};
+
+List<List<int>> matchingCustomers = FindMatchingCustomers(customerAccounts);
+
+Console.WriteLine("Matching Customers:");
+foreach (List<int> match in matchingCustomers)
+{
+    Console.WriteLine($"Customer(s) {string.Join(", ", match)}");
+}
+List<List<int>> FindMatchingCustomers(List<Tuple<int, int>> customerAccounts)
+{
+    Dictionary<int, HashSet<int>> accountOwners = new Dictionary<int, HashSet<int>>();
+
+    // Populate the dictionary
+    foreach (var pair in customerAccounts)
+    {
+        int customerId = pair.Item1;
+        int accountId = pair.Item2;
+
+        if (!accountOwners.ContainsKey(accountId))
+        {
+            accountOwners[accountId] = new HashSet<int>();
+        }
+
+        accountOwners[accountId].Add(customerId);
+    }
+
+    // Find customers who share all the same accounts
+    List<List<int>> matchingCustomers = new List<List<int>>();
+    foreach (var pair1 in accountOwners)
+    {
+        foreach (var pair2 in accountOwners)
+        {
+            if (pair1.Key != pair2.Key && pair1.Value.SetEquals(pair2.Value))
+            {
+                List<int> matchingCustomer = new List<int> { pair1.Value.First(), pair2.Value.First() };
+                matchingCustomers.Add(matchingCustomer);
+            }
+        }
+    }
+
+    return matchingCustomers;
+}
 Console.WriteLine("Hello, World!");
 
 var a = Signal.CreateSignal(1);

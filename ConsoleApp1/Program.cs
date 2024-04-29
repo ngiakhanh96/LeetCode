@@ -2,6 +2,41 @@ global using ConsoleApp1.Heap;
 global using ConsoleApp1.LinkedList;
 global using ConsoleApp1.UnionFind;
 
+int solution(int[] A)
+{
+    var t = A.Where(p => p > 0).Distinct().ToList();
+    t.Sort();
+    if (t.Count == 0)
+    {
+        return 1;
+    }
+
+    if (t.Count == 1)
+    {
+        return t.First() == 1 ? 2 : 1;
+    }
+
+    if (t.First() > 1)
+    {
+        return 1;
+    }
+
+    var previousNumber = t[0];
+    for (var i = 1; i < t.Count; i++)
+    {
+        if (t[i] == previousNumber + 1)
+        {
+            previousNumber = t[i];
+        }
+        else
+        {
+            return previousNumber + 1;
+        }
+    }
+
+    return t.Last() + 1;
+}
+
 var c = Calculate("0-2147483647");
 int Calculate(string s)
 {
