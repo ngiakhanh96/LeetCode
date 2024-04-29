@@ -1,9 +1,9 @@
 ﻿using SignalPoc;
 Console.WriteLine("Hello, World!");
 
-var a = Signal.CreateSignal(1);
+var a = Signal.Create(1);
 Console.WriteLine("a is " + a.Get());//1
-var b = Signal.CreateSignal(2);
+var b = Signal.Create(2);
 Console.WriteLine("b is " + b.Get());//2
 var effect = Signal.CreateEffect(() =>
 {
@@ -14,7 +14,7 @@ a.Update(val => val + 1); //Sum is 4
 
 b.Update(val => val + 1); //Sum is 5
 
-var c = Signal.ComputeSignal(() => a.Get() + b.Get());
+var c = Signal.Computed(() => a.Get() + b.Get());
 Console.WriteLine("c is " + c.Get());//5
 a.Update(val => val + 1);//Sum is 6
 Console.WriteLine("a is " + a.Get());//3
@@ -22,7 +22,7 @@ b.Update(val => val + 1);//Sum is 7
 Console.WriteLine("b is " + b.Get());//4
 Console.WriteLine("c is " + c.Get());//7
 
-var d = Signal.ComputeSignal(() => c.Get() * 2);
+var d = Signal.Computed(() => c.Get() * 2);
 Console.WriteLine("d is " + d.Get());//14
 Console.WriteLine("a is " + a.Get());//3
 Console.WriteLine("b is " + b.Get());//4
@@ -46,9 +46,9 @@ Console.WriteLine("d is " + d.Get());//16
 
 Console.WriteLine("----------------------------");
 Console.WriteLine("Conditional signal");
-var e = Signal.CreateSignal(true);
+var e = Signal.Create(true);
 Console.WriteLine("e is " + e.Get());//true
-var f = Signal.ComputeSignal(() =>
+var f = Signal.Computed(() =>
 {
     if (e.Get())
     {

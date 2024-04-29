@@ -3,7 +3,7 @@
 internal static class Signal
 {
     public static Action? CurrentEffectSubscription;
-    public static ComputedSignalBase? CurrentComputedSignalSubscription;
+    public static ComputedSignalBase? CurrentComputedSignal;
     public static List<SignalBase> CurrentSignals = [];
     public static SignalEffectSubscription CreateEffect(Action action)
     {
@@ -15,13 +15,13 @@ internal static class Signal
         return effectSubscription;
     }
 
-    public static ComputedSignal<T> ComputeSignal<T>(Func<T> action)
+    public static ComputedSignal<T> Computed<T>(Func<T> action)
     {
         ComputedSignal<T> computedSignal = new(action);
         return computedSignal;
     }
 
-    public static Signal<T> CreateSignal<T>(T value)
+    public static Signal<T> Create<T>(T value)
     {
         return new Signal<T>(value);
     }
@@ -64,7 +64,11 @@ internal abstract class SignalBase
             subscription();
         }
 
-        UpdateComputedChildSignals(action: signal => signal.MarkObsolete());
+        UpdateComputedChildSignals(action: signal =>
+        {
+            signal.MarkObsolete();
+            signal.Notify();
+        });
     }
 
     protected void UpdateSubscriptions()
@@ -75,9 +79,9 @@ internal abstract class SignalBase
             Signal.CurrentSignals.Add(this);
         }
 
-        else if (Signal.CurrentComputedSignalSubscription is not null)
+        else if (Signal.CurrentComputedSignal is not null)
         {
-            _computedChildSignals.Add(new WeakReference<ComputedSignalBase>(Signal.CurrentComputedSignalSubscription));
+            _computedChildSignals.Add(new WeakReference<ComputedSignalBase>(Signal.CurrentComputedSignal));
             Signal.CurrentSignals.Add(this);
         }
     }
@@ -160,15 +164,13 @@ internal class ComputedSignal<T> : ComputedSignalBase, IReadOnlySignal<T>
         //Unregister old parent signals
         Unsubscribe();
 
-        Signal.CurrentComputedSignalSubscription = this;
+        Signal.CurrentComputedSignal = this;
         _cacheResult = _valueFn();
 
         //Register new parent signals
         CurrentParentSignals = Signal.CurrentSignals;
         Signal.CurrentSignals = [];
-        Signal.CurrentComputedSignalSubscription = null;
+        Signal.CurrentComputedSignal = null;
         IsObsolete = false;
-
-        Notify();
     }
 }
