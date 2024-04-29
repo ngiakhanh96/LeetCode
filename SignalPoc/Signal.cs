@@ -45,16 +45,16 @@ internal interface IReadOnlySignal<out T>
 internal abstract class SignalBase
 {
     private readonly HashSet<Action> _effectSubscriptions = [];
-    private readonly HashSet<ComputedSignalBase> _computedSignals = [];
+    private readonly HashSet<ComputedSignalBase> _computedChildSignals = [];
 
     public void RemoveEffectSubscription(Action action)
     {
         _effectSubscriptions.Remove(action);
     }
 
-    public void RemoveComputedSignal(ComputedSignalBase computedSignalBase)
+    public void RemoveChildComputedSignal(ComputedSignalBase computedSignalBase)
     {
-        _computedSignals.Remove(computedSignalBase);
+        _computedChildSignals.Remove(computedSignalBase);
     }
 
     protected void Notify()
@@ -64,7 +64,7 @@ internal abstract class SignalBase
             subscription();
         }
 
-        foreach (var signal in _computedSignals)
+        foreach (var signal in _computedChildSignals)
         {
             signal.MarkObsolete();
         }
@@ -80,7 +80,7 @@ internal abstract class SignalBase
 
         else if (Signal.CurrentComputedSignalSubscription is not null)
         {
-            _computedSignals.Add(Signal.CurrentComputedSignalSubscription);
+            _computedChildSignals.Add(Signal.CurrentComputedSignalSubscription);
             Signal.CurrentSignals.Add(this);
         }
     }
@@ -104,7 +104,7 @@ internal class Signal<T>(T value) : SignalBase, IReadOnlySignal<T>
 internal abstract class ComputedSignalBase : SignalBase
 {
     protected bool IsObsolete = true;
-    protected List<SignalBase> CurrentChildSignals = [];
+    protected List<SignalBase> CurrentParentSignals = [];
     public void MarkObsolete()
     {
         IsObsolete = true;
@@ -112,9 +112,9 @@ internal abstract class ComputedSignalBase : SignalBase
 
     public void Unsubscribe()
     {
-        foreach (var signal in CurrentChildSignals)
+        foreach (var signal in CurrentParentSignals)
         {
-            signal.RemoveComputedSignal(this);
+            signal.RemoveChildComputedSignal(this);
         }
     }
 }
@@ -143,14 +143,14 @@ internal class ComputedSignal<T> : ComputedSignalBase, IReadOnlySignal<T>
 
     private void Recalculate()
     {
-        //Unregister old child signals
+        //Unregister old parent signals
         Unsubscribe();
 
         Signal.CurrentComputedSignalSubscription = this;
         _cacheResult = _valueFn();
 
-        //Register new child signals
-        CurrentChildSignals = Signal.CurrentSignals;
+        //Register new parent signals
+        CurrentParentSignals = Signal.CurrentSignals;
         Signal.CurrentSignals = [];
         Signal.CurrentComputedSignalSubscription = null;
         IsObsolete = false;
