@@ -2,6 +2,8 @@ global using ConsoleApp1.Heap;
 global using ConsoleApp1.LinkedList;
 global using ConsoleApp1.UnionFind;
 
+Test.RunTest();
+
 int solution(int[] A)
 {
     var t = A.Where(p => p > 0).Distinct().ToList();
